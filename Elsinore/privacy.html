@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Elsinore</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+    line-height: 1.6;
+    color: #1c1c1e;
+    background: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e5e5ea; background: #000000; }
+    a { color: #4da3ff; }
+  }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  .meta { opacity: 0.7; font-size: 0.95rem; }
+  ul { padding-left: 1.2rem; }
+  a.back { display: inline-block; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&larr; Elsinore</a>
+<h1>Privacy Policy</h1>
+<p class="meta">Effective date: August 1, 2026</p>
+
+<p>
+  Elsinore is a native iOS client for a Frigate NVR server that you host and
+  control. This policy describes what the app does and does not do with your
+  data.
+</p>
+
+<h2>Summary</h2>
+<ul>
+  <li>Elsinore collects no analytics and no personal data.</li>
+  <li>The app connects only to the Frigate server (and optional companion
+      &ldquo;sidecar&rdquo;) that you configure &mdash; your own
+      infrastructure, not anything operated by Elsinore or its maintainer.</li>
+  <li>Video and images from your cameras never leave your own infrastructure,
+      with one narrow exception for optional push notifications, described
+      below.</li>
+  <li>There is no Elsinore account and no cloud backend to sign into.</li>
+</ul>
+
+<h2>What the app stores, and where</h2>
+<p>
+  When you add a server, Elsinore stores the server address and your
+  username locally on your device, and stores your password or credential
+  in the iOS Keychain, protected by the operating system. Credentials are
+  never transmitted anywhere except directly to the server you configured.
+</p>
+
+<h2>What the app does not do</h2>
+<ul>
+  <li>Elsinore does not include any analytics, advertising, or crash-reporting
+      SDK.</li>
+  <li>Elsinore does not operate a backend service that your camera footage,
+      snapshots, or metadata pass through. Live video, recorded clips, and
+      review/event data are fetched directly from your Frigate server to
+      your device.</li>
+  <li>Elsinore does not require or create a user account of any kind.</li>
+</ul>
+
+<h2>Third-party software</h2>
+<p>
+  Elsinore uses one third-party library: a WebRTC media framework, used to
+  negotiate and play low-latency live video directly between your device and
+  your Frigate server (via its embedded <code>go2rtc</code> component). This
+  is a media-transport library only; it does not collect or transmit any
+  data on its own, and no video passes through Elsinore's maintainer or any
+  third party as a result of using it. No other third-party SDKs are
+  included in the app.
+</p>
+
+<h2>Optional push notifications</h2>
+<p>
+  Push notifications are optional and off by default. If you enable them,
+  here is exactly what happens:
+</p>
+<ul>
+  <li>Your device registers its Apple Push Notification (APNs) device token
+      with a small relay service operated by the app's maintainer. This
+      relay exists only because Apple requires push notifications to be sent
+      from a server holding APNs credentials &mdash; it is not a general
+      backend and does not proxy your video or camera data in normal
+      operation.</li>
+  <li>When your own Frigate server detects an alert, your self-hosted
+      &ldquo;sidecar&rdquo; component sends the relay a minimal, generic
+      payload: your device's push token, a short-lived opaque handle it
+      mints itself, and a severity level (e.g. &ldquo;alert&rdquo; or
+      &ldquo;detection&rdquo;). This payload never includes camera names,
+      object labels, zones, snapshots, or any other identifying detail about
+      what was detected.</li>
+  <li>The relay forwards that minimal payload to Apple's push service, which
+      delivers a generic notification to your device (e.g. &ldquo;Motion
+      detected&rdquo;).</li>
+  <li>Your device then uses the opaque handle to fetch the real alert
+      details &mdash; camera name, snapshot image, event data &mdash;
+      directly from your own Frigate server, not from the relay. This is
+      what fills in the notification with a snapshot and specifics before
+      you see it.</li>
+</ul>
+<p>
+  In short: the relay only ever sees a device token, an opaque handle it
+  generated itself, and a severity level. It never sees your camera names,
+  detected object labels, or any image. All actual alert content comes from,
+  and stays on, your own server.
+</p>
+
+<h2>Data sharing</h2>
+<p>
+  Elsinore does not sell, rent, or share your data with third parties. There
+  is no advertising, and no data is used for anything beyond operating the
+  app's core function of connecting to your own server.
+</p>
+
+<h2>Children's privacy</h2>
+<p>
+  Elsinore is not directed at children and does not knowingly collect any
+  information from anyone, including children, because it does not collect
+  personal information at all.
+</p>
+
+<h2>Changes to this policy</h2>
+<p>
+  If this policy changes, the updated version will be published at this same
+  URL with a new effective date.
+</p>
+
+<h2>Contact</h2>
+<p>
+  Questions about this policy or the app's data practices can be sent to
+  <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a>.
+</p>
+</body>
+</html>

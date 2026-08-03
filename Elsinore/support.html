@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Elsinore</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+    line-height: 1.6;
+    color: #1c1c1e;
+    background: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e5e5ea; background: #000000; }
+    a { color: #4da3ff; }
+    code { background: #1c1c1e; }
+  }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  ul, ol { padding-left: 1.2rem; }
+  code {
+    background: #f2f2f7;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  a.back { display: inline-block; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&larr; Elsinore</a>
+<h1>Support &amp; FAQ</h1>
+
+<h2>Requirements</h2>
+<ul>
+  <li>Your own self-hosted <a href="https://frigate.video/">Frigate</a> NVR
+      server. Elsinore does not include, host, or sell an NVR &mdash; you
+      need one running already.</li>
+  <li>Frigate 0.17.x or later is the actively tested version. Older
+      versions may work for basic viewing but are not verified.</li>
+  <li>A way to reach your Frigate server's address from your iPhone or iPad:
+      the same local network, or a remote path such as a Tailscale/VPN
+      overlay network (recommended) or your own reverse proxy.</li>
+</ul>
+
+<h2>Setting up the app</h2>
+<ol>
+  <li>Open Elsinore and choose &ldquo;Add Server.&rdquo;</li>
+  <li>Enter your Frigate server's base URL (for example,
+      <code>http://192.168.1.50:8971</code> on a local network, or a
+      Tailscale MagicDNS name such as <code>https://nvr.your-tailnet.ts.net</code>
+      for remote access).</li>
+  <li>Enter your Frigate username and password (native Frigate auth). Your
+      credential is stored in the iOS Keychain and never sent anywhere
+      except to the server you entered.</li>
+  <li>Once connected, the live grid, review feed, and clip playback should
+      populate directly from your server.</li>
+</ol>
+
+<h2>Remote access</h2>
+<p>
+  The recommended way to use Elsinore away from home is an overlay network
+  such as <a href="https://tailscale.com/">Tailscale</a> or another
+  WireGuard-based VPN. Install the same overlay network's app on both your
+  Frigate server's host and your iPhone, then use the tailnet address (a
+  <code>100.64.0.0/10</code> address or a <code>.ts.net</code> MagicDNS
+  name) as your server URL in Elsinore. This keeps your camera traffic off
+  the public internet and typically allows low-latency live video (WebRTC)
+  to work remotely, which a plain reverse-proxy setup often cannot guarantee.
+</p>
+<p>
+  A public reverse proxy with your own TLS certificate is also supported,
+  but live video may fall back to higher-latency HLS instead of WebRTC
+  depending on what your proxy allows through.
+</p>
+
+<h2>Troubleshooting</h2>
+<ul>
+  <li><strong>Can't connect / login fails.</strong> Double-check the server
+      URL, including the port, and confirm you can reach that same address
+      from a browser on the same device.</li>
+  <li><strong>Live view works but feels delayed.</strong> This usually means
+      the app has fallen back to HLS because low-latency WebRTC media
+      couldn't reach your device (common on restrictive networks or plain
+      reverse proxies without an overlay network). This is expected
+      graceful-degradation behavior, not a bug.</li>
+  <li><strong>Notifications aren't arriving.</strong> Push notifications
+      require the optional companion &ldquo;sidecar&rdquo; component to be
+      running alongside your Frigate server, and notification permission to
+      be granted to the app in iOS Settings. See the Privacy Policy for how
+      notifications work.</li>
+  <li><strong>App can't reach my server after a network change.</strong>
+      Confirm your device's own network path (Wi-Fi, cellular, VPN/tailnet
+      connection) can currently reach the server address you configured.</li>
+</ul>
+
+<h2>Contact</h2>
+<p>
+  For anything not covered here, email
+  <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a>.
+</p>
+</body>
+</html>
