@@ -51,10 +51,12 @@
 <h2>Setting up the app</h2>
 <ol>
   <li>Open Elsinore and choose &ldquo;Add Server.&rdquo;</li>
-  <li>Enter your Frigate server's base URL (for example,
-      <code>http://192.168.1.50:8971</code> on a local network, or a
+  <li>Enter your <strong>frigate-sidecar</strong> base URL (for example,
+      <code>http://192.168.1.50:5001</code> on a local network, or a
       Tailscale MagicDNS name such as <code>https://nvr.your-tailnet.ts.net</code>
-      for remote access).</li>
+      for remote access). Pointing at Frigate's own web UI port also
+      connects, but event highlights and scrub previews come from the
+      sidecar and will be missing.</li>
   <li>Enter your Frigate username and password (native Frigate auth). Your
       credential is stored in the iOS Keychain and never sent anywhere
       except to the server you entered.</li>
