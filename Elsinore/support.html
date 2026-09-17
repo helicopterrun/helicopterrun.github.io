@@ -56,7 +56,8 @@
       need one running already.</li>
   <li>Frigate 0.17.x or later is the actively tested version. Older
       versions may work for basic viewing but are not verified.</li>
-  <li>A way to reach your Frigate server's address from your iPhone or iPad:
+  <li>A way to reach your Frigate server's address from your iPhone, iPad,
+      or Mac:
       the same local network, or a remote path such as a Tailscale/VPN
       overlay network (recommended) or your own reverse proxy.</li>
 </ul>
@@ -69,8 +70,8 @@
       Tailscale MagicDNS name such as <code>https://nvr.your-tailnet.ts.net</code>
       for remote access).</li>
   <li>Enter your Frigate username and password (native Frigate auth). Your
-      credential is stored in the iOS Keychain and never sent anywhere
-      except to the server you entered.</li>
+      credential is stored in the system Keychain (iOS, iPadOS, or macOS)
+      and never sent anywhere except to the server you entered.</li>
   <li>Once connected, the live grid, review feed, and clip playback should
       populate directly from your server.</li>
 </ol>
@@ -80,7 +81,7 @@
   The recommended way to use Elsinore away from home is an overlay network
   such as <a href="https://tailscale.com/">Tailscale</a> or another
   WireGuard-based VPN. Install the same overlay network's app on both your
-  Frigate server's host and your iPhone, then use the tailnet address (a
+  Frigate server's host and your iPhone, iPad, or Mac, then use the tailnet address (a
   <code>100.64.0.0/10</code> address or a <code>.ts.net</code> MagicDNS
   name) as your server URL in Elsinore. This keeps your camera traffic off
   the public internet and typically allows low-latency live video (WebRTC)
