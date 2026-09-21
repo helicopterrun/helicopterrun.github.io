@@ -3,155 +3,122 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elsinore — native Frigate NVR client for iOS</title>
-<meta name="description" content="A native iOS client for your own self-hosted Frigate NVR. No account, no cloud, no analytics.">
-<style>
-  /* Elsinore — the app's default palette (dark-only, like the app). */
-  :root {
-    color-scheme: dark;
-    --panel: #121318; --surface: #1C1D24; --deep: #0B0C10;
-    --stroke: #30323B;
-    --text: #D1D5DB; --muted: #9AA3AB; --muted-2: #7B838C;
-    --accent: #E8A33D; --mint: #49C2A1;
-    --lane-person: #66B9EE; --lane-vehicle: #B594E8;
-    --lane-animal: #69C48B; --lane-package: #E3B341;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    background: var(--panel); color: var(--text);
-    margin: 0; padding: 3rem 1.25rem 4rem;
-    line-height: 1.65; font-variant-numeric: tabular-nums;
-  }
-  .wrap { max-width: 46rem; margin: 0 auto; }
-  a { color: var(--accent); }
-  a:hover { color: #F1B24D; }
-
-  header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
-  .mark { flex-shrink: 0; }
-  h1 { font-size: 1.7rem; margin: 0; letter-spacing: 0.02em; }
-  .tagline { margin: 0.1rem 0 0; color: var(--muted-2); }
-
-  .lede { margin-top: 2rem; }
-
-  .section-h {
-    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin: 2.75rem 0 0.9rem; font-weight: 600;
-  }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.75rem; }
-  .card {
-    background: var(--surface); border: 1px solid var(--stroke);
-    border-radius: 12px; padding: 0.9rem 1.1rem;
-  }
-  .card b { display: block; font-size: 0.92rem; margin-bottom: 0.25rem; }
-  .card p { margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 0.5em; vertical-align: baseline; }
-
-  .oath { border-left: 2px solid var(--mint); padding: 0.1rem 0 0.1rem 1.1rem; margin: 0; }
-  .oath li { list-style: none; margin: 0.45rem 0; color: var(--text); }
-  .oath li::before { content: "— "; color: var(--mint); }
-
-  ul.links { padding: 0; list-style: none; }
-  ul.links li { margin: 0.5rem 0; }
-  code {
-    background: var(--deep); border: 1px solid var(--stroke); border-radius: 4px;
-    padding: 0.1em 0.4em; font-size: 0.9em;
-  }
-  footer {
-    margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--stroke);
-    font-size: 0.8rem; color: var(--muted-2);
-  }
-
-  .cta {
-    display: inline-block; margin-top: 1.25rem; background: var(--accent);
-    color: var(--deep); font-weight: 600; text-decoration: none;
-    border-radius: 8px; padding: 0.6rem 1.1rem; font-size: 0.95rem;
-  }
-  .cta:hover { background: #F1B24D; color: var(--deep); }
-  .cta-note { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--muted-2); }
-</style>
+<title>Elsinore</title>
+<meta name="description" content="A native iOS, iPadOS, and macOS client for your own self-hosted Frigate NVR. No account, no cloud, no analytics.">
+<link rel="stylesheet" href="site.css">
 </head>
-<body>
-<div class="wrap">
-<header>
-  <!-- The castle mark: four spires over the water, as on the app icon. -->
-  <svg class="mark" width="56" height="56" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
-    <rect width="56" height="56" rx="12" fill="#0B0C10"/>
-    <g fill="#E8A33D">
-      <rect x="10" y="22" width="5" height="16"/>
-      <polygon points="10,22 12.5,15 15,22"/>
-      <rect x="19" y="26" width="5" height="12"/>
-      <polygon points="19,26 21.5,20 24,26"/>
-      <rect x="28" y="24" width="5" height="14"/>
-      <polygon points="28,24 30.5,17 33,24"/>
-      <rect x="37" y="21" width="5" height="17"/>
-      <polygon points="37,21 39.5,13 42,21"/>
-      <rect x="8" y="36" width="40" height="2.5"/>
-    </g>
-    <polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="#49C2A1" stroke-width="2.5"/>
-  </svg>
-  <div>
-    <h1>Elsinore</h1>
-    <p class="tagline">Native client for Frigate NVR</p>
-  </div>
+<body class="landing">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
 </header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li class="here"><a href="index.html" aria-current="page">Home</a></li>
+<li><a href="support.html">Support</a></li>
+<li><a href="privacy.html">Privacy</a></li>
+</ul>
+<p class="nav-h">Docs</p><ul>
+<li><a href="docs/index.html">Overview</a></li>
+<li><a href="docs/getting-started.html">Getting started</a></li>
+<li><a href="docs/connect.html">Connect</a></li>
+<li><a href="docs/live.html">Live</a></li>
+<li><a href="docs/scrub.html">Scrub</a></li>
+<li><a href="docs/search-and-review.html">Search and Review</a></li>
+<li><a href="docs/alerts.html">Alerts</a></li>
+<li><a href="docs/investigate.html">Investigate</a></li>
+<li><a href="docs/sidecar.html">Sidecar</a></li>
+<li><a href="docs/mac.html">Mac</a></li>
+<li><a href="docs/settings.html">Settings</a></li>
+<li><a href="docs/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</nav>
+<main id="main">
 
-<p class="lede">
-  Elsinore connects to a <a href="https://frigate.video/">Frigate</a> server
-  you run and control &mdash; on your own network, or reachable remotely over
-  an overlay network such as Tailscale. The app talks to your server and
-  nowhere else.
-</p>
+<h1>Elsinore</h1>
 
-<a class="cta" href="https://apps.apple.com/us/app/elsinore/id6797358423">Download on the App Store</a>
-<p class="cta-note">Mac version in review.</p>
+<p>Elsinore is a native client for <a href="https://frigate.video/">Frigate</a>, the
+open-source NVR and object-detection system you run on your own hardware.</p>
+<p>It requires a self-hosted Frigate server to function. Elsinore has no cloud
+backend, no account system, and cannot connect to anything other than the
+Frigate instance you point it at. If you do not already run Frigate, this app
+will not be useful to you.</p>
+<p><a class="cta" href="https://apps.apple.com/us/app/elsinore/id6797358423">Download on the App Store</a>
+<a class="cta" href="docs/getting-started.html">Get started</a></p>
+<p>Elsinore is a Universal Purchase: the same app covers iPhone, iPad, and Mac.</p>
+<h2 id="what-it-does">What it does</h2>
+<div class="cards" markdown="1">
 
-<p class="section-h">What it does</p>
-<div class="cards">
-  <div class="card">
-    <b><span class="dot" style="background:var(--lane-person)"></span>Live grid</b>
-    <p>Every camera at once, with low-latency WebRTC when you open one up.</p>
-  </div>
-  <div class="card">
-    <b><span class="dot" style="background:var(--accent)"></span>Scrub reel</b>
-    <p>A film-strip timeline of the day &mdash; drag through hours of footage frame by frame.</p>
-  </div>
-  <div class="card">
-    <b><span class="dot" style="background:var(--lane-vehicle)"></span>Review feed</b>
-    <p>Alerts and detections with filters, object tracks, and clip playback.</p>
-  </div>
-  <div class="card">
-    <b><span class="dot" style="background:var(--lane-package)"></span>Smart push</b>
-    <p>Optional notifications that escalate, resolve, and never leak your footage.</p>
-  </div>
-  <div class="card">
-    <b><span class="dot" style="background:var(--lane-animal)"></span>Clip export</b>
-    <p>Pull a clip straight out of your recordings and share it.</p>
-  </div>
-  <div class="card">
-    <b><span class="dot" style="background:var(--mint)"></span>Instrument, not document</b>
-    <p>A dark, monospaced interface built for watching &mdash; five palettes, one discipline.</p>
-  </div>
+**Live**: every camera in one grid, low-latency WebRTC on a single camera,
+HLS when WebRTC cannot get through. [Read more](docs/live.html)
+
+**Scrub**: a vertical film reel of the day. Drag through hours of recording
+frame by frame, with the dossier card riding along.
+[Read more](docs/scrub.html)
+
+**Search**: one feed of alerts and detections, filtered by camera, object,
+zone, severity, and time, with a deeper search that queries the footage
+itself. [Read more](docs/search-and-review.html)
+
+**Alerts**: a guided setup that asks how much you want to hear, then routes
+subjects and places through an attention ladder. Needs the sidecar.
+[Read more](docs/alerts.html)
+
+**Investigate and Follow**: one object across every camera at once, with a
+shared cursor, a "Where next" list, and autoplay that switches cameras for
+you. [Read more](docs/investigate.html)
+
+**Mac**: the same app, with keyboard commands, separate camera windows, a
+menu bar companion, and Handoff. [Read more](docs/mac.html)
+
 </div>
 
-<p class="section-h">The deal</p>
-<ul class="oath">
-  <li>No Elsinore account.</li>
-  <li>No cloud backend.</li>
-  <li>No analytics, no ads, no tracking SDKs.</li>
-  <li>Your video never leaves your own infrastructure.</li>
+<p><img alt="The Live grid on iPhone, showing ten camera tiles with names and status dots above the Live, Scrub, Search, and Settings tab bar." class="shot" src="img/live.png" /></p>
+<h2 id="what-you-need">What you need</h2>
+<ul>
+<li>Your own Frigate server. Frigate 0.17 or later is the actively tested
+  version.</li>
+<li>A route to it from your device: the same local network, or a remote path
+  such as Tailscale, another WireGuard VPN, or your own reverse proxy.</li>
+<li>Optionally, the <a href="docs/sidecar.html">Marcellus sidecar</a> next to Frigate.
+  It is what adds push notifications, Live Activities, scrub previews,
+  encounters, and Investigate.</li>
 </ul>
-
-<p class="section-h">Pages</p>
-<ul class="links">
-  <li><a href="privacy.html">Privacy Policy</a></li>
-  <li><a href="support.html">Support &amp; FAQ</a></li>
+<h2 id="the-deal">The deal</h2>
+<ul>
+<li>No Elsinore account.</li>
+<li>No cloud backend.</li>
+<li>No analytics, no ads, no tracking SDKs.</li>
+<li>Your video never leaves your own infrastructure.</li>
 </ul>
-
-<footer>
-  Elsinore is not affiliated with the Frigate project. Contact:
-  <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a>
+<p>See the <a href="privacy.html">privacy policy</a> for the one narrow exception, which
+covers optional push notifications.</p>
+<h2 id="where-to-go-next">Where to go next</h2>
+<ul>
+<li><a href="docs/index.html">Documentation</a>: the full manual.</li>
+<li><a href="docs/getting-started.html">Getting started</a>: the ten minute path.</li>
+<li><a href="support.html">Support</a>: quick answers and how to report a bug.</li>
+</ul>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="index.html">Home</a> &middot; <a href="support.html">Support</a> &middot;
+<a href="privacy.html">Privacy</a> &middot; <a href="docs/index.html">Docs</a></p>
 </footer>
+</main>
 </div>
 </body>
 </html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elsinore on Mac — Elsinore</title>
+<meta name="description" content="What the Mac app shares with iPhone and iPad, what it does differently, and the full keyboard command list.">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body class="doc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="../index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
+</header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../support.html">Support</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+</ul>
+<p class="nav-h">Docs</p><ul>
+<li><a href="../docs/index.html">Overview</a></li>
+<li><a href="../docs/getting-started.html">Getting started</a></li>
+<li><a href="../docs/connect.html">Connect</a></li>
+<li><a href="../docs/live.html">Live</a></li>
+<li><a href="../docs/scrub.html">Scrub</a></li>
+<li><a href="../docs/search-and-review.html">Search and Review</a></li>
+<li><a href="../docs/alerts.html">Alerts</a></li>
+<li><a href="../docs/investigate.html">Investigate</a></li>
+<li><a href="../docs/sidecar.html">Sidecar</a></li>
+<li class="here"><a href="../docs/mac.html" aria-current="page">Mac</a></li>
+<li><a href="../docs/settings.html">Settings</a></li>
+<li><a href="../docs/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</nav>
+<main id="main">
+<p class="applies">Applies to: macOS 26.5 / same app as iOS 26</p>
+<h1>Elsinore on Mac</h1>
+<details class="toc" open><summary>On this page</summary><div class="toc">
+<ul>
+<li><a href="#what-is-shared">What is shared</a></li>
+<li><a href="#what-differs">What differs</a></li>
+<li><a href="#handoff">Handoff</a></li>
+<li><a href="#keyboard">Keyboard</a><ul>
+<li><a href="#reel">Reel</a></li>
+<li><a href="#playback">Playback</a></li>
+<li><a href="#camera">Camera</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<p>The Mac app is the same app, built from the same code, with the chrome a Mac
+expects.</p>
+<p>Elsinore ships as a Universal Purchase: the Mac app shares its bundle
+identifier with the iPhone and iPad app, so one purchase covers both.</p>
+<h2 id="what-is-shared">What is shared</h2>
+<p><a href="live.html">Live</a>, <a href="scrub.html">Scrub</a>,
+<a href="search-and-review.html">Search and Review</a>,
+<a href="investigate.html">Investigate and Follow</a>, and the whole alert routing
+model are the same views and the same logic on both platforms. There is no
+Mac-only subset of features; the differences are in input and in chrome.</p>
+<h2 id="what-differs">What differs</h2>
+<p><strong>No Live Activities.</strong> Live Activities and the Dynamic Island are an
+iPhone and iPad feature. On Mac, Elsinore delivers ordinary notifications
+plus a menu bar companion. The Alerts settings say so on Mac rather than
+showing a switch that would do nothing. Notifications, quiet hours, sounds,
+and the attention ladder all work.</p>
+<p><strong>Separate camera windows.</strong> A camera can be opened in its own window,
+which is the thing a Mac can do that a phone cannot.</p>
+<p><strong>A menu bar companion</strong>, for status at a glance without bringing the app
+forward.</p>
+<p><strong>A transport bar</strong> under the reel, instead of the controls shade the phone
+uses. Trackpad and mouse drive the reel alongside the keyboard.</p>
+<p><strong>Server › Guide.</strong> The Mac app embeds the sidecar's own <code>/guide</code>
+documentation directly, with your session already attached so it does not
+land you on a login page. See
+<a href="sidecar.html#the-operator-manual">the operator manual</a>.</p>
+<p><strong>Settings tabs</strong> rather than a list: General, Connection, Appearance,
+Alerts, Storage, Scrub Feel, and About. General carries Launch at login;
+Scrub Feel is the reel tuning that lives in the controls shade on iOS. See
+the <a href="settings.html">settings reference</a>.</p>
+<h2 id="handoff">Handoff</h2>
+<p>Viewing a camera publishes a Handoff activity carrying the camera name and
+the playback time, so the camera and moment you are looking at on one Apple
+device can be picked up on another.</p>
+<h2 id="keyboard">Keyboard</h2>
+<p>Three menus.</p>
+<h3 id="reel">Reel</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step back / forward</td>
+<td>Left / Right</td>
+</tr>
+<tr>
+<td>Step back / forward 10 rows</td>
+<td>Shift-Left / Shift-Right</td>
+</tr>
+<tr>
+<td>Step back / forward one frame</td>
+<td>Option-Left / Option-Right</td>
+</tr>
+<tr>
+<td>Previous / next event</td>
+<td><code>[</code> / <code>]</code></td>
+</tr>
+<tr>
+<td>Coarser / finer rung</td>
+<td>Command-<code>]</code> / Command-<code>[</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="playback">Playback</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Play / pause</td>
+<td>Space</td>
+</tr>
+<tr>
+<td>Faster / slower</td>
+<td>Command-Up / Command-Down</td>
+</tr>
+<tr>
+<td>Mute</td>
+<td>Command-Shift-M</td>
+</tr>
+<tr>
+<td>Export clip</td>
+<td>Command-E</td>
+</tr>
+<tr>
+<td>Jump to live</td>
+<td><code>L</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="camera">Camera</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Select wall</td>
+<td>Command-0</td>
+</tr>
+<tr>
+<td>Select camera 1 to 9</td>
+<td>Command-1 to Command-9</td>
+</tr>
+</tbody>
+</table>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
+<a href="../privacy.html">Privacy</a> &middot; <a href="../docs/index.html">Docs</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

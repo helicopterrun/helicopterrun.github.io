@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting — Elsinore</title>
+<meta name="description" content="Elsinore problems grouped by symptom, from connection failures to missing notifications and empty scrub reels.">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body class="doc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="../index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
+</header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../support.html">Support</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+</ul>
+<p class="nav-h">Docs</p><ul>
+<li><a href="../docs/index.html">Overview</a></li>
+<li><a href="../docs/getting-started.html">Getting started</a></li>
+<li><a href="../docs/connect.html">Connect</a></li>
+<li><a href="../docs/live.html">Live</a></li>
+<li><a href="../docs/scrub.html">Scrub</a></li>
+<li><a href="../docs/search-and-review.html">Search and Review</a></li>
+<li><a href="../docs/alerts.html">Alerts</a></li>
+<li><a href="../docs/investigate.html">Investigate</a></li>
+<li><a href="../docs/sidecar.html">Sidecar</a></li>
+<li><a href="../docs/mac.html">Mac</a></li>
+<li><a href="../docs/settings.html">Settings</a></li>
+<li class="here"><a href="../docs/troubleshooting.html" aria-current="page">Troubleshooting</a></li>
+</ul>
+</nav>
+<main id="main">
+<p class="applies">Applies to: iOS and iPadOS 26 / macOS 26.5 / Frigate 0.17+</p>
+<h1>Troubleshooting</h1>
+<details class="toc" open><summary>On this page</summary><div class="toc">
+<ul>
+<li><a href="#connecting">Connecting</a><ul>
+<li><a href="#cannot-connect-or-login-fails">Cannot connect, or login fails</a></li>
+<li><a href="#sign-in-keeps-failing-through-the-sidecar">Sign-in keeps failing through the sidecar</a></li>
+<li><a href="#the-app-cannot-reach-my-server-after-a-network-change">The app cannot reach my server after a network change</a></li>
+<li><a href="#i-need-to-point-the-app-somewhere-else">I need to point the app somewhere else</a></li>
+</ul>
+</li>
+<li><a href="#live-video">Live video</a><ul>
+<li><a href="#live-view-works-but-feels-delayed">Live view works but feels delayed</a></li>
+<li><a href="#a-tile-says-stale-or-unavailable">A tile says Stale, or Unavailable</a></li>
+<li><a href="#live-was-fine-and-then-froze">Live was fine and then froze</a></li>
+</ul>
+</li>
+<li><a href="#scrub">Scrub</a><ul>
+<li><a href="#the-reel-is-empty-or-will-not-preview">The reel is empty or will not preview</a></li>
+<li><a href="#previous-and-next-chips-have-disappeared-on-a-camera">Previous and Next chips have disappeared on a camera</a></li>
+<li><a href="#export-fails">Export fails</a></li>
+</ul>
+</li>
+<li><a href="#notifications">Notifications</a><ul>
+<li><a href="#nothing-arrives-at-all">Nothing arrives at all</a></li>
+<li><a href="#notifications-arrive-but-without-a-picture-or-with-a-generic-title">Notifications arrive but without a picture, or with a generic title</a></li>
+<li><a href="#live-activities-never-start">Live Activities never start</a></li>
+<li><a href="#a-live-activity-stops-updating">A Live Activity stops updating</a></li>
+<li><a href="#i-get-too-many-or-too-few">I get too many, or too few</a></li>
+</ul>
+</li>
+<li><a href="#investigate">Investigate</a><ul>
+<li><a href="#investigate-is-not-available">Investigate is not available</a></li>
+<li><a href="#where-next-keeps-suggesting-the-wrong-camera">Where next keeps suggesting the wrong camera</a></li>
+</ul>
+</li>
+<li><a href="#still-stuck">Still stuck</a></li>
+</ul>
+</div>
+</details>
+<p>Grouped by what you are seeing. Two diagnostics cover most of this:
+Settings › Server › <strong>Connection Doctor</strong> and Settings › Alerts ›
+<strong>Push Doctor</strong>.</p>
+<h2 id="connecting">Connecting</h2>
+<h3 id="cannot-connect-or-login-fails">Cannot connect, or login fails</h3>
+<p>Check the server URL including the port, and confirm you can open that same
+address in a browser on the same device. Then run the
+<a href="connect.html#connection-doctor">Connection Doctor</a>, which walks the chain
+and names the rung that broke.</p>
+<p>Common causes it distinguishes for you:</p>
+<ul>
+<li>The address does not parse, or App Transport Security will refuse it. A
+  self-signed certificate falls here; it will not work.</li>
+<li>The hostname does not resolve. For a <code>.ts.net</code> name this usually means
+  Tailscale is not connected on this device.</li>
+<li>The server answers but login returns 401, which is a wrong username or
+  password.</li>
+<li>The server answers 200 but is not Frigate. Something else is listening on
+  that port, or a proxy is intercepting.</li>
+<li>Login succeeds but returns no cookie, or redirects to another host. That
+  is a reverse proxy configuration problem.</li>
+</ul>
+<h3 id="sign-in-keeps-failing-through-the-sidecar">Sign-in keeps failing through the sidecar</h3>
+<p>If you connect through <a href="sidecar.html">Marcellus</a>, a misconfigured
+<code>frigate.proxy_base_url</code> shows up as a login loop. It must point at
+Frigate's authenticated origin, usually port 8971.</p>
+<h3 id="the-app-cannot-reach-my-server-after-a-network-change">The app cannot reach my server after a network change</h3>
+<p>Confirm your device's current network path can reach the configured
+address. Switching between Wi-Fi, cellular, and a VPN or tailnet changes
+which addresses are routable. The Connection Doctor's network and
+reachability rungs will tell you which one failed.</p>
+<h3 id="i-need-to-point-the-app-somewhere-else">I need to point the app somewhere else</h3>
+<p>Settings › Server, edit, <strong>Save settings</strong>. See
+<a href="connect.html#changing-or-removing-a-server">changing servers</a>.</p>
+<h2 id="live-video">Live video</h2>
+<h3 id="live-view-works-but-feels-delayed">Live view works but feels delayed</h3>
+<p>The app fell back to HLS because low-latency WebRTC media could not reach
+your device. HLS is segmented and runs several seconds behind. This is
+expected graceful degradation, not a bug.</p>
+<p>It is most common on restrictive networks and on plain reverse proxies,
+because WebRTC media travels on its own port and many proxies only forward
+HTTP. An <a href="connect.html#remote-access">overlay network</a> such as Tailscale
+usually fixes it where a reverse proxy cannot.</p>
+<h3 id="a-tile-says-stale-or-unavailable">A tile says Stale, or Unavailable</h3>
+<p><strong>Stale</strong> means frames arrived and then stopped, which usually points at the
+camera or at Frigate. <strong>Unavailable</strong> means no frame ever arrived, which
+usually points at the network path or at that camera's configuration in
+Frigate.</p>
+<h3 id="live-was-fine-and-then-froze">Live was fine and then froze</h3>
+<p>The app watches for a stream that starts and then starves, and falls back to
+HLS on its own. If the picture is genuinely frozen rather than delayed,
+leave and re-enter the camera to force a fresh negotiation.</p>
+<h2 id="scrub">Scrub</h2>
+<h3 id="the-reel-is-empty-or-will-not-preview">The reel is empty or will not preview</h3>
+<p>Scrub previews come from the <a href="sidecar.html">sidecar's</a> scrub cache. If the
+sidecar's media and recordings path mappings do not match where Frigate
+actually writes its recordings, the strips come back empty. Check those
+paths in the sidecar config and look at <code>/healthz</code>.</p>
+<p>Against bare Frigate, with no sidecar, the reel works but has no
+pre-rendered previews, so it will not feel fluid.</p>
+<h3 id="previous-and-next-chips-have-disappeared-on-a-camera">Previous and Next chips have disappeared on a camera</h3>
+<p>That camera's newest event is older than the threshold in Settings ›
+Appearance &amp; Display › <strong>Hide event controls after</strong>. Raise it, or set it to
+Never.</p>
+<h3 id="export-fails">Export fails</h3>
+<p>Export writes to Photos, so it needs add-only Photos permission. If that was
+denied, the app says so and offers to open Settings.</p>
+<h2 id="notifications">Notifications</h2>
+<p>Run Settings › Alerts › <a href="alerts.html#push-doctor">Push Doctor</a> first. Its
+six checks are ordered so the first failure is the real one.</p>
+<h3 id="nothing-arrives-at-all">Nothing arrives at all</h3>
+<ul>
+<li>Push requires the <a href="sidecar.html">Marcellus sidecar</a>. Plain Frigate cannot
+  send notifications.</li>
+<li>Notification permission must be granted. If iOS has denied it, Settings ›
+  Alerts shows a warning row that links straight to the right page.</li>
+<li>On the sidecar, check <code>/healthz</code> shows MQTT connected, and that the push
+  transport is not still set to <code>mock</code>.</li>
+<li>A TestFlight or development build registers with Apple's sandbox
+  environment; a production build does not. If the app's status shows an
+  environment that does not match the build you are running, that is the
+  problem.</li>
+<li>If the device's push token was pruned by Apple, reinstalling the app
+  forces a fresh registration.</li>
+</ul>
+<h3 id="notifications-arrive-but-without-a-picture-or-with-a-generic-title">Notifications arrive but without a picture, or with a generic title</h3>
+<p>The snapshot and the real title are filled in on your device by the
+notification extension, which fetches them directly from your sidecar. Two
+things stop that:</p>
+<ul>
+<li><strong>The app is in the foreground.</strong> iOS delivers to the app itself rather
+  than to the extension, so no enrichment runs. Lock the device or background
+  the app and try again.</li>
+<li><strong>The sidecar was not reachable in time.</strong> The extension has a short
+  budget; if it runs out, the notification still displays, just without the
+  image.</li>
+</ul>
+<h3 id="live-activities-never-start">Live Activities never start</h3>
+<p>Live Activities need their own permission, separate from notifications, and
+they are iPhone and iPad only. Check Settings › Alerts › Set up alerts, step
+one, which shows both switches and links to each. If the push arrives and
+the Live Activity still never starts, reinstalling the app is the remaining
+user-side fix.</p>
+<h3 id="a-live-activity-stops-updating">A Live Activity stops updating</h3>
+<p>Reopen the app. The per-activity token can fail to re-register if the app
+relaunched while the activity was already running; opening the app
+re-registers it. An activity that has genuinely stalled says "No longer
+updating" rather than showing you a stale frame.</p>
+<h3 id="i-get-too-many-or-too-few">I get too many, or too few</h3>
+<p>Settings › <a href="alerts.html#alert-history">Alert History</a>. Swipe real decisions
+to mark them too much or not enough. Correcting decisions converges faster
+than guessing at the <a href="alerts.html#the-attention-ladder">attention ladder</a>,
+though the ladder is there if you would rather set it directly.</p>
+<p>Also check Quiet Hours, and whether notifications are paused. The current
+posture readout at the top of Settings › Alerts states both.</p>
+<h2 id="investigate">Investigate</h2>
+<h3 id="investigate-is-not-available">Investigate is not available</h3>
+<p>Investigate is built on encounters, which the
+<a href="sidecar.html#encounters-and-topology">sidecar</a> produces. Without it, the
+entry points do not appear.</p>
+<h3 id="where-next-keeps-suggesting-the-wrong-camera">Where next keeps suggesting the wrong camera</h3>
+<p>Swipe those rows for <strong>Not same</strong>, and swipe the correct ones for <strong>Same</strong>.
+The sidecar learns camera adjacency and typical transition times from those
+corrections. See
+<a href="investigate.html#same-and-not-same">Same and Not same</a>.</p>
+<h2 id="still-stuck">Still stuck</h2>
+<p><a href="../support.html#reporting-a-bug">Email support</a> with the Connection Doctor
+transcript, the Push Doctor output if it is a notification problem, and your
+app, Frigate, and sidecar versions.</p>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
+<a href="../privacy.html">Privacy</a> &middot; <a href="../docs/index.html">Docs</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

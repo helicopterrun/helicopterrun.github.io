@@ -4,152 +4,109 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Support — Elsinore</title>
-<style>
-  /* Elsinore — the app's default palette (dark-only, like the app). */
-  :root {
-    color-scheme: dark;
-    --panel: #121318; --surface: #1C1D24; --deep: #0B0C10;
-    --stroke: #30323B;
-    --text: #D1D5DB; --muted: #9AA3AB; --muted-2: #7B838C;
-    --accent: #E8A33D;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    background: var(--panel); color: var(--text);
-    margin: 0; padding: 3rem 1.25rem 4rem;
-    line-height: 1.7; font-variant-numeric: tabular-nums;
-  }
-  .wrap { max-width: 44rem; margin: 0 auto; }
-  a { color: var(--accent); }
-  a:hover { color: #F1B24D; }
-  h1 { font-size: 1.45rem; margin: 0 0 0.25rem; }
-  h2 {
-    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin: 2.5rem 0 0.75rem; font-weight: 600;
-  }
-  .meta { color: var(--muted-2); font-size: 0.9rem; }
-  ul, ol { padding-left: 1.3rem; }
-  li { margin: 0.4rem 0; }
-  li::marker { color: var(--muted-2); }
-  code {
-    background: var(--deep); border: 1px solid var(--stroke); border-radius: 4px;
-    padding: 0.1em 0.4em; font-size: 0.9em;
-  }
-  a.back {
-    display: inline-block; margin-bottom: 2rem; color: var(--muted);
-    text-decoration: none; border: 1px solid var(--stroke); border-radius: 4px;
-    padding: 0.2rem 0.7rem; font-size: 0.85rem; background: var(--surface);
-  }
-  a.back:hover { color: var(--text); }
-</style>
+<meta name="description" content="Quick answers, contact details, and what to include in a bug report for Elsinore.">
+<link rel="stylesheet" href="site.css">
 </head>
-<body>
-<div class="wrap">
-<a class="back" href="index.html">&larr; Elsinore</a>
-<h1>Support &amp; FAQ</h1>
-
-<h2>Requirements</h2>
-<ul>
-  <li>Your own self-hosted <a href="https://frigate.video/">Frigate</a> NVR
-      server. Elsinore does not include, host, or sell an NVR &mdash; you
-      need one running already.</li>
-  <li>Frigate 0.17.x or later is the actively tested version. Older
-      versions may work for basic viewing but are not verified.</li>
-  <li>A way to reach your Frigate server's address from your iPhone, iPad,
-      or Mac:
-      the same local network, or a remote path such as a Tailscale/VPN
-      overlay network (recommended) or your own reverse proxy.</li>
+<body class="doc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
+</header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li><a href="index.html">Home</a></li>
+<li class="here"><a href="support.html" aria-current="page">Support</a></li>
+<li><a href="privacy.html">Privacy</a></li>
 </ul>
-
-<h2>Setting up the app</h2>
-<ol>
-  <li>Open Elsinore and choose &ldquo;Add Server.&rdquo;</li>
-  <li>Enter your Frigate server's base URL (for example,
-      <code>http://192.168.1.50:8971</code> on a local network, or a
-      Tailscale MagicDNS name such as <code>https://nvr.your-tailnet.ts.net</code>
-      for remote access).</li>
-  <li>Enter your Frigate username and password (native Frigate auth). Your
-      credential is stored in the system Keychain (iOS, iPadOS, or macOS)
-      and never sent anywhere except to the server you entered.</li>
-  <li>Once connected, the live grid, review feed, and clip playback should
-      populate directly from your server.</li>
-</ol>
-
-<h2>Remote access</h2>
-<p>
-  The recommended way to use Elsinore away from home is an overlay network
-  such as <a href="https://tailscale.com/">Tailscale</a> or another
-  WireGuard-based VPN. Install the same overlay network's app on both your
-  Frigate server's host and your iPhone, iPad, or Mac, then use the tailnet address (a
-  <code>100.64.0.0/10</code> address or a <code>.ts.net</code> MagicDNS
-  name) as your server URL in Elsinore. This keeps your camera traffic off
-  the public internet and typically allows low-latency live video (WebRTC)
-  to work remotely, which a plain reverse-proxy setup often cannot guarantee.
-</p>
-<p>
-  A public reverse proxy with your own TLS certificate is also supported,
-  but live video may fall back to higher-latency HLS instead of WebRTC
-  depending on what your proxy allows through.
-</p>
-
-<h2>Investigate</h2>
-<p>
-  <strong>Investigate</strong> follows one object across every camera at once. Open
-  an event's details from the dossier card's <em>i</em> tile, then tap
-  <strong>Investigate this moment</strong> — the timeline opens at the moment the
-  scrubber is sitting on, not at the event's start.
-</p>
-<ul>
-  <li><strong>Drag anywhere over the lanes</strong> to move the cursor. One cursor
-  runs through every camera, so all the lanes move together.</li>
-  <li><strong>Tap a bar</strong> to follow that sighting: the camera becomes the
-  focused one, the cursor jumps to where the bar begins, and the preview above
-  shows that camera's frame at that instant. Tap a camera's <strong>name</strong>
-  to switch to it without moving the cursor.</li>
-  <li>A bar drawn faintly is something that has been sitting still for more than
-  half an hour — a parked car, not a passer-by. A small chevron on a bar's left
-  edge means the sighting began before the visible window.</li>
-  <li><strong>Where next</strong> lists the cameras the object is likely to appear
-  on and roughly when. Tap a row to jump there; swipe it for
-  <em>Same</em> / <em>Not same</em> to teach the grouping.</li>
-  <li><strong>Follow</strong> at the bottom left plays the whole visit back for you:
-  each sighting in order, switching cameras by itself, so you watch someone move
-  through the property without picking cameras. The controls under the picture step
-  between cameras, pause, and toggle 2&times; speed; if a camera has no recording for
-  its stretch, Follow says so and moves on to the next one.</li>
-  <li><strong>Previous / Next sighting</strong> at the bottom walk the same visit
-  from camera to camera, and <strong>Open camera</strong> hands the moment back to
-  the ordinary scrub reel.</li>
-  <li>The capsule on the left of the time axis (<em>10 min</em>) cycles how much
-  time the window shows.</li>
+<p class="nav-h">Docs</p><ul>
+<li><a href="docs/index.html">Overview</a></li>
+<li><a href="docs/getting-started.html">Getting started</a></li>
+<li><a href="docs/connect.html">Connect</a></li>
+<li><a href="docs/live.html">Live</a></li>
+<li><a href="docs/scrub.html">Scrub</a></li>
+<li><a href="docs/search-and-review.html">Search and Review</a></li>
+<li><a href="docs/alerts.html">Alerts</a></li>
+<li><a href="docs/investigate.html">Investigate</a></li>
+<li><a href="docs/sidecar.html">Sidecar</a></li>
+<li><a href="docs/mac.html">Mac</a></li>
+<li><a href="docs/settings.html">Settings</a></li>
+<li><a href="docs/troubleshooting.html">Troubleshooting</a></li>
 </ul>
+</nav>
+<main id="main">
 
-<h2>Troubleshooting</h2>
+<h1>Support</h1>
+
+<p>Start with the <a href="docs/index.html">documentation</a>; this page is the short
+version plus how to reach a human.</p>
+<h2 id="documentation">Documentation</h2>
 <ul>
-  <li><strong>Can't connect / login fails.</strong> Double-check the server
-      URL, including the port, and confirm you can reach that same address
-      from a browser on the same device.</li>
-  <li><strong>Live view works but feels delayed.</strong> This usually means
-      the app has fallen back to HLS because low-latency WebRTC media
-      couldn't reach your device (common on restrictive networks or plain
-      reverse proxies without an overlay network). This is expected
-      graceful-degradation behavior, not a bug.</li>
-  <li><strong>Notifications aren't arriving.</strong> Push notifications
-      require the optional companion &ldquo;sidecar&rdquo; component to be
-      running alongside your Frigate server, and notification permission to
-      be granted to the app in iOS Settings. See the Privacy Policy for how
-      notifications work.</li>
-  <li><strong>App can't reach my server after a network change.</strong>
-      Confirm your device's own network path (Wi-Fi, cellular, VPN/tailnet
-      connection) can currently reach the server address you configured.</li>
+<li><a href="docs/getting-started.html">Getting started</a>: requirements and the first
+  ten minutes.</li>
+<li><a href="docs/connect.html">Connect to your server</a>: onboarding, remote access,
+  Connection Doctor.</li>
+<li><a href="docs/live.html">Live</a> · <a href="docs/scrub.html">Scrub</a> ·
+  <a href="docs/search-and-review.html">Search and Review</a></li>
+<li><a href="docs/alerts.html">Alerts and notifications</a> ·
+  <a href="docs/investigate.html">Investigate and Follow</a></li>
+<li><a href="docs/sidecar.html">The Marcellus sidecar</a> · <a href="docs/mac.html">Mac</a> ·
+  <a href="docs/settings.html">Settings reference</a></li>
+<li><a href="docs/troubleshooting.html">Troubleshooting</a>: the long list, grouped by
+  symptom.</li>
 </ul>
-
-<h2>Contact</h2>
-<p>
-  For anything not covered here, email
-  <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a>.
-</p>
+<h2 id="quick-answers">Quick answers</h2>
+<p><strong>Cannot connect, or login fails.</strong> Check the server URL, including the
+port, and confirm you can reach that same address from a browser on the same
+device. Then run Settings › Server › Connection Doctor, which walks the whole
+chain and names the rung that broke.</p>
+<p><strong>Live view works but feels delayed.</strong> The app fell back to HLS because
+low-latency WebRTC media could not reach your device. This is common on
+restrictive networks and on plain reverse proxies. It is expected
+graceful degradation, not a bug. See <a href="docs/live.html">Live</a>.</p>
+<p><strong>Notifications are not arriving.</strong> Push requires the optional
+<a href="docs/sidecar.html">Marcellus sidecar</a> running alongside Frigate, and
+notification permission granted to the app. Settings › Alerts ›
+Push Doctor runs the whole chain end to end. See
+<a href="docs/alerts.html">Alerts</a>.</p>
+<p><strong>The app cannot reach my server after a network change.</strong> Confirm your
+device's own network path (Wi-Fi, cellular, VPN or tailnet) can currently
+reach the address you configured.</p>
+<h2 id="reporting-a-bug">Reporting a bug</h2>
+<p>Email <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#105;&#99;&#111;&#112;&#116;&#101;&#114;&#114;&#117;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#104;&#101;&#108;&#105;&#99;&#111;&#112;&#116;&#101;&#114;&#114;&#117;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>. Please include:</p>
+<ul>
+<li>The Elsinore version, from Settings › About.</li>
+<li>Your Frigate version.</li>
+<li>Your Marcellus sidecar version, if you run one.</li>
+<li>The Connection Doctor output. Settings › Server › Connection Doctor
+  produces a plain-text transcript with one PASS, WARN, FAIL, INFO, or SKIP
+  line per rung; paste that in.</li>
+<li>For a notification problem, the Push Doctor output as well
+  (Settings › Alerts › Push Doctor).</li>
+<li>What you expected, and what happened instead.</li>
+</ul>
+<h2 id="privacy">Privacy</h2>
+<p>The <a href="privacy.html">privacy policy</a> describes exactly what the app stores,
+what it does not do, and what the optional push relay can see.</p>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="index.html">Home</a> &middot; <a href="support.html">Support</a> &middot;
+<a href="privacy.html">Privacy</a> &middot; <a href="docs/index.html">Docs</a></p>
+</footer>
+</main>
 </div>
 </body>
 </html>

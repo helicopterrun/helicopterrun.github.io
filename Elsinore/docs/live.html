@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live — Elsinore</title>
+<meta name="description" content="The Elsinore live grid, camera ordering, single camera view, and how the app chooses between WebRTC and HLS.">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body class="doc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="../index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
+</header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../support.html">Support</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+</ul>
+<p class="nav-h">Docs</p><ul>
+<li><a href="../docs/index.html">Overview</a></li>
+<li><a href="../docs/getting-started.html">Getting started</a></li>
+<li><a href="../docs/connect.html">Connect</a></li>
+<li class="here"><a href="../docs/live.html" aria-current="page">Live</a></li>
+<li><a href="../docs/scrub.html">Scrub</a></li>
+<li><a href="../docs/search-and-review.html">Search and Review</a></li>
+<li><a href="../docs/alerts.html">Alerts</a></li>
+<li><a href="../docs/investigate.html">Investigate</a></li>
+<li><a href="../docs/sidecar.html">Sidecar</a></li>
+<li><a href="../docs/mac.html">Mac</a></li>
+<li><a href="../docs/settings.html">Settings</a></li>
+<li><a href="../docs/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</nav>
+<main id="main">
+<p class="applies">Applies to: iOS and iPadOS 26 / macOS 26.5 / plain Frigate is enough</p>
+<h1>Live</h1>
+<details class="toc" open><summary>On this page</summary><div class="toc">
+<ul>
+<li><a href="#the-grid">The grid</a></li>
+<li><a href="#camera-order">Camera order</a></li>
+<li><a href="#single-camera">Single camera</a></li>
+<li><a href="#webrtc-and-hls">WebRTC and HLS</a><ul>
+<li><a href="#what-the-fallback-feels-like">What the fallback feels like</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<p>The Live tab shows every camera at once and gets out of the way.</p>
+<p><img alt="The Live grid on iPhone: ten camera tiles in two columns, each labelled with the camera name and a green status dot, over a tab bar reading Live, Scrub, Search, Settings." class="shot" src="../img/live.png" /></p>
+<h2 id="the-grid">The grid</h2>
+<p>Each tile carries the camera name, a status dot, and a still that refreshes
+as the app polls. Tapping a tile opens that camera on its own.</p>
+<p>A tile that has gone quiet shows a <strong>Stale</strong> badge with a last-updated
+readout. A tile whose first frame never arrived shows <strong>Unavailable</strong>
+instead. Those two states are the difference between "the feed stopped" and
+"the feed never started", which is usually the difference between a camera
+problem and a network problem.</p>
+<p>Not every tile streams live video at once. Settings › Appearance &amp; Display ›
+<strong>Live video tiles</strong> controls how many do; Auto means four on iPhone and six
+on iPad.</p>
+<h2 id="camera-order">Camera order</h2>
+<p>By default Elsinore groups cameras by aspect ratio, so the grid does not
+stagger, and orders cameras within a group by Frigate's own <code>ui.order</code>.</p>
+<p>To take over, go to Settings › Appearance &amp; Display › <strong>Camera order</strong> and
+drag. Each drag is saved immediately; there is no save button.
+<strong>Reset to default</strong> puts the automatic grouping back.</p>
+<h2 id="single-camera">Single camera</h2>
+<p>Opening one camera gives you the full frame with the live stream, and it is
+also where <a href="scrub.html">Scrub</a> lives: the same screen carries the reel
+below the picture, so moving from "what is happening now" to "what happened
+an hour ago" does not mean changing screens.</p>
+<p>Viewing a camera also publishes a Handoff activity carrying the camera name
+and playback time, so you can pick the same moment up on another Apple
+device. See <a href="mac.html#handoff">Mac</a>.</p>
+<h2 id="webrtc-and-hls">WebRTC and HLS</h2>
+<p>On a single camera Elsinore tries WebRTC first, through the <code>go2rtc</code>
+component embedded in Frigate, because it is the only way to get live
+latency down to something that feels live.</p>
+<p>The app waits about three and a half seconds for an actual rendered frame.
+Not a connected socket, not a completed ICE handshake: a frame on screen.
+If no frame arrives in that window, it falls back to HLS. Three things
+cause that:</p>
+<ul>
+<li><strong>Signalling failed</strong>: the app could not negotiate with go2rtc at all.</li>
+<li><strong>ICE failed</strong>: the two ends could not agree on a network path.</li>
+<li><strong>Media timeout</strong>: signalling succeeded over HTTP, but the media itself,
+  which travels on its own port, never arrived. This is the common case on
+  restrictive networks and on reverse proxies that only forward HTTP.</li>
+</ul>
+<p>The app also watches for a stream that starts and then starves. If frames
+stop arriving on a stream that still claims to be playing, it falls back to
+HLS mid-stream rather than showing you a frozen picture.</p>
+<h3 id="what-the-fallback-feels-like">What the fallback feels like</h3>
+<p>HLS is segmented, so it is several seconds behind real time rather than
+under one. Everything still works; it is just not live in the way WebRTC is
+live. If your remote setup always falls back, an
+<a href="connect.html#remote-access">overlay network</a> usually fixes it where a
+reverse proxy cannot.</p>
+<p>There is no numeric "seconds behind" readout for live. The signed offset
+you see on the <a href="scrub.html#the-live-chip">Scrub reel's LIVE chip</a> is about
+your position in the recording, not about stream latency.</p>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
+<a href="../privacy.html">Privacy</a> &middot; <a href="../docs/index.html">Docs</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

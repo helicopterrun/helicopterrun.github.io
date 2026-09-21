@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigate and Follow — Elsinore</title>
+<meta name="description" content="Following one subject across every camera at once, with the shared cursor, the Where next list, corrections, and Follow autoplay.">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body class="doc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="../index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
+</header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../support.html">Support</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+</ul>
+<p class="nav-h">Docs</p><ul>
+<li><a href="../docs/index.html">Overview</a></li>
+<li><a href="../docs/getting-started.html">Getting started</a></li>
+<li><a href="../docs/connect.html">Connect</a></li>
+<li><a href="../docs/live.html">Live</a></li>
+<li><a href="../docs/scrub.html">Scrub</a></li>
+<li><a href="../docs/search-and-review.html">Search and Review</a></li>
+<li><a href="../docs/alerts.html">Alerts</a></li>
+<li class="here"><a href="../docs/investigate.html" aria-current="page">Investigate</a></li>
+<li><a href="../docs/sidecar.html">Sidecar</a></li>
+<li><a href="../docs/mac.html">Mac</a></li>
+<li><a href="../docs/settings.html">Settings</a></li>
+<li><a href="../docs/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</nav>
+<main id="main">
+<p class="applies">Applies to: iOS and iPadOS 26 / macOS 26.5 / requires the sidecar</p>
+<h1>Investigate and Follow</h1>
+<details class="toc" open><summary>On this page</summary><div class="toc">
+<ul>
+<li><a href="#how-to-get-there">How to get there</a></li>
+<li><a href="#the-lanes-and-the-cursor">The lanes and the cursor</a></li>
+<li><a href="#where-next">Where next</a><ul>
+<li><a href="#same-and-not-same">Same and Not same</a></li>
+</ul>
+</li>
+<li><a href="#follow">Follow</a></li>
+<li><a href="#stepping-by-hand">Stepping by hand</a></li>
+</ul>
+</div>
+</details>
+<p>Investigate follows one subject across every camera at once, instead of
+making you pick cameras and guess at times.</p>
+<p>It needs the <a href="sidecar.html">Marcellus sidecar</a>, because the grouping of
+sightings into a single visit is the sidecar's work.</p>
+<p><img alt="The Investigate screen on iPhone: a still from stairway-wide at 8:56:42p, a ten minute window, lanes for six cameras with a shared orange cursor, and a Where next list offering shed and stairway-tight, each marked usually about 7 s later and likely." class="shot" src="../img/investigate.png" /></p>
+<h2 id="how-to-get-there">How to get there</h2>
+<p>Four doors, all of which land you at a specific moment rather than at the
+top of a list:</p>
+<ul>
+<li><strong>Long-press the dossier card</strong> on the <a href="scrub.html">Scrub reel</a> and choose
+  <strong>Investigate this moment</strong>.</li>
+<li>The <strong>Investigate</strong> row on an event's detail page, reached from the card's
+  <strong>i</strong> tile. This carries the reel's current cursor time, not the event's
+  start.</li>
+<li>The <strong>toolbar button</strong> in single-camera scrub view, for when you already
+  know it is there.</li>
+<li><strong>Tapping a push notification</strong>, when the alert belongs to an encounter.
+  That opens the encounter directly.</li>
+</ul>
+<h2 id="the-lanes-and-the-cursor">The lanes and the cursor</h2>
+<p>One row per camera, one cursor through all of them. Dragging anywhere over
+the lanes moves every camera together, and the preview above shows the
+focused camera's frame at that instant. This is the whole point: time is
+shared, so you can see what the other cameras were doing at the same second.</p>
+<ul>
+<li><strong>Tap a bar</strong> to follow that sighting. The camera becomes the focused one
+  and the cursor jumps to where the bar begins.</li>
+<li><strong>Tap a camera's name</strong> to switch to it without moving the cursor. That is
+  a different gesture with a different result, on purpose.</li>
+<li><strong>A faint bar</strong> is something that has been sitting still for more than half
+  an hour. A parked car, not a passer-by.</li>
+<li><strong>A chevron on a bar's left edge</strong> means the sighting began before the
+  visible window, rather than the bar pretending to start at the edge.</li>
+<li>The <strong>capsule</strong> at the left of the time axis cycles the window: 2 minutes,
+  5 minutes, 10 minutes, 30 minutes, 1 hour. It starts at 10 minutes.</li>
+</ul>
+<h2 id="where-next">Where next</h2>
+<p>Below the lanes, <strong>Where next</strong> lists the cameras this subject is likely to
+turn up on and roughly when, for example "shed, usually about 7 s later,
+likely".</p>
+<p>The confidence is a word, never a score: <strong>confirmed</strong>, <strong>likely</strong>, or
+<strong>possible</strong>. A suggestion only reads "confirmed" once the sidecar has
+actually pinned it; the app never upgrades a guess on its own.</p>
+<p>Tap a row to jump there.</p>
+<h3 id="same-and-not-same">Same and Not same</h3>
+<p>Swipe a <strong>Where next</strong> row for <strong>Same</strong> or <strong>Not same</strong>.</p>
+<p>This is worth doing. The sidecar chains sightings into one visit using
+identity matches, shared zones, camera adjacency, and learned transition
+times between camera pairs. Your corrections are the ground truth it learns
+those transition times from, so telling it that the figure on the shed
+camera is the same person shortens every future guess about that pair, and
+telling it "not same" stops a wrong chain from growing.</p>
+<h2 id="follow">Follow</h2>
+<p><img alt="Investigate with Follow running: the preview reads Now on stairway-wide, 1 of 9, a transport row sits under the picture, ten camera lanes show bars around 7:48:38p, and the bottom bar reads Stop following." class="shot" src="../img/follow.png" /></p>
+<p><strong>Follow</strong> at the bottom left plays the whole visit back for you. It steps
+through each sighting in order, switching cameras by itself, so you watch
+someone move through the property without picking anything. The preview
+tells you where you are: "Now on stairway-wide, 1 of 9".</p>
+<p>The transport row under the picture steps between sightings, pauses, and
+toggles between 1x and 2x. If a camera has no recording for its stretch,
+Follow says so and moves on. <strong>Stop following</strong> hands control back.</p>
+<h2 id="stepping-by-hand">Stepping by hand</h2>
+<ul>
+<li><strong>Previous</strong> and <strong>Next</strong> walk the same visit from sighting to sighting,
+  across every camera, ordered by time. They disable themselves at each end.</li>
+<li><strong>Open camera</strong> hands the current moment back to the ordinary
+  <a href="scrub.html">Scrub reel</a>, which is where you go to export a clip or look
+  at the surrounding hour in detail.</li>
+</ul>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
+<a href="../privacy.html">Privacy</a> &middot; <a href="../docs/index.html">Docs</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

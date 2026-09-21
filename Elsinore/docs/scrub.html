@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scrub — Elsinore</title>
+<meta name="description" content="The Elsinore scrub reel, how travel speed works, the dossier card, gap cards, clip export, and the Mac keyboard.">
+<link rel="stylesheet" href="../site.css">
+</head>
+<body class="doc">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<a class="brand" href="../index.html"><svg class="mark" width="34" height="34" viewBox="0 0 56 56" role="img" aria-label="Elsinore castle mark">
+<rect width="56" height="56" rx="12" fill="var(--mark-bg)"/>
+<g fill="var(--accent)">
+<rect x="10" y="22" width="5" height="16"/><polygon points="10,22 12.5,15 15,22"/>
+<rect x="19" y="26" width="5" height="12"/><polygon points="19,26 21.5,20 24,26"/>
+<rect x="28" y="24" width="5" height="14"/><polygon points="28,24 30.5,17 33,24"/>
+<rect x="37" y="21" width="5" height="17"/><polygon points="37,21 39.5,13 42,21"/>
+<rect x="8" y="36" width="40" height="2.5"/>
+</g>
+<polyline points="8,44 16,41 24,44 32,41 40,44 48,41" fill="none" stroke="var(--mint)" stroke-width="2.5"/>
+</svg><span>Elsinore</span></a>
+<p class="brand-sub">Native client for Frigate NVR</p>
+</header>
+<div class="shell">
+<nav class="sitenav" aria-label="Site sections">
+<p class="nav-h">Site</p><ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../support.html">Support</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+</ul>
+<p class="nav-h">Docs</p><ul>
+<li><a href="../docs/index.html">Overview</a></li>
+<li><a href="../docs/getting-started.html">Getting started</a></li>
+<li><a href="../docs/connect.html">Connect</a></li>
+<li><a href="../docs/live.html">Live</a></li>
+<li class="here"><a href="../docs/scrub.html" aria-current="page">Scrub</a></li>
+<li><a href="../docs/search-and-review.html">Search and Review</a></li>
+<li><a href="../docs/alerts.html">Alerts</a></li>
+<li><a href="../docs/investigate.html">Investigate</a></li>
+<li><a href="../docs/sidecar.html">Sidecar</a></li>
+<li><a href="../docs/mac.html">Mac</a></li>
+<li><a href="../docs/settings.html">Settings</a></li>
+<li><a href="../docs/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</nav>
+<main id="main">
+<p class="applies">Applies to: iOS and iPadOS 26 / macOS 26.5 / scrub previews need the sidecar</p>
+<h1>Scrub</h1>
+<details class="toc" open><summary>On this page</summary><div class="toc">
+<ul>
+<li><a href="#images-to-find-video-to-confirm">Images to find, video to confirm</a></li>
+<li><a href="#travelling">Travelling</a></li>
+<li><a href="#the-dossier-card">The dossier card</a></li>
+<li><a href="#the-live-chip">The LIVE chip</a></li>
+<li><a href="#gap-cards">Gap cards</a></li>
+<li><a href="#exporting-a-clip">Exporting a clip</a></li>
+<li><a href="#mac">Mac</a></li>
+</ul>
+</div>
+</details>
+<p>Scrub is a vertical reel of recorded footage that you drag through, with the
+nearest event riding along above it.</p>
+<p><img alt="The Scrub reel on iPhone for the camera stairway-wide: a still frame at the top, a dossier card showing a person at 74 percent with an info tile and a camera tile, and below them a vertical reel marked with the current time 8:56:46p and object glyphs." class="shot" src="../img/scrub.png" /></p>
+<h2 id="images-to-find-video-to-confirm">Images to find, video to confirm</h2>
+<p>The reel is built on still frames, not video. Finding the moment you want is
+an image problem: you recognise a shape in a thumbnail far faster than you
+can wait for a clip to seek and buffer. So Elsinore lets you travel through
+hours of still frames at whatever speed you want, and only plays video once
+you have found the second you care about.</p>
+<p>Frames come from the <a href="sidecar.html">sidecar's</a> scrub cache. Against bare
+Frigate the reel still works, but without pre-rendered previews it is much
+less fluid.</p>
+<h2 id="travelling">Travelling</h2>
+<p>Dragging is the only way to move. The reel itself is fixed at one second per
+row; what a drag changes is how far you travel per row, and the app picks
+that automatically from how you are dragging. A slow, careful drag steps
+second by second. A fast flick covers hours.</p>
+<p>Underneath, travel steps along a fixed ladder of spans: <strong>1 second, 5
+seconds, 1 minute, 5 minutes, 15 minutes, 1 hour</strong>. A finer <strong>Frame</strong> rung,
+roughly a tenth of a second, is available from the reel's controls shade
+for when you need to step actual video frames.</p>
+<p>Rows snap to real preview frames where a row is a minute or less. Above
+that the grid wins, because there is no frame for every position.</p>
+<p>Object activity draws in the margin as coloured spans for person, vehicle,
+animal, and package, at spans of ten minutes or less. Above that a span
+would be a few pixels tall, so the app draws per-lane counts instead.</p>
+<p>Four sliders in the <strong>Scrub feel</strong> controls shade tune the drag: Precision,
+Travel, Swipe threshold, and Event drag. They apply to every camera.</p>
+<h2 id="the-dossier-card">The dossier card</h2>
+<p>Above the reel sits a card for the nearest event. When you are parked on an
+event it is lit; when you are not, it is a ghost you can tap to travel to it.
+It shows the snapshot, the subject, a confidence figure, and the time, plus
+a relative age pill on the crop.</p>
+<p>The card has two action tiles:</p>
+<ul>
+<li><strong>i</strong>: opens the event's detail page, which is also one of the doors into
+  <a href="investigate.html#how-to-get-there">Investigate</a>.</li>
+<li><strong>Camera</strong>: a menu of the other cameras that saw the same object, each
+  with a signed time offset from where you are now. Pick one to jump to that
+  camera at that moment. Disabled while loading, and when nothing else saw
+  it.</li>
+</ul>
+<p><strong>Long-press the lit card</strong> for <strong>Investigate this moment</strong>, which opens
+<a href="investigate.html">Investigate</a> at the time the cursor is sitting on rather
+than at the event's start.</p>
+<p>Previous and Next chips step between events on this camera. If a camera's
+newest event is older than a threshold you set in Settings › Appearance &amp;
+Display › <strong>Hide event controls after</strong>, those chips and the card hide
+themselves rather than advertising stale history.</p>
+<h2 id="the-live-chip">The LIVE chip</h2>
+<p>The LIVE chip turns green when you are following within a minute of the live
+edge. Otherwise it shows a signed offset: how far back in the recording you
+currently are. Tapping it returns you to live.</p>
+<h2 id="gap-cards">Gap cards</h2>
+<p>Between events the reel shows gap cards: <strong>SWIPE LEFT</strong>, <strong>SWIPE RIGHT</strong>, or
+<strong>SWIPE LEFT OR RIGHT</strong>, with chevrons that fade in three steps toward the
+direction that has something in it. PAST and FUTURE hint bands mark which
+way is which. They exist so an empty stretch of reel tells you where to go
+rather than looking broken.</p>
+<h2 id="exporting-a-clip">Exporting a clip</h2>
+<p>The controls shade carries the export flow. Set a start and an end with the
+handle chips, then tap <strong>Export</strong>. A confirmation offers <strong>Export to
+Photos</strong> or <strong>Timelapse (25x)</strong>, depending on what the span supports.
+Progress shows while it renders, with cancel and retry.</p>
+<p>Export writes to Photos, so it needs add-only Photos permission. If that is
+denied the app says so and offers to open Settings.</p>
+<h2 id="mac">Mac</h2>
+<p>On Mac the reel is driven by trackpad and keyboard as well as by dragging,
+and the controls live in a transport bar rather than a shade. The keyboard
+commands are listed on the <a href="mac.html#keyboard">Mac page</a>.</p>
+<footer class="pagefoot">
+<p>Last updated: September 21, 2026</p>
+<p>Elsinore is not affiliated with the Frigate project. Contact:
+<a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
+<p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
+<a href="../privacy.html">Privacy</a> &middot; <a href="../docs/index.html">Docs</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>
