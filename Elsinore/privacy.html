@@ -123,6 +123,12 @@ what happens:</p>
 <li>The payload never contains snapshots, thumbnails, video, recordings, or
   your server address in a form the relay uses. Images are fetched by your
   device directly from your own server after the notification arrives.</li>
+<li>If you have a UniFi Protect doorbell mapped through your sidecar, a
+  doorbell press sends the same kind of payload: title and body text, the
+  camera name, a notification category identifying it as a doorbell ring,
+  a Protect event identifier and timestamp, and a link back to your own
+  server for the snapshot. No image bytes travel through the relay for
+  doorbell rings either.</li>
 <li>The relay forwards the payload to Apple's push service, which delivers it
   to your device. Apple's handling of push traffic is governed by Apple's
   own privacy terms.</li>

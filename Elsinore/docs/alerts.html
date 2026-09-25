@@ -61,9 +61,9 @@
 <li><a href="#the-attention-ladder">The attention ladder</a></li>
 <li><a href="#what-needs-the-sidecar">What needs the sidecar</a></li>
 <li><a href="#what-leaves-the-house">What leaves the house</a></li>
+<li><a href="#doorbell-rings">Doorbell rings</a></li>
 <li><a href="#live-activities-and-widgets">Live Activities and widgets</a></li>
 <li><a href="#permissions-the-app-asks-for">Permissions the app asks for</a></li>
-<li><a href="#push-doctor">Push Doctor</a></li>
 <li><a href="#alert-history">Alert History</a></li>
 </ul>
 </div>
@@ -155,6 +155,21 @@ That is why a notification arrives with a picture without the picture ever
 having been uploaded anywhere.</p>
 <p>The <a href="../privacy.html#optional-push-notifications">privacy policy</a> is the
 authoritative statement of what the relay sees.</p>
+<h2 id="doorbell-rings">Doorbell rings</h2>
+<p>If your sidecar is set up for a UniFi Protect doorbell, pressing it sends a
+time-sensitive notification straight away: "Someone's at the door," with the
+camera name and time, the default sound, and a live snapshot of the doorbell
+camera. Tapping it, or its <strong>Live view</strong> action, opens that camera's live
+view. Repeat presses within about 20 seconds collapse into a single
+notification instead of piling up.</p>
+<p>Settings › Alerts › <strong>Doorbell rings</strong> turns this on or off per device; it is
+on by default. Pausing the doorbell camera alone does not silence rings —
+only a global pause does. Rings are separate from Frigate's person and
+motion alerts, so they still arrive even when the doorbell camera's alerts
+are filtered or paused. This works the same on iPhone and Mac.</p>
+<p>Setting up the doorbell itself — the UniFi Protect API key and mapping the
+doorbell to its Frigate camera — happens on the sidecar. See the Marcellus
+in-product guide, topic "UniFi Protect".</p>
 <h2 id="live-activities-and-widgets">Live Activities and widgets</h2>
 <p><strong>Live Activities</strong> (iPhone and iPad only) put an ongoing event on your Lock
 Screen and in the Dynamic Island: a snapshot, a title, an elapsed timer, a
@@ -181,20 +196,9 @@ companion instead. See <a href="mac.html">Mac</a>.</p>
 <li><strong>Local networking</strong>, so it can reach a Frigate server on your LAN.</li>
 </ul>
 <p>There is no location, camera, microphone, or contacts access.</p>
-<h2 id="push-doctor">Push Doctor</h2>
-<p>Settings › Alerts › <strong>Push Doctor</strong>. Six checks, end to end:</p>
-<ol>
-<li>Notification permission.</li>
-<li>Device registration.</li>
-<li>Server posture.</li>
-<li>The APNs relay.</li>
-<li>Measured delivery.</li>
-<li>Round trip, which sends a real test push and watches for it to arrive.</li>
-</ol>
-<p>That last check works because the app reports back to your sidecar when a
-push is actually seen. If notifications are misbehaving, this page usually
-names the rung. Paste its output into a
-<a href="../support.html#reporting-a-bug">bug report</a>.</p>
+<p>For a notification problem, run Settings › Server ›
+<a href="connect.html#connection-doctor">Connection Doctor</a>, which includes push
+delivery and round-trip checks.</p>
 <h2 id="alert-history">Alert History</h2>
 <p>Settings › <strong>Alert History</strong> is a feed of routing decisions, including the
 ones that chose not to send. Dimmed rows are what the system suppressed.
@@ -202,7 +206,7 @@ Swipe a row to say it was too much or not enough, or to silence it. This is
 the fastest way to converge on the alerts you actually want, because you are
 correcting real decisions rather than guessing at dials.</p>
 <footer class="pagefoot">
-<p>Last updated: September 21, 2026</p>
+<p>Last updated: September 22, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
