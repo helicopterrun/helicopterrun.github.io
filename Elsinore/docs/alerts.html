@@ -38,7 +38,7 @@
 <li><a href="../docs/scrub.html">Scrub</a></li>
 <li><a href="../docs/search-and-review.html">Search and Review</a></li>
 <li class="here"><a href="../docs/alerts.html" aria-current="page">Alerts</a></li>
-<li><a href="../docs/investigate.html">Investigate</a></li>
+<li><a href="../docs/investigate.html">Explore</a></li>
 <li><a href="../docs/sidecar.html">Sidecar</a></li>
 <li><a href="../docs/mac.html">Mac</a></li>
 <li><a href="../docs/settings.html">Settings</a></li>
@@ -89,54 +89,93 @@ either way; the later steps just describe what would reach you.</p>
 notifications one step earlier.</p>
 <h3 id="2-posture">2. Posture</h3>
 <p>"How much do you want to hear? Pick a starting point. You'll refine it
-next." Three presets, plus a fourth if your current dials do not match any
-of them:</p>
+next." Three presets, plus a fourth if your current settings do not match
+any of them:</p>
 <ul>
-<li><strong>Quiet</strong>: nothing pops except a person somewhere Restricted.</li>
-<li><strong>Balanced</strong>: people at your doors and inside get a banner.</li>
-<li><strong>Vigilant</strong>: people get a banner anywhere but the street.</li>
-<li><strong>Custom</strong>: keep my current dials.</li>
+<li><strong>Calm</strong>: mostly Quiet rows, with no Live Activities for ordinary comings
+  and goings. Only a person somewhere Restricted is Urgent.</li>
+<li><strong>Balanced</strong>: people on your grounds and at your entrances get a Glance.
+  Vehicles and animals are Quiet. A person somewhere Restricted is Urgent.</li>
+<li><strong>Watchful</strong>: a Glance for nearly everything near the house. A person at
+  your entrances or somewhere Restricted is Urgent.</li>
+<li><strong>Keep my current settings</strong>: leave the table as it is.</li>
 </ul>
 <h3 id="3-subjects">3. Subjects</h3>
-<p>"Who do you want to hear about? Per subject: ignore it, keep it quiet, or
-let the posture decide." Person, Vehicle, Animal, and Thing always appear.
-Package, Bins, and Openings appear only when your sidecar is new enough to
-route them. Each gets three choices:</p>
-<ul>
-<li><strong>Ignore</strong>: never recorded, never shown.</li>
-<li><strong>Quietly</strong>: a silent Live Activity at most, never a banner.</li>
-<li><strong>As set</strong>: whatever the posture says for each area.</li>
-</ul>
+<p>"Who do you want to hear about? Choose the most each one may ever do."
+Person, Vehicle, Animal, and Thing always appear. Package, Bins, and
+Openings appear only when your sidecar is new enough to route them. Each
+subject gets a ceiling, one of the four levels: <strong>Ignore</strong> (never alerts,
+shows in the app only), <strong>Quiet</strong> (never more than a Notification Center
+row), <strong>Glance</strong> (never more than a Live Activity), or <strong>Urgent</strong> (no
+ceiling; the posture decides for each place).</p>
 <h3 id="4-feel">4. Feel</h3>
 <p>"Feel the difference. Try each level now so the words mean something." Four
 panels:</p>
 <ul>
-<li><strong>Try it</strong>: Try Glance, Try Notify, Try Alarm. These send real test
-  notifications so you hear what each level actually does.</li>
+<li><strong>Try it</strong>: Try Glance (a Live Activity demo), Try Quiet and Try Urgent
+  (real test notifications), so you see and hear what each level actually
+  does.</li>
 <li><strong>Delivery</strong> (iPhone and iPad): Live Activity first, or Notifications
   first.</li>
-<li><strong>Sound</strong>: mute all sounds, and pick the alarm sound with a preview.</li>
-<li><strong>Quiet hours</strong>: on or off, From and Until, and whether quiet hours are
-  fully silent or just without sound. Alarm-level events still break
-  through.</li>
+<li><strong>Sound</strong>: mute all sounds, and pick the Urgent sound with a preview.</li>
+<li><strong>Quiet hours</strong>: on or off, From and Until, and whether quiet hours hold
+  Urgent at Glance or just remove the sound. Urgent alerts in Restricted
+  places still break through.</li>
 </ul>
 <h3 id="5-review">5. Review</h3>
-<p>"Here's what you'll get. Every subject, every area. Change anything later in
-Settings › Alerts." The full routing grid, one sentence per subject, a
-summary of delivery, sounds, and quiet hours, and a button to <strong>send a test
-through your server</strong>, which round-trips a real push all the way from the
-sidecar.</p>
+<p>"Here's what you'll get. Every subject, every place. Change anything later
+in Settings › Alerts." The full grid, one sentence per subject, a summary of
+delivery, sounds, and quiet hours, and a button to <strong>send a test through
+your server</strong>, which round-trips a real push all the way from the sidecar.</p>
 <h2 id="the-attention-ladder">The attention ladder</h2>
-<p>Underneath the presets is a grid: for each subject, in each kind of place,
-one of <strong>Off, Log, Glance, Notify, Alarm</strong>. Settings › Alerts ›
-<strong>Attention Ladder</strong> is where you set it directly.</p>
+<p>Every detection lands on one of four levels, quietest first:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ignore</strong></td>
+<td>Shows in the app only.</td>
+</tr>
+<tr>
+<td><strong>Quiet</strong></td>
+<td>A Notification Center row. No banner, sound or buzz.</td>
+</tr>
+<tr>
+<td><strong>Glance</strong></td>
+<td>A Live Activity. Nothing in Notification Center.</td>
+</tr>
+<tr>
+<td><strong>Urgent</strong></td>
+<td>Breaks through Focus. Stays in Notification Center.</td>
+</tr>
+</tbody>
+</table>
+<p>The level depends on what was seen (the subject) and where (the place).
+Settings › Alerts › <strong>Attention Ladder</strong> is a grid of subject by place where
+you set each cell directly. There are four kinds of place:</p>
+<ul>
+<li><strong>Public</strong>: streets and sidewalks you don't control. Never more than a
+  Glance unless something urgent happens.</li>
+<li><strong>Grounds</strong>: your property: yard, driveway, garden, paths.</li>
+<li><strong>Entrances</strong>: doors, gates and windows.</li>
+<li><strong>Restricted</strong>: places only you should be: a pool, a charger, equipment.</li>
+</ul>
 <p>Places come from your Frigate zones, classified during
 <a href="connect.html#zones">onboarding</a> or later in Settings › Alerts › <strong>Zones</strong>.
-Unassigned zones default to Semi-private. That is why a person in the street
-and a person in the hallway can produce different results from the same
-camera.</p>
-<p>A <strong>Recognition</strong> section lets a recognised person or vehicle relax the
-result by one level, or all the way down to Noted.</p>
+Unassigned zones count as Grounds. That is why a person in the street and a
+person in the hallway can produce different results from the same camera.</p>
+<p>Behaviour can lift a detection one step (running, approaching, night), but
+never above Glance. Only Restricted places, safety triggers, or a cell you
+set to Urgent reach Urgent. Ignore never escalates, except for a person. A
+<strong>Recognition</strong> section lets a recognised person or vehicle relax the
+result.</p>
+<p>If your sidecar is older than the four-level ladder, the grid is shown
+read-only with the line "Update Marcellus to change alert settings."</p>
 <h2 id="what-needs-the-sidecar">What needs the sidecar</h2>
 <p>Everything on this page needs the sidecar, because the sidecar is what
 watches Frigate and decides to send. Within that, the extended subjects
@@ -201,7 +240,7 @@ like any other widget.</p>
 companion instead. See <a href="mac.html">Mac</a>.</p>
 <h2 id="permissions-the-app-asks-for">Permissions the app asks for</h2>
 <ul>
-<li><strong>Notifications</strong>, for banners, sounds, and alarms. Elsinore also holds
+<li><strong>Notifications</strong>, for Quiet rows and Urgent alerts. Elsinore also holds
   the time-sensitive entitlement, so an urgent alert is not quietly
   downgraded by a Focus filter.</li>
 <li><strong>Live Activities</strong>, which is a separate permission from notifications.</li>
@@ -220,7 +259,7 @@ Swipe a row to say it was too much or not enough, or to silence it. This is
 the fastest way to converge on the alerts you actually want, because you are
 correcting real decisions rather than guessing at dials.</p>
 <footer class="pagefoot">
-<p>Last updated: September 24, 2026</p>
+<p>Last updated: October 16, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

@@ -38,7 +38,7 @@
 <li><a href="../docs/scrub.html">Scrub</a></li>
 <li><a href="../docs/search-and-review.html">Search and Review</a></li>
 <li><a href="../docs/alerts.html">Alerts</a></li>
-<li><a href="../docs/investigate.html">Investigate</a></li>
+<li><a href="../docs/investigate.html">Explore</a></li>
 <li><a href="../docs/sidecar.html">Sidecar</a></li>
 <li><a href="../docs/mac.html">Mac</a></li>
 <li><a href="../docs/settings.html">Settings</a></li>
@@ -79,6 +79,12 @@ fast." One button: <strong>Get Started</strong>.</p>
 it." Fill in the server URL, username, and password, then tap <strong>Test
 Connection</strong>. Continue stays disabled until that test succeeds, because the
 successful test is also what commits your credentials.</p>
+<p><strong>Which address?</strong> If you run a Marcellus sidecar, enter its address and
+port. Otherwise enter the address you open Frigate's web interface at in a
+browser, including the port: usually Frigate's login-protected port, 8971,
+for example <code>https://192.168.1.10:8971</code>. The username and password are your
+Frigate login. If a browser on this device can't reach that address, the
+app can't either; see <a href="#remote-access">Remote access</a>.</p>
 <p>If the test fails, a <strong>Diagnose connection</strong> button opens the
 <a href="#connection-doctor">Connection Doctor</a> as a sheet without losing what you
 typed.</p>
@@ -98,11 +104,11 @@ denied them.</p>
 <h3 id="zones">Zones</h3>
 <p>Skipped entirely if your server exposes no zones. Otherwise: "What ground
 is what?" You confirm or correct the place class the sidecar guessed for
-each Frigate zone, using one picker per zone. A "What do these mean?" sheet
-explains the classes, and a summary shows what your choices do to routing.
+each Frigate zone, using one picker per zone: Public, Grounds, Entrances or
+Restricted. A "What do these mean?" sheet explains the four places, and a summary shows what your choices do to routing.
 Buttons: <strong>Looks right</strong> or <strong>Skip</strong>. If there are no zones yet the step
 says so plainly and offers Continue.</p>
-<p>Place classes matter because the <a href="alerts.html">attention ladder</a> routes by
+<p>Places matter because the <a href="alerts.html">attention ladder</a> routes by
 subject and place, not by camera.</p>
 <h3 id="alerts">Alerts</h3>
 <p>Skipped if zones were unavailable, and skipped if you declined
@@ -178,7 +184,7 @@ ladder appears on the same page.</p>
   zone classifications, and returns to the welcome screen.</li>
 </ul>
 <footer class="pagefoot">
-<p>Last updated: September 22, 2026</p>
+<p>Last updated: October 16, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

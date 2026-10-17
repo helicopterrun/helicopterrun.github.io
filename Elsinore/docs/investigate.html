@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Investigate and Follow — Elsinore</title>
-<meta name="description" content="Following one subject across every camera at once, with the shared cursor, the Where next list, corrections, and Follow autoplay.">
+<title>Explore and Investigate — Elsinore</title>
+<meta name="description" content="Following one subject across every camera at once. Explore on iPhone, the Investigate window on Mac: shared cursor, where next, corrections, and Follow.">
 <link rel="stylesheet" href="../site.css">
 </head>
 <body class="doc">
@@ -38,7 +38,7 @@
 <li><a href="../docs/scrub.html">Scrub</a></li>
 <li><a href="../docs/search-and-review.html">Search and Review</a></li>
 <li><a href="../docs/alerts.html">Alerts</a></li>
-<li class="here"><a href="../docs/investigate.html" aria-current="page">Investigate</a></li>
+<li class="here"><a href="../docs/investigate.html" aria-current="page">Explore</a></li>
 <li><a href="../docs/sidecar.html">Sidecar</a></li>
 <li><a href="../docs/mac.html">Mac</a></li>
 <li><a href="../docs/settings.html">Settings</a></li>
@@ -47,26 +47,119 @@
 </nav>
 <main id="main">
 <p class="applies">Applies to: iOS and iPadOS 26 / macOS 26.5 / requires the sidecar</p>
-<h1>Investigate and Follow</h1>
+<h1>Explore and Investigate</h1>
 <details class="toc" open><summary>On this page</summary><div class="toc">
 <ul>
 <li><a href="#how-to-get-there">How to get there</a></li>
-<li><a href="#the-lanes-and-the-cursor">The lanes and the cursor</a></li>
-<li><a href="#where-next">Where next</a><ul>
+<li><a href="#the-lanes">The lanes</a></li>
+<li><a href="#selecting-a-sighting">Selecting a sighting</a><ul>
 <li><a href="#same-and-not-same">Same and Not same</a></li>
 </ul>
 </li>
+<li><a href="#scenes-cameras-that-see-the-same-place">Scenes: cameras that see the same place</a></li>
 <li><a href="#follow">Follow</a></li>
+<li><a href="#mac-the-investigate-window">Mac: the Investigate window</a><ul>
+<li><a href="#how-to-get-there-on-mac">How to get there on Mac</a></li>
+<li><a href="#the-lanes-and-the-cursor">The lanes and the cursor</a></li>
+<li><a href="#where-next">Where next</a></li>
+<li><a href="#same-and-not-same_1">Same and Not same</a></li>
+<li><a href="#follow_1">Follow</a></li>
 <li><a href="#stepping-by-hand">Stepping by hand</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </details>
-<p>Investigate follows one subject across every camera at once, instead of
-making you pick cameras and guess at times.</p>
+<p>Explore follows one subject across every camera at once, instead of
+making you pick cameras and guess at times. On iPhone it is a mode of the
+<a href="scrub.html">Scrub page</a>. On Mac it is a separate Investigate window,
+described <a href="#mac-the-investigate-window">below</a>.</p>
 <p>It needs the <a href="sidecar.html">Marcellus sidecar</a>, because the grouping of
 sightings into a single visit is the sidecar's work.</p>
-<p><img alt="The Investigate screen on iPhone: a still from stairway-wide at 8:56:42p, a ten minute window, lanes for six cameras with a shared orange cursor, and a Where next list offering shed and stairway-tight, each marked usually about 7 s later and likely." class="shot" src="../img/investigate.png" /></p>
 <h2 id="how-to-get-there">How to get there</h2>
+<p>Explore keeps the Scrub page as it is: the player, the drum, Previous, LIVE
+and Next, the dossier card. Only the drum changes, from one camera's object
+tracks to <strong>one lane per camera</strong>.</p>
+<ul>
+<li><strong>The toolbar toggle</strong>: the two-part button swaps between one camera and
+  all cameras.</li>
+<li><strong>Pinch in on the drum</strong> to go to all cameras.</li>
+<li><strong>Long-press the dossier card</strong> and choose <strong>Explore this moment</strong>. This
+  uses the time the cursor is on, not the event's start.</li>
+<li>The <strong>Explore</strong> row on an event's detail page, reached from the card's
+  <strong>i</strong> tile.</li>
+<li>The <strong>Explore</strong> item in the Review feed's context menu.</li>
+<li><strong>Explore</strong> on an Encounter card.</li>
+<li><strong>Tapping a push notification</strong>, when the alert belongs to an encounter.</li>
+</ul>
+<p>To go back to one camera, tap the toggle again, or spread two fingers on a
+lane to open just that camera.</p>
+<h2 id="the-lanes">The lanes</h2>
+<p>One lane per camera, one cursor through all of them. Dragging the drum moves
+every camera together, and the player shows the focused camera's frame at that
+instant. Time is shared, so you can see what the other cameras were doing at
+the same second.</p>
+<ul>
+<li><strong>Busy cameras open, quiet ones fold.</strong> A camera with sightings near the
+  cursor opens wide. A quiet one folds to a thin hairline at the right edge.</li>
+<li><strong>The focused camera</strong> is the one in the player, and its lane is tinted.</li>
+<li><strong>The window is short.</strong> The lanes show about a minute and a half either
+  side of the cursor, with <strong>-1:00</strong> and <strong>+1:00</strong> marks. When a subject is
+  selected, the window widens to fit the whole of its path.</li>
+<li><strong>Previous and Next</strong>, and flicks, stop at events on any camera. If the next
+  event is on another camera, the focus moves there.</li>
+</ul>
+<p><strong>Tap a lane</strong>, or a tile in the filmstrip (below), to switch camera. The
+cursor time stays where it is.</p>
+<h2 id="selecting-a-sighting">Selecting a sighting</h2>
+<p><strong>Tap a bar</strong> to select that sighting. The camera becomes the focused one,
+and the cursor jumps to where the bar begins.</p>
+<p>The cameras the subject passed through lead the drum in the order it walked
+them, joined by a glowing <strong>trail</strong>. A dashed bar in another lane is the
+<strong>where next</strong> suggestion: the camera the subject is likely to turn up on, and
+roughly when.</p>
+<p>The strip under the player becomes the subject's controls: where next,
+<strong>Same</strong> / <strong>Not same</strong>, <strong>Follow</strong>, and <strong>x</strong> to clear the selection.</p>
+<p>With nothing selected, the strip is a <strong>filmstrip</strong> instead: stills of the
+other busy cameras at the cursor time. Tap one to switch to that camera.</p>
+<p>The confidence on a where-next suggestion is a word, never a score:
+<strong>confirmed</strong>, <strong>likely</strong>, or <strong>possible</strong>. It only reads "confirmed" once the
+sidecar has actually pinned it; the app never upgrades a guess on its own.</p>
+<h3 id="same-and-not-same">Same and Not same</h3>
+<p>Tap <strong>Same</strong> or <strong>Not same</strong> to correct the where-next suggestion.</p>
+<p>This is worth doing. The sidecar chains sightings into one visit using
+identity matches, shared zones, camera adjacency, and learned transition
+times between camera pairs. Your corrections are the ground truth it learns
+those transition times from, so telling it that the figure on the shed
+camera is the same person shortens every future guess about that pair, and
+telling it "not same" stops a wrong chain from growing.</p>
+<h2 id="scenes-cameras-that-see-the-same-place">Scenes: cameras that see the same place</h2>
+<p>Several cameras often see the same person at the same moment, because those
+cameras look at the same spot. Elsinore shows that place as <strong>one
+stop</strong> rather than a hop between cameras.</p>
+<ul>
+<li><strong>On the drum</strong>, a dashed bracket runs across the lanes that share the
+  place, with the place name under it. A badge such as <strong>×2</strong> shows how many
+  people were there, when Elsinore can tell.</li>
+<li><strong>The subject card</strong> says who and for how long, for example
+  "2 people · 0:28". A stop with several views shows a small stack. Tap it to
+  switch views.</li>
+<li><strong>Follow</strong> plays one place at a time, on its best view.</li>
+</ul>
+<p>Elsinore works out which cameras see the same place from how quickly people
+appear on both. If it gets one wrong, go to <strong>Settings › Appearance &amp;
+Display › Shared views</strong> and choose <strong>Automatic</strong>, <strong>Same place</strong>, or
+<strong>Different places</strong> for that pair.</p>
+<p>The lanes use the full width of the drum, with the clock floating over them.</p>
+<h2 id="follow">Follow</h2>
+<p><strong>Follow</strong> plays the whole visit back for you. It focuses each sighting's
+camera in order, lets it play, and moves on at the end, so you watch someone
+move through the property without picking anything. If a camera has no
+recording for its stretch, Follow says so and moves on. Tap Follow again to
+stop and take control back.</p>
+<h2 id="mac-the-investigate-window">Mac: the Investigate window</h2>
+<p>On Mac, the same idea lives in its own window, called Investigate.</p>
+<h3 id="how-to-get-there-on-mac">How to get there on Mac</h3>
 <p>Four doors, all of which land you at a specific moment rather than at the
 top of a list:</p>
 <ul>
@@ -80,7 +173,7 @@ top of a list:</p>
 <li><strong>Tapping a push notification</strong>, when the alert belongs to an encounter.
   That opens the encounter directly.</li>
 </ul>
-<h2 id="the-lanes-and-the-cursor">The lanes and the cursor</h2>
+<h3 id="the-lanes-and-the-cursor">The lanes and the cursor</h3>
 <p>One row per camera, one cursor through all of them. Dragging anywhere over
 the lanes moves every camera together, and the preview above shows the
 focused camera's frame at that instant. This is the whole point: time is
@@ -97,7 +190,7 @@ shared, so you can see what the other cameras were doing at the same second.</p>
 <li>The <strong>capsule</strong> at the left of the time axis cycles the window: 2 minutes,
   5 minutes, 10 minutes, 30 minutes, 1 hour. It starts at 10 minutes.</li>
 </ul>
-<h2 id="where-next">Where next</h2>
+<h3 id="where-next">Where next</h3>
 <p>Below the lanes, <strong>Where next</strong> lists the cameras this subject is likely to
 turn up on and roughly when, for example "shed, usually about 7 s later,
 likely".</p>
@@ -105,7 +198,7 @@ likely".</p>
 <strong>possible</strong>. A suggestion only reads "confirmed" once the sidecar has
 actually pinned it; the app never upgrades a guess on its own.</p>
 <p>Tap a row to jump there.</p>
-<h3 id="same-and-not-same">Same and Not same</h3>
+<h3 id="same-and-not-same_1">Same and Not same</h3>
 <p>Swipe a <strong>Where next</strong> row for <strong>Same</strong> or <strong>Not same</strong>.</p>
 <p>This is worth doing. The sidecar chains sightings into one visit using
 identity matches, shared zones, camera adjacency, and learned transition
@@ -113,8 +206,7 @@ times between camera pairs. Your corrections are the ground truth it learns
 those transition times from, so telling it that the figure on the shed
 camera is the same person shortens every future guess about that pair, and
 telling it "not same" stops a wrong chain from growing.</p>
-<h2 id="follow">Follow</h2>
-<p><img alt="Investigate with Follow running: the preview reads Now on stairway-wide, 1 of 9, a transport row sits under the picture, ten camera lanes show bars around 7:48:38p, and the bottom bar reads Stop following." class="shot" src="../img/follow.png" /></p>
+<h3 id="follow_1">Follow</h3>
 <p><strong>Follow</strong> at the bottom left plays the whole visit back for you. It steps
 through each sighting in order, switching cameras by itself, so you watch
 someone move through the property without picking anything. The preview
@@ -122,7 +214,7 @@ tells you where you are: "Now on stairway-wide, 1 of 9".</p>
 <p>The transport row under the picture steps between sightings, pauses, and
 toggles between 1x and 2x. If a camera has no recording for its stretch,
 Follow says so and moves on. <strong>Stop following</strong> hands control back.</p>
-<h2 id="stepping-by-hand">Stepping by hand</h2>
+<h3 id="stepping-by-hand">Stepping by hand</h3>
 <ul>
 <li><strong>Previous</strong> and <strong>Next</strong> walk the same visit from sighting to sighting,
   across every camera, ordered by time. They disable themselves at each end.</li>
@@ -131,7 +223,7 @@ Follow says so and moves on. <strong>Stop following</strong> hands control back.
   at the surrounding hour in detail.</li>
 </ul>
 <footer class="pagefoot">
-<p>Last updated: September 21, 2026</p>
+<p>Last updated: October 17, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
