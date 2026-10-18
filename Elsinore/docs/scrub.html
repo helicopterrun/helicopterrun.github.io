@@ -73,12 +73,14 @@ you have found the second you care about.</p>
 Frigate the reel still works, but without pre-rendered previews it is much
 less fluid.</p>
 <h2 id="travelling">Travelling</h2>
-<p>Dragging is the only way to move. The reel itself is fixed at one second per
-row; what a drag changes is how far you travel per row, and the app picks
-that automatically from how you are dragging. A slow, careful drag steps
-second by second. A fast flick covers hours.</p>
-<p>Underneath, travel steps along a fixed ladder of spans: <strong>1 second, 5
-seconds, 1 minute, 5 minutes, 15 minutes, 1 hour</strong>. A finer <strong>Frame</strong> rung,
+<p>Dragging is the only way to move. The reel is fixed at one second per row,
+and events are drawn on a map of the last and next few minutes around where
+you are. The map widens and narrows to fit the nearby activity, from about a
+minute and a half either side up to ten minutes.</p>
+<p>How far a drag goes depends on how fast you move. A slow, careful drag steps
+through the seconds, one row at a time. A fast swipe moves with the events:
+what is under your finger stays under your finger. Flicks carry further, and
+Previous, Next and the chips take you on long trips. A finer <strong>Frame</strong> rung,
 roughly a tenth of a second, is available from the reel's controls shade
 for when you need to step actual video frames.</p>
 <p>Rows snap to real preview frames where a row is a minute or less. Above
@@ -87,7 +89,10 @@ that the grid wins, because there is no frame for every position.</p>
 animal, and package, at spans of ten minutes or less. Above that a span
 would be a few pixels tall, so the app draws per-lane counts instead.</p>
 <p>Four sliders in the <strong>Scrub feel</strong> controls shade tune the drag: Precision,
-Travel, Swipe threshold, and Event drag. They apply to every camera.</p>
+Travel, Swipe threshold, and Event drag. Travel sets how far a fast swipe goes
+compared with the event map; at the default, events stay exactly under your
+finger. A read-only <strong>Event map</strong> line in the same shade shows how wide the map
+currently is, for example ±3 min. The sliders apply to every camera.</p>
 <h2 id="the-dossier-card">The dossier card</h2>
 <p>Above the reel sits a card for the nearest event. When you are parked on an
 event it is lit; when you are not, it is a ghost you can tap to travel to it.
@@ -136,7 +141,7 @@ right. Hover for a larger still, click to jump there, and pinch to change the
 zoom. The <strong>Explore</strong> button in the toolbar (Command-Shift-E) adds a timeline
 of every camera; see <a href="investigate.html#explore-on-the-mac">Explore on the Mac</a>.</p>
 <footer class="pagefoot">
-<p>Last updated: October 17, 2026</p>
+<p>Last updated: October 18, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
