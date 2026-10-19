@@ -59,7 +59,7 @@
 </li>
 <li><a href="#live-video">Live video</a><ul>
 <li><a href="#live-view-works-but-feels-delayed">Live view works but feels delayed</a></li>
-<li><a href="#a-tile-says-stale-or-unavailable">A tile says Stale, or Unavailable</a></li>
+<li><a href="#a-tile-says-stale-or-shows-a-grey-dot">A tile says Stale, or shows a grey dot</a></li>
 <li><a href="#live-was-fine-and-then-froze">Live was fine and then froze</a></li>
 </ul>
 </li>
@@ -128,11 +128,11 @@ expected graceful degradation, not a bug.</p>
 because WebRTC media travels on its own port and many proxies only forward
 HTTP. An <a href="connect.html#remote-access">overlay network</a> such as Tailscale
 usually fixes it where a reverse proxy cannot.</p>
-<h3 id="a-tile-says-stale-or-unavailable">A tile says Stale, or Unavailable</h3>
-<p><strong>Stale</strong> means frames arrived and then stopped, which usually points at the
-camera or at Frigate. <strong>Unavailable</strong> means no frame ever arrived, which
-usually points at the network path or at that camera's configuration in
-Frigate.</p>
+<h3 id="a-tile-says-stale-or-shows-a-grey-dot">A tile says Stale, or shows a grey dot</h3>
+<p><strong>Stale</strong> (with a yellow dot) means frames arrived and then stopped, which
+usually points at the camera or at Frigate. A grey dot over a camera
+placeholder means no frame ever arrived, which usually points at the
+network path or at that camera's configuration in Frigate.</p>
 <h3 id="live-was-fine-and-then-froze">Live was fine and then froze</h3>
 <p>The app watches for a stream that starts and then starves, and falls back to
 HLS on its own. If the picture is genuinely frozen rather than delayed,
@@ -147,14 +147,14 @@ paths in the sidecar config and look at <code>/healthz</code>.</p>
 pre-rendered previews, so it will not feel fluid.</p>
 <h3 id="previous-and-next-chips-have-disappeared-on-a-camera">Previous and Next chips have disappeared on a camera</h3>
 <p>That camera's newest event is older than the threshold in Settings ›
-Appearance &amp; Display › <strong>Hide event controls after</strong>. Raise it, or set it to
-Never.</p>
+Scrub › <strong>Hide event controls after</strong> (default 5 days). Raise it, or set it
+to Never.</p>
 <h3 id="export-fails">Export fails</h3>
 <p>Export writes to Photos, so it needs add-only Photos permission. If that was
 denied, the app says so and offers to open Settings.</p>
 <h2 id="notifications">Notifications</h2>
 <p>Run Settings › Server › <a href="connect.html#connection-doctor">Connection Doctor</a> first. Its
-six checks are ordered so the first failure is the real one.</p>
+Notifications section has six checks (seven with a doorbell), ordered so the first failure is the real one.</p>
 <h3 id="nothing-arrives-at-all">Nothing arrives at all</h3>
 <ul>
 <li>Push requires the <a href="sidecar.html">Marcellus sidecar</a>. Plain Frigate cannot
@@ -212,8 +212,8 @@ corrections. See
 <a href="investigate.html#same-and-not-same">Same and Not same</a>.</p>
 <h2 id="still-stuck">Still stuck</h2>
 <p><a href="../support.html#reporting-a-bug">Email support</a> with the Connection Doctor
-transcript, the Connection Doctor output if it is a notification problem, and your
-app, Frigate, and sidecar versions.</p>
+transcript (Copy report), the live diagnostics if live video is the problem,
+and your app, Frigate, and sidecar versions.</p>
 <footer class="pagefoot">
 <p>Last updated: October 17, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:

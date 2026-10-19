@@ -55,6 +55,7 @@
 <li><a href="#single-camera">Single camera</a></li>
 <li><a href="#webrtc-and-hls">WebRTC and HLS</a><ul>
 <li><a href="#what-the-fallback-feels-like">What the fallback feels like</a></li>
+<li><a href="#live-on-the-scrub-page">Live on the Scrub page</a></li>
 </ul>
 </li>
 </ul>
@@ -64,26 +65,31 @@
 <p><img alt="The Live grid on iPhone: ten camera tiles in two columns, each labelled with the camera name and a green status dot, over a tab bar reading Live, Scrub, Search, Settings." class="shot" src="../img/live.png" /></p>
 <h2 id="the-grid">The grid</h2>
 <p>Each tile carries the camera name, a status dot, and a still that refreshes
-as the app polls. Tapping a tile opens that camera on its own.</p>
-<p>A tile that has gone quiet shows a <strong>Stale</strong> badge with a last-updated
-readout. A tile whose first frame never arrived shows <strong>Unavailable</strong>
-instead. Those two states are the difference between "the feed stopped" and
-"the feed never started", which is usually the difference between a camera
-problem and a network problem.</p>
+as the app polls. Tapping a tile opens that camera on the Scrub tab.</p>
+<p>When there are encounters you have not seen, one quiet line above the grid
+says how many ("6 encounters while you were away"); tap it to open the
+Review tab.</p>
+<p>A tile that has gone quiet shows a <strong>Stale</strong> badge and a yellow dot. A tile
+whose first frame never arrived shows a grey dot over a camera placeholder.
+(VoiceOver reads these as "last updated" and "Unavailable".) Those two
+states are the difference between "the feed stopped" and "the feed never
+started", which is usually the difference between a camera problem and a
+network problem. A small crossed-out camera in a tile's corner means that
+tile is showing a still rather than video, because of the live video tiles
+limit below.</p>
 <p>Not every tile streams live video at once. Settings › Appearance &amp; Display ›
 <strong>Live video tiles</strong> controls how many do; Auto means four on iPhone and six
-on iPad.</p>
+on iPad. The rest show a still that refreshes every second.</p>
 <h2 id="camera-order">Camera order</h2>
 <p>By default Elsinore groups cameras by aspect ratio, so the grid does not
 stagger, and orders cameras within a group by Frigate's own <code>ui.order</code>.</p>
-<p>To take over, go to Settings › Appearance &amp; Display › <strong>Camera order</strong> and
+<p>To take over, go to Settings › Appearance &amp; Display › <strong>Camera Order</strong> and
 drag. Each drag is saved immediately; there is no save button.
 <strong>Reset to default</strong> puts the automatic grouping back.</p>
 <h2 id="single-camera">Single camera</h2>
-<p>Opening one camera gives you the full frame with the live stream, and it is
-also where <a href="scrub.html">Scrub</a> lives: the same screen carries the reel
-below the picture, so moving from "what is happening now" to "what happened
-an hour ago" does not mean changing screens.</p>
+<p>Tapping a tile opens that camera on the <a href="scrub.html">Scrub</a> tab: the live
+picture at the top, the reel below it, so moving from "what is happening
+now" to "what happened an hour ago" does not mean changing screens.</p>
 <p>Viewing a camera also publishes a Handoff activity carrying the camera name
 and playback time, so you can pick the same moment up on another Apple
 device. See <a href="mac.html#handoff">Mac</a>.</p>
@@ -111,6 +117,12 @@ under one. Everything still works; it is just not live in the way WebRTC is
 live. If your remote setup always falls back, an
 <a href="connect.html#remote-access">overlay network</a> usually fixes it where a
 reverse proxy cannot.</p>
+<h3 id="live-on-the-scrub-page">Live on the Scrub page</h3>
+<p>While you are watching recorded footage the live picture is switched off,
+so the app is not streaming something you cannot see. Press <strong>LIVE</strong> and it
+reconnects, usually in a second or two. If the live picture
+fails it retries by itself; if it never starts, copy Settings › Server ›
+Connection Doctor › <strong>Copy live diagnostics</strong> into a bug report.</p>
 <p>There is no numeric "seconds behind" readout for live. The signed offset
 you see on the <a href="scrub.html#the-live-chip">Scrub reel's LIVE chip</a> is about
 your position in the recording, not about stream latency.</p>

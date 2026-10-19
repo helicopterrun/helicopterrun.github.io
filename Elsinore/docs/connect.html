@@ -69,7 +69,7 @@
 <p>The first run asks for one address and one login, then proves the
 connection works before it moves on.</p>
 <h2 id="the-onboarding-flow">The onboarding flow</h2>
-<p>Five steps, two of which are skipped when they do not apply. A footer
+<p>Six steps, two of which are skipped when they do not apply. A footer
 carries Back and Continue.</p>
 <h3 id="welcome">Welcome</h3>
 <p>The castle artwork, the name, and the line "Local first, private by design,
@@ -77,7 +77,7 @@ fast." One button: <strong>Get Started</strong>.</p>
 <h3 id="server">Server</h3>
 <p>"Connect to your Frigate server, or to a Marcellus instance in front of
 it." Fill in the server URL, username, and password, then tap <strong>Test
-Connection</strong>. Continue stays disabled until that test succeeds, because the
+connection</strong>. Continue stays disabled until that test succeeds, because the
 successful test is also what commits your credentials.</p>
 <p><strong>Which address?</strong> If you run a Marcellus sidecar, enter its address and
 port. Otherwise enter the address you open Frigate's web interface at in a
@@ -85,9 +85,10 @@ browser, including the port: usually Frigate's login-protected port, 8971,
 for example <code>https://192.168.1.10:8971</code>. The username and password are your
 Frigate login. If a browser on this device can't reach that address, the
 app can't either; see <a href="#remote-access">Remote access</a>.</p>
-<p>If the test fails, a <strong>Diagnose connection</strong> button opens the
-<a href="#connection-doctor">Connection Doctor</a> as a sheet without losing what you
-typed.</p>
+<p>If the test fails, a <strong>Connection Doctor</strong> button appears under the result
+and opens the <a href="#connection-doctor">Connection Doctor</a> as a sheet without
+losing what you typed. A <strong>Where do I find my server address?</strong> link opens
+this page.</p>
 <p>On a local network iOS will also prompt for local-network access the first
 time. The step warns you so the system prompt is not a surprise.</p>
 <p>The step explains that a <a href="sidecar.html">Marcellus sidecar</a> is optional and
@@ -105,8 +106,10 @@ denied them.</p>
 <p>Skipped entirely if your server exposes no zones. Otherwise: "What ground
 is what?" You confirm or correct the place class the sidecar guessed for
 each Frigate zone, using one picker per zone: Public, Grounds, Entrances or
-Restricted. A "What do these mean?" sheet explains the four places, and a summary shows what your choices do to routing.
-Buttons: <strong>Looks right</strong> or <strong>Skip</strong>. If there are no zones yet the step
+Restricted. The four places and what they mean are listed on the page itself, above
+the zones, and a summary below shows what your choices do to routing.
+Buttons: <strong>Looks right</strong> or <strong>Skip</strong>. If saving fails the button becomes
+<strong>Retry</strong>, with <strong>Continue anyway</strong> beneath it. If there are no zones yet the step
 says so plainly and offers Continue.</p>
 <p>Places matter because the <a href="alerts.html">attention ladder</a> routes by
 subject and place, not by camera.</p>
@@ -156,7 +159,7 @@ and stops at the first hard failure, reporting each rung as it completes:</p>
 <ol>
 <li><strong>Server address</strong>: does the URL parse, and will App Transport Security
    allow it.</li>
-<li><strong>Network path</strong>: does this device have a usable network at all.</li>
+<li><strong>Network</strong>: does this device have a usable network at all.</li>
 <li><strong>Name lookup</strong>: does the hostname resolve. Skipped for IP literals;
    <code>.ts.net</code> and <code>.local</code> names get their own advice.</li>
 <li><strong>Server reachable</strong>: a request to Frigate's version endpoint.</li>
@@ -164,7 +167,7 @@ and stops at the first hard failure, reporting each rung as it completes:</p>
    a cross-host redirect, a 404, and a 200 that returns no cookie.</li>
 <li><strong>Frigate identity</strong>: is the thing answering actually Frigate, or some
    other service that happens to return 200.</li>
-<li><strong>Sidecar presence</strong>: informational only; it never fails the run.
+<li><strong>Sidecar</strong>: informational only; it never fails the run.
    Reports present, absent, or undetermined.</li>
 </ol>
 <p>Each rung carries a plain-language explanation and advice, for example that
@@ -173,6 +176,9 @@ transcript of PASS, WARN, FAIL, INFO, and SKIP lines, which is what to paste
 into a <a href="../support.html#reporting-a-bug">bug report</a>.</p>
 <p>When a sidecar with push support is present, a second <strong>Notifications</strong>
 ladder appears on the same page.</p>
+<p>At the bottom, <strong>Copy live diagnostics</strong> copies a short record of when the
+camera page's live picture was switched on and off. Paste it into a bug
+report if live video does not start. <strong>Clear</strong> empties it.</p>
 <h2 id="changing-or-removing-a-server">Changing or removing a server</h2>
 <p>Settings › Server shows the same credentials form as onboarding.</p>
 <ul>

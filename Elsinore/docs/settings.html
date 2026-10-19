@@ -58,14 +58,15 @@
 <li><a href="#storage">Storage</a></li>
 <li><a href="#about">About</a></li>
 <li><a href="#mac-only-tabs">Mac-only tabs</a></li>
+<li><a href="#on-the-mac-sidebar">On the Mac sidebar</a></li>
 </ul>
 </div>
 </details>
 <p>Every settings screen, in the order the app lists them.</p>
 <p>On iPhone and iPad the root is a list: Alerts, Alert History, Server,
-Appearance &amp; Display, Storage, About. On Mac the same material is split
-into tabs: General, Connection, Appearance, Alerts, Storage, Scrub Feel,
-About. Connection is Server; Alerts folds in Alert History.</p>
+Appearance &amp; Display, Scrub, Storage, About. On Mac the same material is
+split into tabs: General, Server, Appearance &amp; Display, Alerts, Alert
+History, Storage, Scrub Feel, About.</p>
 <h2 id="alerts">Alerts</h2>
 <p>See <a href="alerts.html">Alerts and notifications</a> for what these do in practice.</p>
 <table>
@@ -173,6 +174,10 @@ silence it.</p>
 <td>The seven-rung connection diagnostic.</td>
 </tr>
 <tr>
+<td>Copy live diagnostics</td>
+<td>On the Connection Doctor page, under Live video diagnostics: copies the record of when the camera page's live picture was switched on and off, to share with support. Clear empties it.</td>
+</tr>
+<tr>
 <td>Disconnect server</td>
 <td>Clears the saved server and credentials and returns you to setup. Confirms first.</td>
 </tr>
@@ -189,16 +194,16 @@ silence it.</p>
 </thead>
 <tbody>
 <tr>
-<td>Camera order</td>
+<td>Camera Order</td>
 <td>Drag the Live grid into a custom order, or reset to automatic grouping.</td>
+</tr>
+<tr>
+<td>Shared views</td>
+<td>Per camera pair: Automatic, Same place, or Different places, for how Explore groups cameras that see the same spot.</td>
 </tr>
 <tr>
 <td>Live video tiles</td>
 <td>How many grid tiles stream live video at once. Auto is four on iPhone, six on iPad.</td>
-</tr>
-<tr>
-<td>Hide event controls after</td>
-<td>When a camera's newest event is older than this, hide its Previous/Next chips and event card. One day through 30 days, or Never.</td>
 </tr>
 <tr>
 <td>Time format</td>
@@ -223,19 +228,34 @@ silence it.</p>
 <td>Count seconds</td>
 <td>A faint tick each second while you drag slowly. Off by default; iPhone and iPad only (the Mac already ticks once a second on the trackpad).</td>
 </tr>
+<tr>
+<td>Tune Haptics</td>
+<td>Shape every tick, click, and texture of the reel. iPhone and iPad only.</td>
+</tr>
+<tr>
+<td>Scrub Feel</td>
+<td>The reel's gain-curve sliders.</td>
+</tr>
+<tr>
+<td>Hide event controls after</td>
+<td>When a camera's newest event is older than this, hide its Previous/Next chips and event card. 1, 3, 5, 7, 14, or 30 days, or Never; the default is 5 days.</td>
+</tr>
 </tbody>
 </table>
+<p>On Mac there is no Scrub tab; Scrub Feel is its own tab, and the Hide event
+controls setting is not offered there.</p>
 <p>Debug builds also carry a Developer Labs section with theme, haptics, and
 reel-drive tuning. It is not in a release build.</p>
 <h2 id="storage">Storage</h2>
-<p><strong>Clear image cache</strong> empties the decoded image cache and the on-disk HTTP
-cache. The caption shows the current item count and size, so you can see
-whether it is worth doing.</p>
+<p>Storage shows how much each cache uses (HTTP cache, Live Activity
+snapshots, Push thumbnails, Decoded image cache) and a total. Tap a <strong>Clear</strong>
+row to empty one cache, or <strong>Clear all caches</strong>.</p>
 <h2 id="about">About</h2>
-<p>The app version and build, plus links to this website, this documentation,
-and the <a href="../privacy.html">privacy policy</a>. Reset app is the last row:
-it forgets the server, all settings, and zone classifications, and returns
-to the welcome screen. Confirms first.</p>
+<p>The version; <strong>Share diagnostics</strong> (runs the Connection Doctor once and
+shares a diagnostics file); <strong>Setup guide</strong>; links to the Website, Support,
+and <a href="../privacy.html">Privacy Policy</a>; and <strong>Reset app…</strong>, last: it forgets
+the server, all settings, and zone classifications, and returns to the
+welcome screen. Confirms first.</p>
 <h2 id="mac-only-tabs">Mac-only tabs</h2>
 <table>
 <thead>
@@ -251,10 +271,14 @@ to the welcome screen. Confirms first.</p>
 </tr>
 <tr>
 <td>Scrub Feel</td>
-<td>The six reel tuning sliders (Precision, Travel, Swipe threshold, Event drag, Event scale, Shortest event), which live in the controls shade on iOS. They apply to every camera.</td>
+<td>The reel tuning sliders (Precision, Travel, Swipe threshold, Event drag, Event scale, Shortest event, and Trackpad) and a Flicks stop at events switch. On iOS these live on the Scrub Feel page. They apply to every camera.</td>
 </tr>
 </tbody>
 </table>
+<h2 id="on-the-mac-sidebar">On the Mac sidebar</h2>
+<p>Status, Connection Doctor, Alert History, and Frigate Config (read-only,
+searchable) live under Server in the main window's sidebar, as does
+Help › Guide.</p>
 <p>See <a href="mac.html">Elsinore on Mac</a>.</p>
 <footer class="pagefoot">
 <p>Last updated: October 18, 2026</p>

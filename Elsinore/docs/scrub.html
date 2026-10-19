@@ -51,10 +51,12 @@
 <details class="toc" open><summary>On this page</summary><div class="toc">
 <ul>
 <li><a href="#images-to-find-video-to-confirm">Images to find, video to confirm</a></li>
+<li><a href="#opening-scrub">Opening Scrub</a></li>
 <li><a href="#travelling">Travelling</a></li>
 <li><a href="#the-dossier-card">The dossier card</a></li>
 <li><a href="#the-live-chip">The LIVE chip</a></li>
 <li><a href="#gap-cards">Gap cards</a></li>
+<li><a href="#the-controls-shade">The controls shade</a></li>
 <li><a href="#exporting-a-clip">Exporting a clip</a></li>
 <li><a href="#mac">Mac</a></li>
 </ul>
@@ -72,8 +74,14 @@ you have found the second you care about.</p>
 <p>Frames come from the <a href="sidecar.html">sidecar's</a> scrub cache. Against bare
 Frigate the reel still works, but without pre-rendered previews it is much
 less fluid.</p>
+<h2 id="opening-scrub">Opening Scrub</h2>
+<p>Tapping a Live tile opens Scrub on that camera. Open the Scrub tab directly
+and it asks which camera and moment you want; the back chevron in its
+toolbar returns you to that picker. A scrub session you leave parked in the
+background expires after 30 minutes.</p>
 <h2 id="travelling">Travelling</h2>
-<p>Dragging is the only way to move. The reel itself is fixed at one second per
+<p>Dragging is the main way to move. The Previous and Next chips and the
+<strong>GO TO</strong> row in the controls shade jump instead of travelling. The reel itself is fixed at one second per
 row; what a drag changes is how far you travel per row, and the app picks
 that automatically from how you are dragging. A slow, careful drag steps
 second by second. A fast flick covers hours.</p>
@@ -92,10 +100,12 @@ would be a few pixels tall, so the app draws per-lane counts instead.</p>
 (about 15 seconds either side of the centre line). Short events are drawn at
 least about 10 seconds long so they are easy to spot; the part that really
 happened is bright and the extra length is dim.</p>
-<p>Six sliders in the <strong>Scrub feel</strong> controls shade tune this: Precision,
+<p>Six sliders on the <strong>Scrub feel</strong> page (reach it from the controls shade or
+Settings › Scrub › Scrub Feel) tune this: Precision,
 Travel, Swipe threshold, Event drag, Event scale, and Shortest event. The
 last two change how wide the event scale is and how short an event may be
-drawn. They apply to every camera.</p>
+drawn. They apply to every camera. On Mac the page adds a Trackpad slider
+and a Flicks stop at events switch.</p>
 <h2 id="the-dossier-card">The dossier card</h2>
 <p>Above the reel sits a card for the nearest event. When you are parked on an
 event it is lit; when you are not, it is a ghost you can tap to travel to it.
@@ -113,20 +123,32 @@ a relative age pill on the crop.</p>
 <p><strong>Long-press the lit card</strong> for <strong>Explore this moment</strong>, which opens
 <a href="investigate.html">Explore</a> at the time the cursor is sitting on rather
 than at the event's start.</p>
+<ul>
+<li><strong>REPLAY</strong>: tap to replay the lit event from just before it began. Press
+  and hold to loop it; the chip then reads LOOP.</li>
+</ul>
 <p>Previous and Next chips step between events on this camera. If a camera's
-newest event is older than a threshold you set in Settings › Appearance &amp;
-Display › <strong>Hide event controls after</strong>, those chips and the card hide
-themselves rather than advertising stale history.</p>
+newest event is older than a threshold you set in Settings › Scrub ›
+<strong>Hide event controls after</strong> (default 5 days; Never turns it off), those
+chips and the card hide themselves rather than advertising stale history.
+LIVE stays.</p>
 <h2 id="the-live-chip">The LIVE chip</h2>
-<p>The LIVE chip turns green when you are following within a minute of the live
-edge. Otherwise it shows a signed offset: how far back in the recording you
-currently are. Tapping it returns you to live.</p>
+<p>At the live edge the chip shows a green dot and Live, dimmed. When you are
+back in the recording it reads LIVE with how far back you are. Tapping
+either returns you to the live picture. The live video is off while you
+watch recorded footage, so it reconnects within a moment, usually about a
+second and a half.</p>
 <h2 id="gap-cards">Gap cards</h2>
 <p>Between events the reel shows gap cards: <strong>SWIPE LEFT</strong>, <strong>SWIPE RIGHT</strong>, or
 <strong>SWIPE LEFT OR RIGHT</strong>, with chevrons that fade in three steps toward the
 direction that has something in it. PAST and FUTURE hint bands mark which
 way is which. They exist so an empty stretch of reel tells you where to go
 rather than looking broken.</p>
+<h2 id="the-controls-shade">The controls shade</h2>
+<p>The slider icon in the toolbar opens the controls shade: mute, pause and
+speed; <strong>OBJECTS</strong> chips that filter what the reel highlights; <strong>GO TO</strong>, to
+jump to a date and hour; the Smooth or Frame choice; <strong>Switch camera</strong>;
+<strong>Export a clip</strong>; and <strong>Scrub feel ›</strong>.</p>
 <h2 id="exporting-a-clip">Exporting a clip</h2>
 <p>The controls shade carries the export flow. Set a start and an end with the
 handle chips, then tap <strong>Export</strong>. A confirmation offers <strong>Export to

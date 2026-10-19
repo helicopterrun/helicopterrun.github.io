@@ -63,7 +63,7 @@
 </div>
 </details>
 <p class="applies">Effective date: August 1, 2026</p>
-<p>Elsinore is a native iOS client for a Frigate NVR server that you host and
+<p>Elsinore is a native client (iPhone, iPad, and Mac) for a Frigate NVR server that you host and
 control. This policy describes what the app does and does not do with your
 data.</p>
 <h2 id="summary">Summary</h2>
@@ -79,13 +79,23 @@ data.</p>
 </ul>
 <h2 id="what-the-app-stores-and-where">What the app stores, and where</h2>
 <p>When you add a server, Elsinore stores the server address and your username
-locally on your device, and stores your password or credential in the iOS
-Keychain, protected by the operating system. Credentials are never
+locally on your device, and stores your password or credential in the
+system Keychain, protected by the operating system. Credentials are never
 transmitted anywhere except directly to the server you configured.</p>
+<p>The app also keeps local caches on your device so things open quickly:
+thumbnails and images, a per-camera index of event times and labels for the
+scrub reel (pruned after 30 days), Live Activity snapshots, push
+thumbnails, widget data, and a short on-device log of when the live picture
+was switched on and off. Settings › Storage shows and clears the caches.
+Nothing in them leaves your device, except that you can choose to copy the
+live log into a bug report.</p>
+<p>If you use Handoff, what you are looking at (a camera name and playback
+time, or the id of the encounter you are exploring) is shared between your
+own signed-in Apple devices by Apple's Handoff service.</p>
 <h2 id="what-the-app-does-not-do">What the app does not do</h2>
 <ul>
-<li>Elsinore does not include any analytics, advertising, or crash-reporting
-  SDK.</li>
+<li>Elsinore does not include any analytics, telemetry, advertising, or
+  crash-reporting SDK.</li>
 <li>Elsinore does not operate a backend service that your camera footage,
   snapshots, or metadata pass through. Live video, recorded clips, and
   review/event data are fetched directly from your Frigate server to your
@@ -106,10 +116,11 @@ optional, self-hosted Marcellus sidecar. If you enable them, here is exactly
 what happens:</p>
 <ul>
 <li>Your device registers its Apple Push Notification (APNs) device token
-  with a small relay service operated by the app's maintainer. This relay
-  exists only because Apple requires push notifications to be sent from a
-  server holding APNs credentials. It is not a general backend and never
-  proxies your video.</li>
+  with your own sidecar. The app itself does not contact the relay. Your
+  sidecar forwards notifications through a small relay service operated by
+  the app's maintainer. This relay exists only because Apple requires push
+  notifications to be sent from a server holding APNs credentials. It is
+  not a general backend and never proxies your video.</li>
 <li>When your own Frigate server detects something, your sidecar composes the
   notification and sends it to the relay for forwarding to Apple. That
   payload contains what the notification needs to display: your device's
@@ -133,8 +144,10 @@ what happens:</p>
   to your device. Apple's handling of push traffic is governed by Apple's
   own privacy terms.</li>
 </ul>
-<p>In short: the relay and Apple see the same text you see on your lock
-screen, plus your device token and routing identifiers. They never see an
+<p>In short: the card text, including camera and zone names, passes through
+the relay in flight on its way to Apple. The relay and Apple see the same
+text you see on your lock screen, plus your device token and routing
+identifiers. They never see an
 image, and all alert media stays on your own server.</p>
 <h2 id="data-sharing">Data sharing</h2>
 <p>Elsinore does not sell, rent, or share your data with third parties. There

@@ -86,7 +86,7 @@ search feed. With it you also get:</p>
 <li>Scrub previews, which is what makes dragging through hours of recording
   show a frame rather than a spinner.</li>
 <li>Encounters, which chain sightings of the same subject across cameras, and
-  the <a href="investigate.html">Investigate and Follow</a> views built on them.</li>
+  the <a href="investigate.html">Explore and Follow</a> views built on them.</li>
 </ul>
 <p>If you run the sidecar, point Elsinore at the sidecar's address rather than
 Frigate's. One address covers everything; the app talks to Frigate through
@@ -97,14 +97,17 @@ it.</p>
 and your Frigate username and password, then tests the connection before it
 will let you continue. Your password goes into the system Keychain.</p>
 <h3 id="2-watch-live">2. Watch Live</h3>
-<p>The Live tab shows every camera at once. Tap a tile to open a single camera,
-where the app negotiates low-latency WebRTC and falls back to HLS if that
-cannot get through. See <a href="live.html">Live</a>.</p>
+<p>The Live tab shows every camera at once. Tap a tile and the Scrub tab opens
+on that camera, showing its live picture (low-latency WebRTC, falling back
+to HLS if that cannot get through). See <a href="live.html">Live</a>.</p>
 <h3 id="3-scrub-back">3. Scrub back</h3>
 <p>The Scrub tab is a vertical reel of recorded footage. Drag to travel
 through time; the dossier card above the reel follows the nearest event and
 gives you its detail page and the other cameras that saw the same object.
-See <a href="scrub.html">Scrub</a>.</p>
+Open the Scrub tab directly and it asks which camera and moment you want;
+the back chevron in its toolbar returns you to that picker. The Review tab
+collects what your server saw into one card per visit; see
+<a href="search-and-review.html">Search and Review</a>. See <a href="scrub.html">Scrub</a>.</p>
 <h3 id="4-set-up-alerts">4. Set up alerts</h3>
 <p>Settings › Alerts › Set up alerts runs a five step wizard: permission,
 posture, subjects, feel, review. It lets you try Quiet, Glance and Urgent

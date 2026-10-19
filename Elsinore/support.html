@@ -60,7 +60,7 @@ version plus how to reach a human.</p>
 <li><a href="docs/live.html">Live</a> · <a href="docs/scrub.html">Scrub</a> ·
   <a href="docs/search-and-review.html">Search and Review</a></li>
 <li><a href="docs/alerts.html">Alerts and notifications</a> ·
-  <a href="docs/investigate.html">Investigate and Follow</a></li>
+  <a href="docs/investigate.html">Explore and Follow</a></li>
 <li><a href="docs/sidecar.html">The Marcellus sidecar</a> · <a href="docs/mac.html">Mac</a> ·
   <a href="docs/settings.html">Settings reference</a></li>
 <li><a href="docs/troubleshooting.html">Troubleshooting</a>: the long list, grouped by
@@ -77,8 +77,9 @@ restrictive networks and on plain reverse proxies. It is expected
 graceful degradation, not a bug. See <a href="docs/live.html">Live</a>.</p>
 <p><strong>Notifications are not arriving.</strong> Push requires the optional
 <a href="docs/sidecar.html">Marcellus sidecar</a> running alongside Frigate, and
-notification permission granted to the app. Settings › Alerts ›
-Connection Doctor runs the whole chain end to end. See
+notification permission granted to the app. Settings › Server ›
+Connection Doctor runs the whole chain end to end, including a
+Notifications section when your sidecar supports push. See
 <a href="docs/alerts.html">Alerts</a>.</p>
 <p><strong>The app cannot reach my server after a network change.</strong> Confirm your
 device's own network path (Wi-Fi, cellular, VPN or tailnet) can currently
@@ -92,8 +93,11 @@ reach the address you configured.</p>
 <li>The Connection Doctor output. Settings › Server › Connection Doctor
   produces a plain-text transcript with one PASS, WARN, FAIL, INFO, or SKIP
   line per rung; paste that in.</li>
-<li>For a notification problem, the Connection Doctor output as well
-  (Settings › Server › Connection Doctor).</li>
+<li>For a notification problem, note the Notifications section of the same
+  transcript.</li>
+<li>Settings › About › <strong>Share diagnostics</strong> attaches a full report.</li>
+<li>For live video problems, Settings › Server › Connection Doctor ›
+  <strong>Copy live diagnostics</strong>.</li>
 <li>What you expected, and what happened instead.</li>
 </ul>
 <h2 id="privacy">Privacy</h2>

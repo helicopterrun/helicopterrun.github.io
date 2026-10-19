@@ -56,32 +56,39 @@
 <li><a href="#deeper-search">Deeper search</a></li>
 </ul>
 </li>
+<li><a href="#the-review-tab">The Review tab</a></li>
 <li><a href="#recognised-names">Recognised names</a></li>
 </ul>
 </div>
 </details>
-<p>The Search tab is the review feed: every alert and detection your server
-recorded, newest first, with a search field over the top.</p>
+<p>The Search tab is the feed: every alert and detection your server
+recorded, newest first, with a search field over the top. The Review tab,
+<a href="#the-review-tab">described below</a>, shows the stories your server built from
+them.</p>
 <p><img alt="The Search tab on iPhone: a search field reading Camera, object, or zone, above a list of detections showing thumbnails, camera names such as gate-face and shed, detected objects, relative times, and an info button per row." class="shot" src="../img/search.png" /></p>
 <h2 id="the-feed">The feed</h2>
 <p>One list, no tabs. Each row carries a thumbnail, the camera, the objects
 detected, how long ago it was, its severity, and an <strong>i</strong> button that opens
 the event detail page. From there you can play the clip, see the object
-tracks, and open <a href="investigate.html">Explore</a>.</p>
+tracks, and open <a href="investigate.html">Explore</a>. Tap the row itself to open
+that moment in Scrub.</p>
 <h2 id="filters">Filters</h2>
 <p>The filter button opens:</p>
 <ul>
-<li><strong>Time range</strong>: how far back to look. The default lookback is a year,
-  deliberately, because Frigate's own review endpoint quietly floors an
-  unspecified query at about a day and would otherwise hide your history.</li>
+<li><strong>Time</strong>: Any time, Last hour, Last 24 hours, or Last 7 days. The default
+  lookback is a year, deliberately, because Frigate's own review endpoint
+  quietly floors an unspecified query at about a day and would otherwise
+  hide your history.</li>
 <li><strong>Severity</strong>: alerts, detections, or both.</li>
 <li><strong>Cameras</strong>: filtered on the server when you pick exactly one, on the
   device otherwise.</li>
 <li><strong>Objects</strong> and <strong>Zones</strong>: these are filtered on the device, because
   Frigate's review endpoint cannot filter by object or zone. Loading may
   take a few more requests as a result.</li>
-<li><strong>Sort</strong>, and <strong>Clear all</strong>.</li>
+<li><strong>Clear all</strong>, <strong>Cancel</strong>, and <strong>Apply</strong>.</li>
 </ul>
+<p>Sort (Newest first, Oldest first, Alerts first) is a separate menu in the
+toolbar.</p>
 <p>The filter button fills in when a filter is active. Search text and sort
 order do not count toward that, since they are visible on screen anyway.</p>
 <h2 id="searching">Searching</h2>
@@ -91,8 +98,9 @@ face or plate), and the zones. Nothing is sent anywhere and nothing is
 saved. A <strong>Did you mean</strong> chip offers a correction when your query looks
 like a typo.</p>
 <h3 id="deeper-search">Deeper search</h3>
-<p>If the instant results do not have it, the feed offers <strong>Deeper search for
-"your query"</strong> with the note that it searches the footage itself. This
+<p>If the instant results do not have it, the feed offers <strong>Search the footage itself</strong>.
+When results run thin, a <strong>Keep looking</strong> prompt loads more. Long-press a
+result of the deeper search for <strong>More like this</strong>. This
 escalates in two stages:</p>
 <ol>
 <li>The <a href="sidecar.html">sidecar's</a> structured search, which is fast.</li>
@@ -102,6 +110,13 @@ escalates in two stages:</p>
 </ol>
 <p>That second stage is what finds "person carrying a box" when no label says
 so.</p>
+<h2 id="the-review-tab">The Review tab</h2>
+<p>Review shows the encounters your server assembled: large cards, newest
+first, with <strong>Alerts | All</strong> under the title and a divider where your last
+absence ended. Tap a card to expand it and play it in place (one at a time).
+Buttons on a card: <strong>Explore</strong>, <strong>Open in Scrub</strong>, and <strong>Open sighting</strong>.
+On the Live tab, a "while you were away" line points here. On Mac, Review is
+an item in the sidebar. Encounters need the <a href="sidecar.html">sidecar</a>.</p>
 <h2 id="recognised-names">Recognised names</h2>
 <p>Where Frigate has a sub-label for an object, a recognised face or a read
 licence plate, Elsinore shows that name on the row, on the
