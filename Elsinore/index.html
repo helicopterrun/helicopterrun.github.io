@@ -30,7 +30,8 @@
 :root{--night:#111216;--deep:#090a0c;--cream:#ebe4d8;--parchment:#ebcf9d;--amber:#e2aa52;--muted:#a2a2a7;--line:#303238;--mono:Departure,ui-monospace,Menlo,monospace;color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:24px}
-body{margin:0;background:var(--night);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+/* The hero art's sky is transparent, so its near-black lives on body, under the stars: it scrolls with the page and eases into --night where the hero ends */
+body{margin:0;position:relative;z-index:0;background:linear-gradient(#030303 77%,var(--night)) 0 0/100% max(850px,min(940px,100svh)) no-repeat var(--night);color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 a,button,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-offset:6px}
@@ -44,6 +45,43 @@ img{max-width:100%;height:auto;display:block}
 .inline-link{color:var(--parchment);border-bottom:1px solid #ebcf9d55}
 .inline-link:hover{color:var(--amber);border-color:var(--amber)}
 
+/* Night sky: steady stars are a tiled SVG; a few twinkle as <i>. Generated parts come from tools/site/nightsky.py */
+.sky{position:fixed;inset:0;z-index:-10;pointer-events:none;overflow:hidden;background:url(home/stars.svg) 0 0/1440px 900px repeat}
+.sky i{position:absolute;display:block;width:1px;height:1px;opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--p) infinite;will-change:opacity}
+.sky .b{width:2px}.sky .d{height:2px}.sky .c{width:2px;height:2px;clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%)}
+@keyframes twinkle{0%,22%,78%,100%{opacity:var(--o)}50%{opacity:calc(var(--o) + var(--a))}}
+@keyframes winlight{0%,50%,100%{opacity:var(--win-lo)}75%{opacity:var(--win-hi)}}
+/* nightsky:begin */
+:root{--feather:220px;--win-color:#E2AA52;--win-lo:0.04;--win-hi:0.18}
+@media(max-width:700px){:root{--feather:130px}}
+.sky .k0{background:#d9cfbc}
+.sky .k1{background:#cfc4ae}
+.sky .k2{background:#e3d6bd}
+.sky .k3{background:#c9a877}
+.sky .k4{background:#b88d55}
+[data-w=w1-0]{left:81.0417%;top:51.375%;width:0.0521%;height:1.25%}
+@container art (max-width:1920px){[data-w=w1-0]{display:none}}
+[data-w=w1-1]{left:81.1979%;top:51.5%;width:0.0521%;height:1.25%}
+@container art (max-width:1920px){[data-w=w1-1]{display:none}}
+[data-w=w1-0],[data-w=w1-1]{--wt:11s;--wp:-3s}
+[data-w=w2-0]{left:82.6042%;top:50.5%;width:0.1042%;height:1.125%}
+@container art (max-width:960px){[data-w=w2-0]{display:none}}
+[data-w=w2-1]{left:82.7604%;top:50.625%;width:0.1042%;height:1.125%}
+@container art (max-width:960px){[data-w=w2-1]{display:none}}
+[data-w=w2-0],[data-w=w2-1]{--wt:17s;--wp:-11s}
+[data-w=w3-0]{left:82.1094%;top:45.25%;width:0.1042%;height:0.25%}
+@container art (max-width:960px){[data-w=w3-0]{display:none}}
+[data-w=w3-1]{left:82.1094%;top:45.625%;width:0.1042%;height:0.5%}
+@container art (max-width:960px){[data-w=w3-1]{display:none}}
+[data-w=w3-0],[data-w=w3-1]{--wt:23s;--wp:-6s}
+/* nightsky:end */
+.read{background:var(--night);box-shadow:0 0 44px 28px var(--night)}
+.foot-end{display:flex;align-items:center;gap:28px}
+.motion-toggle{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:#77777e;background:none;border:0;border-bottom:1px solid #ebcf9d33;padding:3px 0;cursor:pointer}
+.motion-toggle:hover,.motion-toggle:focus-visible{color:var(--amber);border-color:var(--amber)}
+.motion-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+.motion-paused .sky i,.motion-paused .win,.motion-hidden .sky i,.motion-hidden .win,.hero-off .win{animation-play-state:paused}
+
 /* Header */
 header{height:96px;position:absolute;z-index:10;top:0;width:100%;border-bottom:1px solid #ffffff12}
 nav{height:100%;display:flex;align-items:center;gap:40px}
@@ -56,9 +94,13 @@ nav .links a:not(.nav-cta):hover{color:var(--amber)}
 .arrow{display:inline-block;margin-left:12px}
 
 /* Hero */
-.hero{min-height:850px;height:min(940px,100svh);position:relative;isolation:isolate;overflow:hidden;background:var(--deep)}
-.hero-art{position:absolute;z-index:-3;width:100%;height:100%;inset:0;object-fit:cover;object-position:65% center;opacity:.92}
-.hero:before{content:'';position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#08090bd9 0%,#08090b77 32%,transparent 64%),linear-gradient(0deg,#111216 0%,transparent 23%,#08090b38 90%)}
+.hero{min-height:850px;height:min(940px,100svh);position:relative;isolation:isolate;overflow:hidden;background:transparent}
+.art-frame{position:absolute;z-index:-3;inset:0;overflow:hidden;container-type:size;--ox:.65;--oy:.5;-webkit-mask-image:linear-gradient(#000 calc(100% - var(--feather)),transparent);mask-image:linear-gradient(#000 calc(100% - var(--feather)),transparent)}
+.art-box{position:absolute;width:max(100cqw,240cqh);height:max(100cqh,41.6667cqw);left:calc((100cqw - max(100cqw,240cqh)) * var(--ox));top:calc((100cqh - max(100cqh,41.6667cqw)) * var(--oy));container:art/inline-size}
+.art-box picture{display:contents}
+.art-box img{display:block;width:100%;height:100%;max-width:none;filter:brightness(.92)}
+.win{position:absolute;background:var(--win-color);mix-blend-mode:screen;opacity:var(--win-lo);animation:winlight var(--wt) ease-in-out var(--wp) infinite}
+.hero:before{content:'';position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#08090bd9 0%,#08090b77 32%,transparent 64%),linear-gradient(0deg,transparent 23%,#08090b38 90%);-webkit-mask-image:linear-gradient(#000 calc(100% - var(--feather)),transparent);mask-image:linear-gradient(#000 calc(100% - var(--feather)),transparent)}
 .hero .wrap{height:100%;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:36px}
 h1{font:clamp(42px,4.6vw,68px)/1.22 var(--mono);letter-spacing:-2.3px;margin:25px 0 24px;max-width:780px}
 h1 span,.closing h2 span{color:var(--amber)}
@@ -152,7 +194,7 @@ footer .footer-brand{color:var(--parchment);font-size:15px}
 footer .footer-links{display:flex;gap:22px;flex-wrap:wrap}
 footer .fine{max-width:360px;text-align:right}
 
-@media(min-width:1700px){.hero-art{object-position:center 55%}}
+@media(min-width:1700px){.art-frame{--ox:.5;--oy:.55}}
 @media(max-width:1000px){
   .wrap{width:calc(100% - 64px)}
   nav .links{gap:22px}
@@ -167,7 +209,7 @@ footer .fine{max-width:360px;text-align:right}
   .needs,.faq{gap:45px}
   .hero{min-height:800px}
   h1{font-size:52px}
-  .hero-art{object-position:80% center}
+  .art-frame{--ox:.8;--oy:.5}
 }
 @media(max-width:700px){
   .wrap{width:calc(100% - 32px)}
@@ -179,8 +221,11 @@ footer .fine{max-width:360px;text-align:right}
   .nav-cta{padding:9px 12px;font-size:12px}
   .hero{height:auto;min-height:0;padding-bottom:300px}
   .hero .wrap{justify-content:flex-start;padding-top:150px}
-  .hero-art{height:62%;top:auto;bottom:0;width:150%;max-width:none;left:-50%;object-position:78% bottom;opacity:.85}
-  .hero:before{background:linear-gradient(180deg,#090a0c 30%,#090a0c88 55%,transparent 75%,#111216 100%)}
+  .art-frame{height:62%;top:auto;bottom:0;width:150%;max-width:none;left:-50%;--ox:.78;--oy:1}
+  .art-box img{filter:brightness(.85)}
+  .hero:before{background:linear-gradient(180deg,#090a0cd9 30%,#090a0c88 55%,transparent 75%)}
+  .read{box-shadow:0 0 22px 10px var(--night)}
+  body{background-size:100% 1100px}
   h1{font-size:clamp(32px,8.4vw,50px);letter-spacing:-1.6px;line-height:1.35;margin-top:22px}
   .eyebrow{font-size:9px;letter-spacing:1px}
   .intro{font-size:16px}
@@ -210,10 +255,96 @@ footer .fine{max-width:360px;text-align:right}
   footer{flex-direction:column;gap:18px}
   footer .fine{text-align:left}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}.button:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}.button:hover{transform:none}
+.sky{position:absolute;inset:0 0 auto 0;height:100%;background-image:url(home/stars-twinkle.svg),url(home/stars.svg)}
+.sky i{display:none}
+.win{animation:none;opacity:var(--win-lo)}
+.motion-toggle{display:none}}
 </style>
 </head>
 <body id="top">
+<!-- nightsky:begin -->
+<div class="sky" aria-hidden="true">
+<i class="a k0" style="left:1202px;top:721px;--o:0.55;--a:0.078;--t:16.4s;--p:-5.5s"></i>
+<i class="a k1" style="left:443px;top:784px;--o:0.51;--a:0.098;--t:13.8s;--p:-13.6s"></i>
+<i class="a k0" style="left:472px;top:725px;--o:0.54;--a:0.06;--t:14.8s;--p:-13.8s"></i>
+<i class="b k1" style="left:1292px;top:400px;--o:0.83;--a:0.084;--t:10.8s;--p:-3.3s"></i>
+<i class="c k2" style="left:207px;top:883px;--o:0.49;--a:0.066;--t:14.9s;--p:-14.2s"></i>
+<i class="d k0" style="left:187px;top:225px;--o:0.58;--a:0.06;--t:18.1s;--p:-5.6s"></i>
+<i class="d k4" style="left:1120px;top:410px;--o:0.64;--a:0.075;--t:17.6s;--p:-11.6s"></i>
+<i class="a k2" style="left:38px;top:98px;--o:0.71;--a:0.078;--t:17.0s;--p:-3.1s"></i>
+<i class="d k4" style="left:1102px;top:162px;--o:0.8;--a:0.082;--t:9.5s;--p:-8.8s"></i>
+<i class="a k0" style="left:1311px;top:69px;--o:0.55;--a:0.099;--t:16.9s;--p:-1.5s"></i>
+<i class="d k0" style="left:238px;top:268px;--o:0.54;--a:0.061;--t:11.0s;--p:-1.4s"></i>
+<i class="a k0" style="left:685px;top:14px;--o:0.83;--a:0.072;--t:18.5s;--p:-14.5s"></i>
+<i class="d k3" style="left:938px;top:54px;--o:0.67;--a:0.09;--t:18.9s;--p:-6.8s"></i>
+<i class="a k0" style="left:2642px;top:721px;--o:0.55;--a:0.067;--t:13.3s;--p:-6.7s"></i>
+<i class="a k1" style="left:1883px;top:784px;--o:0.51;--a:0.081;--t:9.6s;--p:-2.5s"></i>
+<i class="a k0" style="left:1912px;top:725px;--o:0.54;--a:0.081;--t:14.4s;--p:-3.5s"></i>
+<i class="b k1" style="left:2732px;top:400px;--o:0.83;--a:0.097;--t:12.7s;--p:-8.0s"></i>
+<i class="c k2" style="left:1647px;top:883px;--o:0.49;--a:0.083;--t:16.8s;--p:-11.5s"></i>
+<i class="d k0" style="left:1627px;top:225px;--o:0.58;--a:0.088;--t:9.5s;--p:-9.1s"></i>
+<i class="d k4" style="left:2560px;top:410px;--o:0.64;--a:0.06;--t:11.7s;--p:-4.5s"></i>
+<i class="a k2" style="left:1478px;top:98px;--o:0.71;--a:0.085;--t:13.8s;--p:-11.3s"></i>
+<i class="d k4" style="left:2542px;top:162px;--o:0.8;--a:0.087;--t:13.4s;--p:-12.1s"></i>
+<i class="a k0" style="left:2751px;top:69px;--o:0.55;--a:0.093;--t:15.7s;--p:-8.2s"></i>
+<i class="d k0" style="left:1678px;top:268px;--o:0.54;--a:0.074;--t:19.0s;--p:-17.0s"></i>
+<i class="a k0" style="left:2125px;top:14px;--o:0.83;--a:0.089;--t:12.0s;--p:-10.7s"></i>
+<i class="d k3" style="left:2378px;top:54px;--o:0.67;--a:0.063;--t:13.8s;--p:-8.2s"></i>
+<i class="a k0" style="left:4082px;top:721px;--o:0.55;--a:0.066;--t:12.8s;--p:-10.5s"></i>
+<i class="a k1" style="left:3323px;top:784px;--o:0.51;--a:0.091;--t:15.3s;--p:-10.2s"></i>
+<i class="a k0" style="left:3352px;top:725px;--o:0.54;--a:0.1;--t:11.7s;--p:-6.1s"></i>
+<i class="b k1" style="left:4172px;top:400px;--o:0.83;--a:0.094;--t:9.1s;--p:-4.7s"></i>
+<i class="c k2" style="left:3087px;top:883px;--o:0.49;--a:0.073;--t:14.4s;--p:-2.3s"></i>
+<i class="d k0" style="left:3067px;top:225px;--o:0.58;--a:0.079;--t:14.9s;--p:-0.3s"></i>
+<i class="d k4" style="left:4000px;top:410px;--o:0.64;--a:0.071;--t:16.6s;--p:-1.3s"></i>
+<i class="a k2" style="left:2918px;top:98px;--o:0.71;--a:0.063;--t:9.1s;--p:-5.8s"></i>
+<i class="d k4" style="left:3982px;top:162px;--o:0.8;--a:0.064;--t:18.7s;--p:-3.8s"></i>
+<i class="a k0" style="left:4191px;top:69px;--o:0.55;--a:0.081;--t:18.9s;--p:-15.4s"></i>
+<i class="d k0" style="left:3118px;top:268px;--o:0.54;--a:0.075;--t:13.8s;--p:-7.4s"></i>
+<i class="a k0" style="left:3565px;top:14px;--o:0.83;--a:0.06;--t:11.1s;--p:-7.6s"></i>
+<i class="d k3" style="left:3818px;top:54px;--o:0.67;--a:0.099;--t:13.4s;--p:-10.4s"></i>
+<i class="a k0" style="left:1202px;top:1621px;--o:0.55;--a:0.069;--t:11.0s;--p:-0.8s"></i>
+<i class="a k1" style="left:443px;top:1684px;--o:0.51;--a:0.064;--t:16.3s;--p:-6.8s"></i>
+<i class="a k0" style="left:472px;top:1625px;--o:0.54;--a:0.073;--t:15.9s;--p:-13.4s"></i>
+<i class="b k1" style="left:1292px;top:1300px;--o:0.83;--a:0.097;--t:17.9s;--p:-15.6s"></i>
+<i class="c k2" style="left:207px;top:1783px;--o:0.49;--a:0.068;--t:10.4s;--p:-2.7s"></i>
+<i class="d k0" style="left:187px;top:1125px;--o:0.58;--a:0.096;--t:18.9s;--p:-15.6s"></i>
+<i class="d k4" style="left:1120px;top:1310px;--o:0.64;--a:0.09;--t:18.9s;--p:-4.9s"></i>
+<i class="a k2" style="left:38px;top:998px;--o:0.71;--a:0.064;--t:9.8s;--p:-1.3s"></i>
+<i class="d k4" style="left:1102px;top:1062px;--o:0.8;--a:0.065;--t:9.3s;--p:-5.1s"></i>
+<i class="a k0" style="left:1311px;top:969px;--o:0.55;--a:0.077;--t:11.5s;--p:-9.7s"></i>
+<i class="d k0" style="left:238px;top:1168px;--o:0.54;--a:0.063;--t:15.4s;--p:-10.0s"></i>
+<i class="a k0" style="left:685px;top:914px;--o:0.83;--a:0.076;--t:18.5s;--p:-2.8s"></i>
+<i class="d k3" style="left:938px;top:954px;--o:0.67;--a:0.075;--t:14.9s;--p:-6.0s"></i>
+<i class="a k0" style="left:2642px;top:1621px;--o:0.55;--a:0.06;--t:11.0s;--p:-10.3s"></i>
+<i class="a k1" style="left:1883px;top:1684px;--o:0.51;--a:0.092;--t:12.0s;--p:-6.6s"></i>
+<i class="a k0" style="left:1912px;top:1625px;--o:0.54;--a:0.095;--t:15.7s;--p:-5.2s"></i>
+<i class="b k1" style="left:2732px;top:1300px;--o:0.83;--a:0.06;--t:18.5s;--p:-0.8s"></i>
+<i class="c k2" style="left:1647px;top:1783px;--o:0.49;--a:0.094;--t:16.0s;--p:-0.2s"></i>
+<i class="d k0" style="left:1627px;top:1125px;--o:0.58;--a:0.068;--t:18.6s;--p:-16.8s"></i>
+<i class="d k4" style="left:2560px;top:1310px;--o:0.64;--a:0.063;--t:17.2s;--p:-9.3s"></i>
+<i class="a k2" style="left:1478px;top:998px;--o:0.71;--a:0.067;--t:12.4s;--p:-6.4s"></i>
+<i class="d k4" style="left:2542px;top:1062px;--o:0.8;--a:0.066;--t:11.2s;--p:-2.1s"></i>
+<i class="a k0" style="left:2751px;top:969px;--o:0.55;--a:0.077;--t:14.8s;--p:-10.9s"></i>
+<i class="d k0" style="left:1678px;top:1168px;--o:0.54;--a:0.09;--t:11.9s;--p:-2.2s"></i>
+<i class="a k0" style="left:2125px;top:914px;--o:0.83;--a:0.067;--t:18.7s;--p:-8.2s"></i>
+<i class="d k3" style="left:2378px;top:954px;--o:0.67;--a:0.09;--t:14.4s;--p:-0.7s"></i>
+<i class="a k0" style="left:4082px;top:1621px;--o:0.55;--a:0.061;--t:14.1s;--p:-0.5s"></i>
+<i class="a k1" style="left:3323px;top:1684px;--o:0.51;--a:0.072;--t:12.9s;--p:-0.8s"></i>
+<i class="a k0" style="left:3352px;top:1625px;--o:0.54;--a:0.06;--t:17.7s;--p:-7.3s"></i>
+<i class="b k1" style="left:4172px;top:1300px;--o:0.83;--a:0.093;--t:10.5s;--p:-8.2s"></i>
+<i class="c k2" style="left:3087px;top:1783px;--o:0.49;--a:0.07;--t:12.0s;--p:-5.7s"></i>
+<i class="d k0" style="left:3067px;top:1125px;--o:0.58;--a:0.064;--t:12.2s;--p:-6.2s"></i>
+<i class="d k4" style="left:4000px;top:1310px;--o:0.64;--a:0.074;--t:17.7s;--p:-15.2s"></i>
+<i class="a k2" style="left:2918px;top:998px;--o:0.71;--a:0.089;--t:13.1s;--p:-10.0s"></i>
+<i class="d k4" style="left:3982px;top:1062px;--o:0.8;--a:0.076;--t:15.4s;--p:-9.6s"></i>
+<i class="a k0" style="left:4191px;top:969px;--o:0.55;--a:0.081;--t:11.9s;--p:-8.4s"></i>
+<i class="d k0" style="left:3118px;top:1168px;--o:0.54;--a:0.09;--t:10.0s;--p:-6.3s"></i>
+<i class="a k0" style="left:3565px;top:914px;--o:0.83;--a:0.074;--t:13.3s;--p:-9.2s"></i>
+<i class="d k3" style="left:3818px;top:954px;--o:0.67;--a:0.088;--t:16.0s;--p:-3.2s"></i>
+</div>
+<!-- nightsky:end -->
 <a class="skip" href="#main">Skip to content</a>
 <header>
 <nav class="wrap" aria-label="Main navigation">
@@ -229,7 +360,22 @@ footer .fine{max-width:360px;text-align:right}
 
 <main id="main">
 <section class="hero" aria-labelledby="hero-title">
-<img class="hero-art" src="home/castle-1280.jpg" srcset="home/castle-1280.jpg 1280w, home/castle-2560.jpg 2560w" sizes="(max-width: 700px) 150vw, 100vw" alt="" fetchpriority="high">
+<div class="art-frame">
+<div class="art-box">
+<picture>
+<source type="image/webp" srcset="home/castle-night-1280.webp 1280w, home/castle-night-2560.webp 2560w" sizes="(max-width: 700px) 150vw, 100vw">
+<img src="home/castle-1280.jpg" srcset="home/castle-1280.jpg 1280w, home/castle-2560.jpg 2560w" sizes="(max-width: 700px) 150vw, 100vw" alt="An etched castle on a sea cliff at night, above a dark sea where the sun has just set" fetchpriority="high">
+</picture>
+<!-- nightwin:begin -->
+<i class="win" data-w="w1-0"></i>
+<i class="win" data-w="w1-1"></i>
+<i class="win" data-w="w2-0"></i>
+<i class="win" data-w="w2-1"></i>
+<i class="win" data-w="w3-0"></i>
+<i class="win" data-w="w3-1"></i>
+<!-- nightwin:end -->
+</div>
+</div>
 <div class="wrap">
 <div class="eyebrow">A native app for your Frigate cameras</div>
 <h1 id="hero-title">Your cameras.<br><span>Your timeline.</span></h1>
@@ -240,19 +386,19 @@ footer .fine{max-width:360px;text-align:right}
 </div>
 <p class="requires"><i aria-hidden="true"></i>Requires your own <a class="inline-link" href="https://frigate.video/">Frigate</a> server.</p>
 <div class="platforms">iPhone <span>/</span> iPad <span>/</span> Mac <span>·</span> one purchase</div>
-<div class="hero-foot"><span class="signal"><i aria-hidden="true"></i> LOCAL FIRST. ALWAYS YOUR VIEW.</span><span class="scroll-hint">SCROLL TO TAKE A CLOSER LOOK ↓</span></div>
+<div class="hero-foot"><span class="signal"><i aria-hidden="true"></i> LOCAL FIRST. ALWAYS YOUR VIEW.</span><span class="foot-end"><button type="button" class="motion-toggle" hidden aria-pressed="false">Pause motion</button><span class="scroll-hint">SCROLL TO TAKE A CLOSER LOOK ↓</span></span></div>
 </div>
 </section>
 
 <section class="wrap" id="features" aria-labelledby="features-title">
-<div class="section-head">
+<div class="section-head read">
 <div><div class="eyebrow">01 / A closer look</div><h2 id="features-title">A clear view.<br>A little less noise.</h2></div>
 <p>From a quick glance at the front door to finding what happened hours ago. Everything has its place.</p>
 </div>
 
 <div class="features">
 <article class="feature" aria-labelledby="f-live">
-<div class="feature-copy">
+<div class="feature-copy read">
 <span class="feature-number">01 — LIVE</span>
 <h3 id="f-live">Every camera.<br>One calm place.</h3>
 <p>Every camera in one live grid, or one full screen. Live video starts over low-latency WebRTC and falls back to HLS on its own when it needs to.</p>
@@ -265,7 +411,7 @@ footer .fine{max-width:360px;text-align:right}
 </article>
 
 <article class="feature" aria-labelledby="f-scrub">
-<div class="feature-copy">
+<div class="feature-copy read">
 <span class="feature-number">02 — SCRUB</span>
 <h3 id="f-scrub">Hours of footage.<br>Seconds to find it.</h3>
 <p>Drag the reel and watch each moment go by as you move. Jump between events with Previous and Next, go straight to any time, and play back at ½× to 2×.</p>
@@ -278,7 +424,7 @@ footer .fine{max-width:360px;text-align:right}
 </article>
 
 <article class="feature" aria-labelledby="f-review">
-<div class="feature-copy">
+<div class="feature-copy read">
 <span class="feature-number">03 — REVIEW</span>
 <h3 id="f-review">Who came by.<br>And when.</h3>
 <p>Alerts and detections in one feed, filtered by camera, object and zone. Encounters group a visit into one card, with the clip a tap away.</p>
@@ -291,7 +437,7 @@ footer .fine{max-width:360px;text-align:right}
 </article>
 
 <article class="feature" aria-labelledby="f-explore">
-<div class="feature-copy">
+<div class="feature-copy read">
 <span class="feature-number">04 — EXPLORE</span>
 <h3 id="f-explore">Pick up the trail.<br>Camera to camera.</h3>
 <p>Follow one person or vehicle across every camera on a shared timeline, with a list of where they went next.</p>
@@ -304,7 +450,7 @@ footer .fine{max-width:360px;text-align:right}
 </article>
 
 <article class="feature" aria-labelledby="f-alerts">
-<div class="feature-copy">
+<div class="feature-copy read">
 <span class="feature-number">05 — ALERTS</span>
 <h3 id="f-alerts">Alerts you tune.<br>Nothing you don't.</h3>
 <p>Decide per object and per place: a quiet log entry, a live lock-screen alert, or a time-sensitive alarm. A guided setup gets you there, with quiet hours when you want them.</p>
@@ -319,7 +465,7 @@ footer .fine{max-width:360px;text-align:right}
 </section>
 
 <section class="wrap mac" id="mac" aria-labelledby="mac-title">
-<div>
+<div class="read">
 <div class="eyebrow">02 / On your Mac</div>
 <h2 id="mac-title">Settle in at<br>your desk.</h2>
 <p>The same app on the Mac, at home on a bigger screen. One purchase covers iPhone, iPad and Mac.</p>
@@ -335,20 +481,20 @@ footer .fine{max-width:360px;text-align:right}
 </section>
 
 <section class="wrap principles" id="privacy" aria-labelledby="privacy-title">
-<div class="principles-top">
+<div class="principles-top read">
 <div class="eyebrow">03 / Private by design</div>
 <h2 id="privacy-title">Your home isn't a feed.<br>It stays yours.</h2>
 </div>
 <div class="principle-list">
-<article class="principle"><span class="num">[ 01 ]</span><h3>No account. No cloud.</h3><p>Elsinore talks straight to your Frigate server, at home or from anywhere. There is no Elsinore cloud in the middle and nothing to sign up for.</p></article>
-<article class="principle"><span class="num">[ 02 ]</span><h3>No tracking.</h3><p>No analytics, no telemetry, no advertising or tracking SDKs. Your password stays in the device's secure storage and only ever goes to your server.</p></article>
-<article class="principle"><span class="num">[ 03 ]</span><h3>Your video stays home.</h3><p>Footage and notification images come from your own server. Optional notifications carry one short line through the system push service. <a class="inline-link" href="privacy.html">Privacy policy</a></p></article>
+<article class="principle read"><span class="num">[ 01 ]</span><h3>No account. No cloud.</h3><p>Elsinore talks straight to your Frigate server, at home or from anywhere. There is no Elsinore cloud in the middle and nothing to sign up for.</p></article>
+<article class="principle read"><span class="num">[ 02 ]</span><h3>No tracking.</h3><p>No analytics, no telemetry, no advertising or tracking SDKs. Your password stays in the device's secure storage and only ever goes to your server.</p></article>
+<article class="principle read"><span class="num">[ 03 ]</span><h3>Your video stays home.</h3><p>Footage and notification images come from your own server. Optional notifications carry one short line through the system push service. <a class="inline-link" href="privacy.html">Privacy policy</a></p></article>
 </div>
 </section>
 
 <section class="wrap needs" id="needs" aria-labelledby="needs-title">
-<div><div class="eyebrow">04 / What you need</div><h2 id="needs-title">Before you<br>download.</h2></div>
-<div>
+<div class="read"><div class="eyebrow">04 / What you need</div><h2 id="needs-title">Before you<br>download.</h2></div>
+<div class="read">
 <div class="need"><span class="num">[ 01 ]</span><div><h3>Your own Frigate server</h3><p>Elsinore is a viewer and reviewer for an existing <a class="inline-link" href="https://frigate.video/">Frigate</a> setup. Frigate 0.17 or later is the version we test against. If you don't run Frigate, Elsinore won't be useful to you.</p></div></div>
 <div class="need"><span class="num">[ 02 ]</span><div><h3>A way to reach it</h3><p>Your home network, or a remote path of your own: Tailscale, another WireGuard VPN, or a reverse proxy.</p></div></div>
 <div class="need"><span class="num">[ 03 ]</span><div><h3>Optional: Marcellus</h3><p>A free, open-source companion service that runs next to Frigate. It adds alerts, live lock-screen alerts, encounters, Explore and scrub previews. Without it you still get live view, recordings and the review feed. <a class="inline-link" href="docs/sidecar.html">About Marcellus</a></p></div></div>
@@ -356,8 +502,8 @@ footer .fine{max-width:360px;text-align:right}
 </section>
 
 <section class="wrap faq" id="questions" aria-labelledby="faq-title">
-<div><div class="eyebrow">05 / Good to know</div><h2 id="faq-title">A few things,<br>before you look.</h2></div>
-<div>
+<div class="read"><div class="eyebrow">05 / Good to know</div><h2 id="faq-title">A few things,<br>before you look.</h2></div>
+<div class="read">
 <details open><summary>What is Elsinore?</summary><p>A fast, native app for Frigate, the open-source NVR you run on your own hardware. It brings your live cameras, recordings, encounters and alerts to iPhone, iPad and Mac.</p></details>
 <details><summary>Is there a subscription?</summary><p>No subscription and no account. One App Store purchase covers iPhone, iPad and Mac.</p></details>
 <details><summary>Does my video leave my network?</summary><p>Video, recordings and snapshots go straight from your server to your device. The one exception is optional notifications: the short line on your lock screen, such as “Person at Front Door”, travels through the system push service and a minimal relay with no database. The <a class="inline-link" href="privacy.html">privacy policy</a> has the details.</p></details>
@@ -378,11 +524,27 @@ footer .fine{max-width:360px;text-align:right}
 </main>
 
 <footer class="wrap">
-<div>
+<div class="read">
 <a class="footer-brand" href="#top">Elsinore</a>
 <div class="footer-links"><a href="docs/index.html">Docs</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="https://apps.apple.com/us/app/elsinore/id6797358423">App Store</a></div>
 </div>
-<p class="fine">Elsinore is not affiliated with the Frigate project.<br>Your cameras. Your timeline.</p>
+<p class="fine read">Elsinore is not affiliated with the Frigate project.<br>Your cameras. Your timeline.</p>
 </footer>
+<script>
+(function(){
+var d=document.documentElement,b=document.querySelector('.motion-toggle'),K='elsinore.motion',
+mq=matchMedia('(prefers-reduced-motion: reduce)'),paused=false;
+if(!b)return;
+try{paused=localStorage.getItem(K)==='paused'}catch(e){}
+function paint(){d.classList.toggle('motion-paused',paused);b.textContent=paused?'Resume motion':'Pause motion';b.setAttribute('aria-pressed',String(paused))}
+function sync(){b.hidden=mq.matches}
+b.addEventListener('click',function(){paused=!paused;paint();try{paused?localStorage.setItem(K,'paused'):localStorage.removeItem(K)}catch(e){}});
+if(mq.addEventListener)mq.addEventListener('change',sync);else if(mq.addListener)mq.addListener(sync);
+document.addEventListener('visibilitychange',function(){d.classList.toggle('motion-hidden',document.hidden)});
+var hero=document.querySelector('.hero');
+if(hero&&'IntersectionObserver' in window)new IntersectionObserver(function(e){d.classList.toggle('hero-off',!e[0].isIntersecting)}).observe(hero);
+paint();sync();
+})();
+</script>
 </body>
 </html>
