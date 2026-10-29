@@ -84,10 +84,11 @@ img{max-width:100%;height:auto;display:block}
 @container art (max-width:959.9px){.win[data-w=upper-tower]{display:none}}
 /* nightsky:end */
 /* Reading backings sit on the text itself, not its container, so the sky shows between blocks */
-:root{--read-glow:0 0 20px 12px var(--canvas)}
+:root{--read-glow:0 0 36px 14px var(--canvas)}
 .read :is(h2,h3,p,li,summary,.eyebrow,.feature-number,.feature-note,.num,.footer-brand,.footer-links),p.read{background:var(--canvas);box-shadow:var(--read-glow)}
 .read :is(h2,h3,.eyebrow){width:fit-content}
 .foot-end{display:flex;align-items:center;gap:28px}
+.motion-toggle:not([hidden])+.scroll-hint{border-left:1px solid var(--line);padding-left:28px}
 .motion-toggle{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:#77777e;background:none;border:0;border-bottom:1px solid #ebcf9d33;padding:3px 0;cursor:pointer}
 .motion-toggle:hover,.motion-toggle:focus-visible{color:var(--amber);border-color:var(--amber)}
 .motion-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
@@ -100,7 +101,8 @@ nav{height:100%;display:flex;align-items:center;gap:40px}
 .brand img{width:40px;height:40px;border-radius:9px}
 nav .links{display:flex;gap:32px;align-items:center;margin-left:auto;font-size:13px;color:#c8c6c1;white-space:nowrap}
 nav .links a:not(.nav-cta):hover{color:var(--amber)}
-.nav-cta{padding:11px 16px;border:1px solid #a2a2a744;border-radius:4px}
+.nav-cta{padding:11px 16px;border:1px solid #a2a2a744;border-radius:4px;background:var(--canvas)}
+nav .links a:not(.nav-cta),.brand{background:var(--canvas);box-shadow:0 0 10px 6px var(--canvas)}
 .nav-cta:hover{border-color:var(--amber);color:var(--amber)}
 .arrow{display:inline-block;margin-left:12px}
 
@@ -126,7 +128,8 @@ h1 span,.closing h2 span{color:var(--amber)}
 .text-link:hover{color:var(--amber)}
 .requires{font:11px/1.8 var(--mono);color:#cfc6b6;margin-top:28px;display:flex;align-items:center;gap:10px;letter-spacing:.3px}
 .requires i,.signal i{width:5px;height:5px;background:#cfa36b;box-shadow:0 0 8px #cfa36b66;flex:none}
-.platforms{font:10px/1.8 var(--mono);color:#96979d;margin-top:8px;letter-spacing:.5px}
+.platforms{font:10px/1.8 var(--mono);color:#aeadb2;margin-top:8px;letter-spacing:.5px}
+.requires,.platforms{text-shadow:0 0 4px var(--canvas),0 0 10px var(--canvas)}
 .platforms span{margin:0 10px;color:#67635b}
 .hero-foot{position:absolute;bottom:34px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;font:10px var(--mono);letter-spacing:1px;color:#aaa69d}
 .signal{display:flex;align-items:center;gap:10px}
@@ -141,7 +144,6 @@ h1 span,.closing h2 span{color:var(--amber)}
 .feature{display:grid;grid-template-columns:1fr 1.05fr;border-top:1px solid var(--line)}
 .feature:last-child{border-bottom:1px solid var(--line)}
 .feature:nth-child(even) .feature-copy{order:2;padding:60px 0 50px 70px}
-.feature:nth-child(even) .screen-stage{border-left:0;border-right:1px solid var(--line)}
 .feature-copy{padding:60px 70px 50px 0;display:flex;flex-direction:column;justify-content:center}
 .feature-number{font:11px var(--mono);color:#75767d;letter-spacing:2px}
 .feature-copy h3{font:34px/1.4 var(--mono);font-weight:400;letter-spacing:-1px;margin:22px 0 18px;max-width:440px}
@@ -150,7 +152,7 @@ h1 span,.closing h2 span{color:var(--amber)}
 .feature-note b{font-size:22px;font-weight:400;color:var(--amber)}
 .feature-links{margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:13px}
 .tag{font:10px/1 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--parchment);border:1px solid #ebcf9d44;border-radius:3px;padding:6px 8px}
-.screen-stage{position:relative;background:#0b0c0f;min-height:720px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid var(--line)}
+.screen-stage{position:relative;background:#0b0c0f;min-height:720px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid var(--line);border-right:1px solid var(--line)}
 .screen-stage:before{content:'';position:absolute;inset:0;background-image:radial-gradient(#c8a46b32 .7px,transparent .7px);background-size:12px 12px;-webkit-mask-image:linear-gradient(0deg,transparent,#000 45%,transparent);mask-image:linear-gradient(0deg,transparent,#000 45%,transparent)}
 .screen-caption{position:absolute;top:25px;left:24px;color:#8b8b91;font:9px var(--mono);letter-spacing:1px}
 .app-screen{position:relative;width:285px;border:1px solid #4c4a43;border-radius:40px;padding:6px;background:#070809;box-shadow:0 25px 70px #0009}
@@ -197,7 +199,8 @@ h1 span,.closing h2 span{color:var(--amber)}
 
 /* Closing and footer */
 .closing{position:relative;text-align:center;overflow:hidden;border-top:1px solid var(--line);padding:90px 24px 105px;background:transparent;isolation:isolate}
-.closing:before{content:'';position:absolute;inset:0;background:linear-gradient(#090a0c99,#090a0c99),url('home/castle-1280.jpg') center 72%/cover;opacity:.45;z-index:-1}
+/* The designer's scene (transparent sky, no baked stars): darkened with a filter, not opacity, so the cliffs stay solid over the sky */
+.closing:before{content:'';position:absolute;inset:0;background:url('home/sky/desktop-environment.webp') 70% 100%/cover no-repeat;filter:brightness(.4);-webkit-mask-image:linear-gradient(#000 calc(100% - 90px),transparent);mask-image:linear-gradient(#000 calc(100% - 90px),transparent);z-index:-1}
 .closing img{width:70px;margin:auto auto 24px;border-radius:16px}
 .closing h2{font:clamp(29px,3.2vw,44px)/1.35 var(--mono);font-weight:400;letter-spacing:-1.5px;margin:0 0 28px}
 .closing .actions{justify-content:center}
@@ -265,6 +268,7 @@ footer .fine{max-width:360px;text-align:right}
   .needs,.faq{grid-template-columns:1fr;gap:20px;padding:55px 0 60px}
   .need{grid-template-columns:44px 1fr}
   .closing{padding:65px 16px 75px}
+  .closing:before{background-image:url('home/sky/mobile-environment.webp');background-position:center 100%}
   .closing h2{font-size:30px}
   footer{flex-direction:column;gap:18px}
   footer .fine{text-align:left}
@@ -1187,7 +1191,7 @@ footer .fine{max-width:360px;text-align:right}
 <div class="features">
 <article class="feature" aria-labelledby="f-live">
 <div class="feature-copy read">
-<span class="feature-number">01 — LIVE</span>
+<span class="feature-number">LIVE</span>
 <h3 id="f-live">Every camera.<br>One calm place.</h3>
 <p>Every camera in one live grid, or one full screen. Live video starts over low-latency WebRTC and falls back to HLS on its own when it needs to.</p>
 <div class="feature-note"><b aria-hidden="true">↳</b><span>Your own server. No cloud in the middle.</span></div>
@@ -1200,7 +1204,7 @@ footer .fine{max-width:360px;text-align:right}
 
 <article class="feature" aria-labelledby="f-scrub">
 <div class="feature-copy read">
-<span class="feature-number">02 — SCRUB</span>
+<span class="feature-number">SCRUB</span>
 <h3 id="f-scrub">Hours of footage.<br>Seconds to find it.</h3>
 <p>Drag the reel and watch each moment go by as you move. Jump between events with Previous and Next, go straight to any time, and play back at ½× to 2×.</p>
 <div class="feature-note"><b aria-hidden="true">↳</b><span>Fast rewind. A timeline you can feel.</span></div>
@@ -1213,11 +1217,11 @@ footer .fine{max-width:360px;text-align:right}
 
 <article class="feature" aria-labelledby="f-review">
 <div class="feature-copy read">
-<span class="feature-number">03 — REVIEW</span>
+<span class="feature-number">REVIEW</span>
 <h3 id="f-review">Who came by.<br>And when.</h3>
 <p>Alerts and detections in one feed, filtered by camera, object and zone. Encounters group a visit into one card, with the clip a tap away.</p>
 <div class="feature-note"><b aria-hidden="true">↳</b><span>Less searching. More understanding.</span></div>
-<div class="feature-links"><a class="inline-link" href="docs/search-and-review.html">How Review works</a><span class="tag">Encounters use Marcellus</span></div>
+<div class="feature-links"><a class="inline-link" href="docs/search-and-review.html">How Review works</a><span class="tag">Encounters need Marcellus</span></div>
 </div>
 <div class="screen-stage"><span class="screen-caption">REVIEW / IPHONE</span><i class="corner tl" aria-hidden="true"></i>
 <div class="app-screen"><img src="home/screen-review.jpg" width="640" height="1396" loading="lazy" alt="The Review tab: a feed of alert cards, the first reading Person and package, front yard."></div>
@@ -1226,11 +1230,11 @@ footer .fine{max-width:360px;text-align:right}
 
 <article class="feature" aria-labelledby="f-explore">
 <div class="feature-copy read">
-<span class="feature-number">04 — EXPLORE</span>
+<span class="feature-number">EXPLORE</span>
 <h3 id="f-explore">Pick up the trail.<br>Camera to camera.</h3>
 <p>Follow one person or vehicle across every camera on a shared timeline, with a list of where they went next.</p>
 <div class="feature-note"><b aria-hidden="true">↳</b><span>One subject. A connected story.</span></div>
-<div class="feature-links"><a class="inline-link" href="docs/investigate.html">How Explore works</a><span class="tag">Uses Marcellus</span></div>
+<div class="feature-links"><a class="inline-link" href="docs/investigate.html">How Explore works</a><span class="tag">Needs Marcellus</span></div>
 </div>
 <div class="screen-stage"><span class="screen-caption">EXPLORE / IPHONE</span><i class="corner tl" aria-hidden="true"></i>
 <div class="app-screen"><img src="home/screen-explore.jpg" width="640" height="1396" loading="lazy" alt="Following a person: a camera view above a person card and a timeline showing when each camera saw them."></div>
@@ -1239,11 +1243,11 @@ footer .fine{max-width:360px;text-align:right}
 
 <article class="feature" aria-labelledby="f-alerts">
 <div class="feature-copy read">
-<span class="feature-number">05 — ALERTS</span>
+<span class="feature-number">ALERTS</span>
 <h3 id="f-alerts">Alerts you tune.<br>Nothing you don't.</h3>
 <p>Decide per object and per place: a quiet log entry, a live lock-screen alert, or a time-sensitive alarm. A guided setup gets you there, with quiet hours when you want them.</p>
 <div class="feature-note"><b aria-hidden="true">↳</b><span>Attention, on your terms.</span></div>
-<div class="feature-links"><a class="inline-link" href="docs/alerts.html">How Alerts work</a><span class="tag">Uses Marcellus</span></div>
+<div class="feature-links"><a class="inline-link" href="docs/alerts.html">How Alerts work</a><span class="tag">Needs Marcellus</span></div>
 </div>
 <div class="screen-stage"><span class="screen-caption">SETTINGS / IPHONE</span><i class="corner tl" aria-hidden="true"></i>
 <div class="app-screen"><img src="home/screen-alerts.jpg" width="640" height="1396" loading="lazy" alt="The Settings tab, with Alerts (rules, sounds and quiet hours) and Alert History at the top."></div>
