@@ -39,8 +39,10 @@
 <li><a href="../docs/search-and-review.html">Search and Review</a></li>
 <li><a href="../docs/alerts.html">Alerts</a></li>
 <li><a href="../docs/investigate.html">Explore</a></li>
+<li><a href="../docs/whos-there.html">People</a></li>
 <li class="here"><a href="../docs/sidecar.html" aria-current="page">Sidecar</a></li>
 <li><a href="../docs/mac.html">Mac</a></li>
+<li><a href="../docs/mac-theater.html">Mac Theater</a></li>
 <li><a href="../docs/settings.html">Settings</a></li>
 <li><a href="../docs/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -51,6 +53,7 @@
 <details class="toc" open><summary>On this page</summary><div class="toc">
 <ul>
 <li><a href="#what-it-adds">What it adds</a></li>
+<li><a href="#do-i-need-marcellus">Do I need Marcellus?</a></li>
 <li><a href="#where-it-runs">Where it runs</a></li>
 <li><a href="#installing-it">Installing it</a></li>
 <li><a href="#pointing-the-app-at-it">Pointing the app at it</a></li>
@@ -79,6 +82,66 @@ from Frigate itself. Marcellus adds:</p>
 <li><strong>Face enrichment</strong>, which is where the recognised names that appear on
   event rows come from.</li>
 </ul>
+<h2 id="do-i-need-marcellus">Do I need Marcellus?</h2>
+<p>No. The app works with Frigate alone; Marcellus is optional. The app asks the
+server what it offers and shows a feature only when the server says it is
+available.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Frigate alone</th>
+<th>With Marcellus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="live.html">Live</a> cameras</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Recorded playback in <a href="scrub.html">Scrub</a></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Scrub preview frames (the fast reel)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="search-and-review.html">Search</a> feed</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Review tab (encounters)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="investigate.html">Explore and Follow</a></td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Push notifications and Live Activities</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="whos-there.html">People</a></td>
+<td>No</td>
+<td>Yes, with face recognition on</td>
+</tr>
+<tr>
+<td>Doorbell-ring notifications</td>
+<td>No</td>
+<td>Yes, with a mapped UniFi Protect doorbell</td>
+</tr>
+</tbody>
+</table>
 <p>It reads Frigate's config, database, and recordings. It never writes to
 them.</p>
 <h2 id="where-it-runs">Where it runs</h2>
@@ -103,8 +166,11 @@ repository's deployment document.</p>
 <li>Run the installer, which detects Docker and falls back to the virtual
    environment plus systemd unit. Or do it by hand: <code>docker compose</code> with
    the published image, or
-   <code>python3 -m venv /opt/marcellus/venv &amp;&amp; pip install marcellus</code>.</li>
-<li>Generate a config with <code>fsc init</code>, and point <code>frigate.base_url</code> at
+   <code>python3 -m venv /opt/marcellus/venv &amp;&amp; /opt/marcellus/venv/bin/pip install "marcellus[http2] @ git+https://github.com/helicopterrun/marcellus"</code>
+   (Marcellus is not on PyPI, so a plain <code>pip install marcellus</code> fails).
+   The installer is
+   <code>curl -fsSL https://raw.githubusercontent.com/helicopterrun/marcellus/main/install.sh | sudo bash</code>.</li>
+<li>Generate a config (<code>docker compose run --rm marcellus init -o /config/sidecar.yml</code> for Docker, <code>fsc init</code> in the virtual environment; the installer does this for you), and point <code>frigate.base_url</code> at
    Frigate's unauthenticated port and <code>frigate.proxy_base_url</code> at its
    authenticated one. Set the database, media, and recordings paths.</li>
 <li>Make sure the service user can read Frigate's config, database, and
@@ -150,7 +216,7 @@ and correctable by hand, which is what makes the
 <a href="investigate.html#same-and-not-same">Same and Not same</a> corrections in the
 app worth the swipe.</p>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 12, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

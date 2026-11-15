@@ -39,8 +39,10 @@
 <li><a href="../docs/search-and-review.html">Search and Review</a></li>
 <li><a href="../docs/alerts.html">Alerts</a></li>
 <li><a href="../docs/investigate.html">Explore</a></li>
+<li><a href="../docs/whos-there.html">People</a></li>
 <li><a href="../docs/sidecar.html">Sidecar</a></li>
 <li><a href="../docs/mac.html">Mac</a></li>
+<li><a href="../docs/mac-theater.html">Mac Theater</a></li>
 <li><a href="../docs/settings.html">Settings</a></li>
 <li><a href="../docs/troubleshooting.html">Troubleshooting</a></li>
 </ul>
@@ -51,6 +53,8 @@
 <details class="toc" open><summary>On this page</summary><div class="toc">
 <ul>
 <li><a href="#requirements">Requirements</a></li>
+<li><a href="#before-you-start">Before you start</a></li>
+<li><a href="#on-mac">On Mac</a></li>
 <li><a href="#what-the-optional-sidecar-adds">What the optional sidecar adds</a></li>
 <li><a href="#the-ten-minute-path">The ten minute path</a><ul>
 <li><a href="#1-connect">1. Connect</a></li>
@@ -75,6 +79,26 @@ one purchase covers all three.</p>
 <p><strong>A route to the server.</strong> Your device has to be able to open the Frigate
 address you type into the app: the same local network, or a remote path.
 See <a href="connect.html#remote-access">remote access</a>.</p>
+<h2 id="before-you-start">Before you start</h2>
+<p><strong>Your Frigate address.</strong> Frigate listens on two ports. Port <strong>8971</strong> is the
+authenticated one (login required); port <strong>5000</strong> is the unauthenticated
+internal one, meant for the local network only. Elsinore uses the
+authenticated port, so enter an address like <code>https://192.168.1.10:8971</code>,
+the same one you open Frigate's web interface at in a browser. If you run
+the <a href="sidecar.html">Marcellus sidecar</a>, enter the sidecar's address instead.</p>
+<p><strong>A Frigate login.</strong> Elsinore signs in with a Frigate username and password.
+Create one in Frigate's own web interface under Settings &gt; Users, or use an
+existing one. Elsinore's documentation does not state a required role, but
+one thing is documented: Frigate may refuse a non-admin user the raw
+configuration file, which is what the Mac app's Frigate Config view reads.
+Test with the account you intend to use.</p>
+<p><strong>If the connection fails,</strong> open the in-app Connection Doctor (it appears
+under the failed test, and later at Settings &gt; Server). It names the step
+that broke. See <a href="connect.html">Connect to your server</a>.</p>
+<h2 id="on-mac">On Mac</h2>
+<p>The Mac app uses the same server address and login as iPhone and iPad, with
+a sidebar instead of a tab bar. See <a href="mac.html">Elsinore on Mac</a> and
+<a href="mac-theater.html">Mac Theater</a>.</p>
 <h2 id="what-the-optional-sidecar-adds">What the optional sidecar adds</h2>
 <p><a href="sidecar.html">Marcellus</a> is a companion server you run next to Frigate. It
 is optional. Without it, Elsinore is a live viewer, a scrub reel, and a
@@ -88,7 +112,8 @@ search feed. With it you also get:</p>
 <li>Encounters, which chain sightings of the same subject across cameras, and
   the <a href="investigate.html">Explore and Follow</a> views built on them.</li>
 </ul>
-<p>If you run the sidecar, point Elsinore at the sidecar's address rather than
+<p>See <a href="sidecar.html#do-i-need-marcellus">Do I need Marcellus?</a> for a
+feature-by-feature table. If you run the sidecar, point Elsinore at the sidecar's address rather than
 Frigate's. One address covers everything; the app talks to Frigate through
 it.</p>
 <h2 id="the-ten-minute-path">The ten minute path</h2>
@@ -120,7 +145,7 @@ tells you which rung broke and what to do about it. The
 <a href="troubleshooting.html">troubleshooting page</a> groups the common failures by
 symptom.</p>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 12, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
