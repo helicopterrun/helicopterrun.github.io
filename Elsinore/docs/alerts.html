@@ -191,6 +191,17 @@ then Apple's push service, then your device.</p>
 <p>The relay exists only because Apple requires pushes to come from a server
 holding APNs credentials. It holds the credential and signs the request to
 Apple. It is not a general backend.</p>
+<p>The relay sees the alert text (title and body), the camera and zone names,
+the device token and, for Live Activities, the movement state with up to 30
+normalised path points. It never sees video, images, faces or people's
+names. The thumbnail link it carries points at your own server.</p>
+<p>The app itself also contacts the relay once when push is on and your server
+supports it, to get a per-install credential. It sends Apple's signed
+app-transaction record (proof that this is a genuine App Store or TestFlight
+install), the platform and the app version. The relay sees the request's IP
+address, as any server would, and stores nothing. The credential is kept in
+the device Keychain and on your Marcellus server, and renewed about every 30
+days.</p>
 <p><strong>No video and no image bytes travel through the relay or through Apple.</strong>
 The push carries a link back to your own sidecar, and your device's
 notification extension fetches the actual snapshot directly from your
@@ -261,7 +272,7 @@ Swipe a row to say it was too much or not enough, or to silence it. This is
 the fastest way to converge on the alerts you actually want, because you are
 correcting real decisions rather than guessing at dials.</p>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 15, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

@@ -55,6 +55,7 @@
 <li><a href="#summary">Summary</a></li>
 <li><a href="#what-the-app-stores-and-where">What the app stores, and where</a></li>
 <li><a href="#what-the-app-does-not-do">What the app does not do</a></li>
+<li><a href="#people-and-face-recognition-optional">People and face recognition (optional)</a></li>
 <li><a href="#third-party-software">Third-party software</a></li>
 <li><a href="#optional-push-notifications">Optional push notifications</a></li>
 <li><a href="#data-sharing">Data sharing</a></li>
@@ -64,19 +65,23 @@
 </ul>
 </div>
 </details>
-<p class="applies">Effective date: August 1, 2026</p>
+<p class="applies">Effective date: November 15, 2026</p>
 <p>Elsinore is a native client (iPhone, iPad, and Mac) for a Frigate NVR server that you host and
 control. This policy describes what the app does and does not do with your
 data.</p>
 <h2 id="summary">Summary</h2>
 <ul>
 <li>Elsinore collects no analytics and no personal data.</li>
-<li>The app connects only to the Frigate server (and optional companion
-  "sidecar") that you configure, which is your own infrastructure, not
-  anything operated by Elsinore or its maintainer.</li>
-<li>Video and images from your cameras never leave your own infrastructure,
-  with one narrow exception for optional push notifications, described
-  below.</li>
+<li>Face recognition (People) is optional and is run by your own server, not
+  by Elsinore. Faces, face images and the numbers used to match them stay on
+  that server. Nothing about them is sent to the maintainer.</li>
+<li>The app connects to the Frigate server (and optional companion "sidecar")
+  that you configure, which is your own infrastructure. The one exception is
+  optional push notifications: with push on, the app also makes one small
+  request to the push relay run by the app's maintainer, described below.</li>
+<li>Video and images from your cameras never leave your own infrastructure.
+  Optional push notifications send alert text and routing information
+  through the relay, described below, but no image bytes.</li>
 <li>There is no Elsinore account and no cloud backend to sign into.</li>
 </ul>
 <h2 id="what-the-app-stores-and-where">What the app stores, and where</h2>
@@ -104,6 +109,80 @@ own signed-in Apple devices by Apple's Handoff service.</p>
   device.</li>
 <li>Elsinore does not require or create a user account of any kind.</li>
 </ul>
+<h2 id="people-and-face-recognition-optional">People and face recognition (optional)</h2>
+<p>People is a part of Elsinore that only appears when your own Marcellus
+sidecar has face recognition turned on and tells the app it is available.
+Elsinore on its own does not recognize faces. If your server does not offer
+People, the app shows nothing about it.</p>
+<p><strong>What exists, and where.</strong> When face recognition is on, your Marcellus
+server looks at the people in your camera events and, on your server only,
+keeps:</p>
+<ul>
+<li>small cropped images of faces (up to five per event by default);</li>
+<li>a set of numbers per face, used to tell whether two faces match (an
+  embedding), and a running average per person;</li>
+<li>a permanent ID number for each person it groups together, and a generated
+  label for that ID, such as "Shoal Gadwall", that is not a name;</li>
+<li>anything you add: a name, a short note, whether you follow the person,
+  and your decisions when you say two faces are not the same or label
+  face pairs in the sidecar's accuracy check;</li>
+<li>when and on which camera that person was recognized.</li>
+</ul>
+<p>The face-matching model also runs on your server. The crops, embeddings and
+IDs are stored by Marcellus on your hardware. They are not sent to Elsinore's
+maintainer or to the relay, and the app does not upload faces anywhere.</p>
+<p><strong>What the app does.</strong> The app asks your server for this information and
+shows it: on the People pages, as faces and names beside recognized people in
+Search, the Review tab (including a filter that narrows it to one person),
+the scrub reel's markers and the event card under the player. Face images are
+loaded from your server and kept in the app's caches on your device, in
+memory and possibly in the on-disk image cache that Settings › Storage shows
+and clears. That cache is also cleared when you switch servers or reset the
+app. They are not saved to your photo library. Names, notes and follows you
+set in the app are sent to your own server and stored there.</p>
+<p><strong>Names.</strong> An ID works fine without a name. If you name a person, your server
+also writes that name into Frigate as the "sub-label" of that person's events
+(including earlier events still in Frigate), so it shows up in Frigate, in
+Elsinore wherever a recognized name is shown, and in the titles of the
+encounters your server builds. Generated labels and ID numbers are not
+written to Frigate, and none of them go into alerts. Your server does use a
+person's generated label, when they have no name, in the encounter titles and
+person lists it sends to the app; it works that out when the app asks and does
+not store it in the encounter.</p>
+<p><strong>Names in alerts.</strong> Names stay out of alerts. No person's name, generated
+label or ID number is put in anything your sidecar sends through the push
+relay or Apple's push service, so an alert or Live Activity about a
+recognized person says "Person", like any other. Names appear only inside
+the app, which fetches them from your own server. Face images and matching
+numbers are never part of an alert either. Recognition can still make an
+alert quieter, without naming anyone.</p>
+<p><strong>How long it is kept.</strong></p>
+<ul>
+<li>An ID with no name or note, that you do not follow, and that has not been
+  recognized for 60 days, is forgotten: its ID, matching numbers and face
+  images are deleted. (60 days is the default; it is a setting on your
+  server.) The plain event record Frigate keeps is unaffected.</li>
+<li>A person you have named, followed or given a note is kept until you
+  delete it.</li>
+<li>A face crop is also deleted when the person it belongs to is.</li>
+</ul>
+<p><strong>How to delete it.</strong> Open the person in People, choose the actions menu,
+then Delete. Your server then erases that person's face images, matching
+numbers and ID (and the "not the same" and accuracy-check answers that mention them),
+removes their name from your server's encounters (unless another person has
+the same name), and asks Frigate to clear the sub-label it wrote on their
+events. The Frigate step is
+best-effort: if Frigate is unreachable at that moment, some sub-labels may
+stay until you clear them in Frigate. Deleting does not recall alerts you
+already received, and Apple's and your devices' notification history are
+outside Elsinore's reach. "Not this person" on a single sighting removes just
+that sighting from the person. To stop recognition altogether, turn off face
+recognition in your Marcellus configuration; that stops new recognition, and
+deleting the people you want gone removes what was already stored.</p>
+<p>"Recognized" here means only that your own server matched a face in a camera
+event to a stored person. People shows when that last happened, not where
+anyone is, and a person missing from it is not evidence that they were not
+there.</p>
 <h2 id="third-party-software">Third-party software</h2>
 <p>Elsinore uses one third-party library: a WebRTC media framework, used to
 negotiate and play low-latency live video directly between your device and
@@ -118,24 +197,41 @@ optional, self-hosted Marcellus sidecar. If you enable them, here is exactly
 what happens:</p>
 <ul>
 <li>Your device registers its Apple Push Notification (APNs) device token
-  with your own sidecar. The app itself does not contact the relay. Your
-  sidecar forwards notifications through a small relay service operated by
-  the app's maintainer. This relay exists only because Apple requires push
-  notifications to be sent from a server holding APNs credentials. It is
-  not a general backend and never proxies your video.</li>
+  with your own sidecar. Your sidecar forwards notifications through a small
+  relay service operated by the app's maintainer. This relay exists only
+  because Apple requires push notifications to be sent from a server holding
+  APNs credentials. It is not a general backend and never proxies your video.</li>
+<li>The app itself also contacts the relay, once, when push is on and your
+  server supports it. It asks the relay for a per-install credential, which
+  your sidecar then uses to show the relay that the notification comes from
+  a genuine copy of Elsinore. The request contains Apple's signed
+  app-transaction record (StoreKit's proof that this is a genuine App Store
+  or TestFlight install of Elsinore), the platform (iOS or macOS) and the app
+  version, and nothing else: no device token, no server address, no camera
+  or event data. Like any server, the relay sees the IP address the request
+  comes from. The relay keeps no database and stores nothing from the
+  request; it checks the record and returns the credential. The credential is
+  kept in the device Keychain and on your own Marcellus server, and the app
+  asks for a new one about every 30 days. Push off, no request.</li>
 <li>When your own Frigate server detects something, your sidecar composes the
   notification and sends it to the relay for forwarding to Apple. That
   payload contains what the notification needs to display: your device's
   push token, the title and body text (for example "Person at Front Door"),
   the camera and zone names as you configured them in Frigate, the kind of
   subject detected (such as person, vehicle, or package), a severity level,
-  timestamps, an identifier for the alert, and a link back to your own
-  server from which your device fetches the thumbnail. When the sidecar has
-  grouped a detection with sightings on other cameras, the payload also
-  names those cameras.</li>
-<li>The payload never contains snapshots, thumbnails, video, recordings, or
-  your server address in a form the relay uses. Images are fetched by your
-  device directly from your own server after the notification arrives.</li>
+  timestamps, an identifier for the alert, and a thumbnail URL on your own
+  server (a link, never the image) from which your device fetches the
+  thumbnail. That URL contains the external address you set for your
+  server, so the relay sees that address when you set one. When the sidecar
+  has grouped a detection with sightings on other cameras, the payload also
+  names those cameras. For Live Activities the payload also carries the
+  activity's state: the same title and body text, the camera, the direction
+  of movement, up to five zone names, and up to 30 points (normalised to the
+  camera frame, with no timestamps) tracing the object's recent path in that
+  camera's picture.</li>
+<li>The payload never contains snapshots, thumbnails, video, recordings, faces
+  or people's names. Images are fetched by your device directly from your
+  own server after the notification arrives.</li>
 <li>If you have a UniFi Protect doorbell mapped through your sidecar, a
   doorbell press sends the same kind of payload: title and body text, the
   camera name, a notification category identifying it as a doorbell ring,
@@ -148,9 +244,11 @@ what happens:</p>
 </ul>
 <p>In short: the card text, including camera and zone names, passes through
 the relay in flight on its way to Apple. The relay and Apple see the same
-text you see on your lock screen, plus your device token and routing
-identifiers. They never see an
-image, and all alert media stays on your own server.</p>
+text you see on your lock screen, plus your device token, routing
+identifiers and, for Live Activities, the movement state described above.
+They never see an image, and all alert media stays on your own server. The
+<a href="https://github.com/helicopterrun/marcellus/blob/main/src/marcellus/guide_content/privacy.md">Marcellus guide page "What leaves your network"</a>
+lists every field the relay receives.</p>
 <h2 id="data-sharing">Data sharing</h2>
 <p>Elsinore does not sell, rent, or share your data with third parties. There
 is no advertising, and no data is used for anything beyond operating the
@@ -166,7 +264,7 @@ URL with a new effective date.</p>
 <p>Questions about this policy or the app's data practices can be sent to
 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#105;&#99;&#111;&#112;&#116;&#101;&#114;&#114;&#117;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#104;&#101;&#108;&#105;&#99;&#111;&#112;&#116;&#101;&#114;&#114;&#117;&#110;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>.</p>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 15, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="index.html">Home</a> &middot; <a href="support.html">Support</a> &middot;

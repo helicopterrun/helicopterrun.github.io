@@ -79,8 +79,9 @@ from Frigate itself. Marcellus adds:</p>
   built on them.</li>
 <li><strong>Deeper search</strong>, the structured stage below the app's instant
   client-side search.</li>
-<li><strong>Face enrichment</strong>, which is where the recognised names that appear on
-  event rows come from.</li>
+<li><strong>Face enrichment</strong> (optional, off unless you turn it on), which is where
+  the recognised names that appear on event rows come from and what feeds
+  the app's <a href="whos-there.html">People</a> page.</li>
 </ul>
 <h2 id="do-i-need-marcellus">Do I need Marcellus?</h2>
 <p>No. The app works with Frigate alone; Marcellus is optional. The app asks the
@@ -142,8 +143,9 @@ available.</p>
 </tr>
 </tbody>
 </table>
-<p>It reads Frigate's config, database, and recordings. It never writes to
-them.</p>
+<p>It reads Frigate's config, database, and recordings. The one thing it
+writes back to Frigate is a sub-label on events, when face recognition is on
+and you have named a face.</p>
 <h2 id="where-it-runs">Where it runs</h2>
 <p>Any Linux host that can see your Frigate install. In practice that is the
 same machine Frigate runs on, or a container beside it.</p>
@@ -216,7 +218,7 @@ and correctable by hand, which is what makes the
 <a href="investigate.html#same-and-not-same">Same and Not same</a> corrections in the
 app worth the swipe.</p>
 <footer class="pagefoot">
-<p>Last updated: November 12, 2026</p>
+<p>Last updated: November 15, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

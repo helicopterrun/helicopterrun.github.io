@@ -55,6 +55,8 @@
 <li><a href="#ids-and-names">IDs and names</a></li>
 <li><a href="#finding-people">Finding People</a></li>
 <li><a href="#a-persons-page">A person's page</a></li>
+<li><a href="#when-unnamed-faces-are-forgotten">When unnamed faces are forgotten</a></li>
+<li><a href="#deleting-a-person">Deleting a person</a></li>
 <li><a href="#merge-suggestions">Merge suggestions</a></li>
 <li><a href="#review-tab-filter">Review tab filter</a></li>
 <li><a href="#privacy">Privacy</a></li>
@@ -66,45 +68,109 @@ has recognized. It is not part of plain Frigate, and it appears only when
 the server says it supports it: the sidecar must have face recognition
 enabled. If the server does not offer it, the app shows nothing for it, with
 no empty page.</p>
+<p>The recognizing is done by your server. Faces, face images and the numbers
+used to match them stay on that server. The
+<a href="../privacy.html#people-and-face-recognition-optional">privacy policy</a> has
+the full account.</p>
 <h2 id="ids-and-names">IDs and names</h2>
 <p>Every face the sidecar groups together gets a <strong>permanent number</strong>, shown
 as <code>#11</code>. A name is an optional label on that number. You never need a name
 to see, follow, search or correct a face; an unnamed face is simply <code>#11</code>.</p>
 <p>IDs are never reused. When two IDs turn out to be the same person and you
 merge them, the old number keeps working and points at the survivor.</p>
+<p>An unnamed face is shown by its <strong>handle</strong>, a generated label such as "Shoal
+Gadwall". The handle is worked out from the ID number, never changes and is
+different for every ID. It is a label for you to talk about the face with,
+not a name: it does not change how the face is grouped, and it is not
+written to Frigate or to alerts. Where the app names a recognized person who
+has no name, such as in an encounter title, it uses the handle; your server
+works that out when the app asks and does not store it in the encounter.</p>
+<p>Naming a face is different. When you name a person, your server writes that
+name into Frigate as the sub-label on their events, including earlier events
+that are still in Frigate, and encounter titles can use it. The name shows
+inside the app, which fetches it from your own server. It is not put in
+alerts (see Privacy below).</p>
 <h2 id="finding-people">Finding People</h2>
 <ul>
 <li><strong>iPhone and iPad:</strong> a People strip of faces sits at the top of the Search
   tab; tap one to open it, or open the full list from the strip.</li>
 <li><strong>Mac:</strong> People is in the sidebar.</li>
 </ul>
-<p>The list groups faces as Today, Following, Who is this?, Named, and Seen
-once.</p>
+<p>The list groups faces as:</p>
+<ul>
+<li><strong>Today</strong>: recognized today.</li>
+<li><strong>Following</strong>: faces you follow.</li>
+<li><strong>Who is this?</strong>: faces with no name that were recognized on two or more
+  days. These are the ones most worth naming.</li>
+<li><strong>Named</strong>: faces you have named.</li>
+<li><strong>Seen once</strong>: faces with no name recognized on a single day.</li>
+</ul>
+<p>On iPhone and iPad the strip at the top of Search shows the people you
+follow, then anyone recognized today (on a quiet day with neither, the most
+recently seen faces), with an <strong>All</strong> button.</p>
+<p>Faces also show up beside the names of recognized people elsewhere in the
+app: on the reel's markers and the event card under the player, in Search
+rows, and on cards in the Review tab. They sit beside the text, never over a
+picture, and appear only when your server knows who was in the event.</p>
 <h2 id="a-persons-page">A person's page</h2>
-<p>The page shows when the face was <strong>Last recognized</strong>, a Rhythm summary of
-when they tend to appear, and their visits as strips of face crops. Tap a
-visit to open that footage, and Previous and Next then move between that
-person's visits. The wording is deliberate: "Last recognized", never "last
-here". Most visits show no usable face, so the app only knows when the face
-was recognized, not when someone was actually present.</p>
+<p>The page shows a best crop, when the face was <strong>Last recognized</strong> and on
+which camera, how many days and sightings it covers, a Rhythm summary of the
+parts of the day and week they usually show up (once there are enough
+sightings), and their visits grouped by day as strips of face crops. Tap a
+visit to open that footage in Scrub, and Previous and Next then move between
+that person's visits across cameras. A <strong>Recent encounters</strong> row opens the
+Review feed for them (your server keeps encounters for 30 days).</p>
+<p><strong>Last recognized</strong> is the last time your server matched a face in a camera
+event to this person. It is a statement about the server's recognizing, not
+about where anyone is. The wording is deliberate: "Last recognized", never
+"last here". A person can be at your door and not appear here. Your server
+can only match a face the camera saw clearly enough: facing the lens, big
+enough, sharp enough, on a camera that is set up for face recognition, with
+the server running. Someone who keeps their back to the camera, wears a hat,
+or walks past a camera that is not enrolled is not recognized, whether or
+not they were there. So an old "Last recognized" is not evidence that someone
+has stayed away, and a missing face is not evidence that no one came.</p>
 <p>The Actions menu on the page offers:</p>
 <ul>
 <li><strong>Name</strong> (or <strong>Rename</strong>).</li>
-<li><strong>Follow</strong> or <strong>Unfollow</strong>. Unnamed, unfollowed IDs are forgotten after
-  the server's expiry period; following keeps one.</li>
-<li><strong>Add note</strong> (or <strong>Edit note</strong>).</li>
-<li><strong>Merge</strong>.</li>
-<li><strong>Delete</strong>, which erases their face crops and history from your server.</li>
+<li><strong>Follow</strong> or <strong>Unfollow</strong>. A followed face moves to <strong>Following</strong>, shows
+  in the strip at the top of Search, and is kept past the expiry described
+  below.</li>
+<li><strong>Add note</strong>, up to 200 characters, for yourself ("probably the courier").</li>
+<li><strong>Merge</strong>: everything moves to the face you keep, and the other ID keeps
+  pointing at it so old links still work. If both have different names,
+  rename one first.</li>
+<li><strong>Delete</strong>, described below.</li>
 </ul>
-<p>Within a visit you can also mark a sighting as not this person, which
-removes it from them; the page offers an undo.</p>
+<p>Within a visit you can also mark a sighting as <strong>Not this person</strong>, which
+removes just that sighting from them; the page offers an undo.</p>
+<h2 id="when-unnamed-faces-are-forgotten">When unnamed faces are forgotten</h2>
+<p>An ID with no name or note that you do not follow, and that has not been
+recognized for <strong>60 days</strong>, is forgotten: its ID, matching numbers and face
+images are deleted from your server. Anyone you have named, followed or given
+a note is kept until you delete them. The 60 days is your server's default;
+whoever runs the server can change it.</p>
+<h2 id="deleting-a-person">Deleting a person</h2>
+<p>Open the person, open the menu, and choose <strong>Delete</strong>. Your server then
+erases their face images, matching numbers and ID (and the "not the same" and
+accuracy-check answers that mention them), removes their name from your
+server's encounters (unless another person has the same name), and asks
+Frigate to clear the sub-label it wrote on their events. The Frigate step is
+best-effort: if Frigate cannot be reached at that moment, some sub-labels may
+need clearing in Frigate itself. Deleting cannot recall alerts you have
+already received. A deleted ID is never reused, and an old link to it shows
+that the person is no longer on your server.</p>
+<p>To stop recognizing altogether, turn face recognition off in the Marcellus
+configuration. That stops new recognizing; delete the people you want gone to
+remove what is already stored.</p>
 <h2 id="merge-suggestions">Merge suggestions</h2>
 <p>When two IDs look like one person, a <strong>Might be the same person</strong> row
 appears at the top of the list. Each suggestion shows the faces side by
 side. Merge combines them (and fails if both already have different names);
 you can also say they are not the same, and that pair is not suggested
 again. Splitting one person into several IDs is the more common fault, so
-this is how existing IDs get tidied up.</p>
+this is how existing IDs get tidied up. <strong>Compare faces</strong> shows each face
+large before you merge.</p>
 <h2 id="review-tab-filter">Review tab filter</h2>
 <p>On the Review tab, the <strong>Person</strong> button in the toolbar narrows the
 encounters to one person. It clears when you relaunch the app. A person's
@@ -112,14 +178,15 @@ page also has a Recent encounters row that opens the same feed for them.
 Review needs the sidecar's encounters; see
 <a href="search-and-review.html#the-review-tab">Search and Review</a>.</p>
 <h2 id="privacy">Privacy</h2>
-<p>Face crops, IDs, names and recognition data stay on your server. Names,
-handles and face IDs are not included in push notifications and never
-reach the push relay or Apple's push service: a recognized person's alert
-reads the same as an unrecognized one's. Recognition can still change how
-an alert is routed, but not its words. See the
-<a href="../privacy.html">privacy policy</a>.</p>
+<p>Face crops, IDs, names and recognition data stay on your server, and the
+app does not upload faces anywhere. Names, handles and face IDs are not
+included in push notifications and never reach the push relay or Apple's push
+service: an alert about a recognized person says "Person", like any other.
+Recognition can still make an alert quieter, but it does not change its
+words. See the
+<a href="../privacy.html#people-and-face-recognition-optional">privacy policy</a>.</p>
 <footer class="pagefoot">
-<p>Last updated: November 12, 2026</p>
+<p>Last updated: November 15, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
