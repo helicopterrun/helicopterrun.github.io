@@ -156,8 +156,22 @@ jump to a date and hour; the Smooth or Frame choice; <strong>Switch camera</stro
 handle chips, then tap <strong>Export</strong>. A confirmation offers <strong>Export to
 Photos</strong> or <strong>Timelapse (25x)</strong>, depending on what the span supports.
 Progress shows while it renders, with cancel and retry.</p>
-<p>Export writes to Photos, so it needs add-only Photos permission. If that is
-denied the app says so and offers to open Settings.</p>
+<p>Export writes to Photos by default, so it needs add-only Photos permission. If
+that is denied the app says so and offers to open Settings. To keep the clip as a
+file instead, choose <strong>Save to Files...</strong> in the confirmation (or <strong>Folder in
+Files...</strong> under <strong>Save to</strong> in the multi-camera picker): you pick a folder first,
+and each clip is saved there as it arrives, named with the camera and start time.
+An existing file is never overwritten; a number is added to the name instead.</p>
+<p>If you cancel an export, or one runs out of time, the app remembers it and asks the
+server to remove the leftover copy later, so an export that was still queued does not
+linger on the server.</p>
+<p>To export the same range from several cameras, tap <strong>More cameras...</strong> in the
+confirmation and pick up to six (the camera you are on is always included).
+Cameras with no recording in that range are greyed out. You get one clip per
+camera, in Photos or in the folder you chose. A row on the scrub page shows how many are done and where they went (for example "3 clips saved to Photos"); tap it to see each
+camera, retry the ones that failed, or cancel. The clips are made two at a time, so a
+batch can take a few minutes, and it keeps going if you leave the page. Keep the app
+open for it: iOS only allows a short time in the background.</p>
 <h2 id="mac">Mac</h2>
 <p>On Mac the reel is driven by trackpad and keyboard as well as by dragging,
 and the controls live in a transport bar rather than a shade. The keyboard
@@ -168,7 +182,7 @@ right. Hover for a larger still, click to jump there, and pinch to change the
 zoom. The <strong>Explore</strong> button in the toolbar (Command-Shift-E) adds a timeline
 of every camera; see <a href="investigate.html#explore-on-the-mac">Explore on the Mac</a>.</p>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 18, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

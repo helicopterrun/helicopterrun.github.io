@@ -70,8 +70,9 @@ version plus how to reach a human.</p>
 </ul>
 <h2 id="quick-answers">Quick answers</h2>
 <p><strong>Cannot connect, or login fails.</strong> Check the server URL, including the
-port, and confirm you can reach that same address from a browser on the same
-device. Then run Settings › Server › Connection Doctor, which walks the whole
+port, and that this device can reach it. A stock Frigate's https port uses a
+self-signed certificate the app refuses; see
+<a href="docs/connect.html#stock-frigate-and-https">Stock Frigate and HTTPS</a>. Then run Settings › Server › Connection Doctor, which walks the whole
 chain and names the rung that broke.</p>
 <p><strong>Live view works but feels delayed.</strong> The app fell back to HLS because
 low-latency WebRTC media could not reach your device. This is common on
@@ -108,7 +109,7 @@ reach the address you configured.</p>
 <p>The <a href="privacy.html">privacy policy</a> describes exactly what the app stores,
 what it does not do, and what the optional push relay can see.</p>
 <footer class="pagefoot">
-<p>Last updated: November 13, 2026</p>
+<p>Last updated: November 18, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="index.html">Home</a> &middot; <a href="support.html">Support</a> &middot;

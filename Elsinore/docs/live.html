@@ -55,7 +55,7 @@
 <li><a href="#the-grid">The grid</a></li>
 <li><a href="#camera-order">Camera order</a></li>
 <li><a href="#single-camera">Single camera</a></li>
-<li><a href="#webrtc-and-hls">WebRTC and HLS</a><ul>
+<li><a href="#webrtc-mse-and-hls">WebRTC, MSE and HLS</a><ul>
 <li><a href="#what-the-fallback-feels-like">What the fallback feels like</a></li>
 <li><a href="#live-on-the-scrub-page">Live on the Scrub page</a></li>
 </ul>
@@ -92,14 +92,21 @@ now" to "what happened an hour ago" does not mean changing screens.</p>
 <p>Viewing a camera also publishes a Handoff activity carrying the camera name
 and playback time, so you can pick the same moment up on another Apple
 device. See <a href="mac.html#handoff">Mac</a>.</p>
-<h2 id="webrtc-and-hls">WebRTC and HLS</h2>
+<h2 id="webrtc-mse-and-hls">WebRTC, MSE and HLS</h2>
 <p>On a single camera Elsinore tries WebRTC first, through the <code>go2rtc</code>
 component embedded in Frigate, because it is the only way to get live
 latency down to something that feels live.</p>
 <p>The app waits about three and a half seconds for an actual rendered frame.
 Not a connected socket, not a completed ICE handshake: a frame on screen.
-If no frame arrives in that window, it falls back to HLS. Three things
-cause that:</p>
+If no frame arrives in that window, it falls back to MSE: the same go2rtc
+stream sent as video fragments over the same kind of connection the app
+uses to set up WebRTC, so it gets through where WebRTC's own media port is
+blocked. If MSE
+cannot start either, the app tries HLS (Frigate 0.17 and earlier; Frigate
+0.18 no longer serves it), and after that shows a still picture that
+refreshes every second and tries live video again shortly. MSE carries no
+sound yet, so the mute button is greyed out while it is in use. Three
+things send WebRTC to the fallback:</p>
 <ul>
 <li><strong>Signalling failed</strong>: the app could not negotiate with go2rtc at all.</li>
 <li><strong>ICE failed</strong>: the two ends could not agree on a network path.</li>
@@ -108,12 +115,13 @@ cause that:</p>
   restrictive networks and on reverse proxies that only forward HTTP.</li>
 </ul>
 <p>The app also watches for a stream that starts and then starves. If frames
-stop arriving on a stream that still claims to be playing, it falls back to
-HLS mid-stream rather than showing you a frozen picture.</p>
+stop arriving on a stream that still claims to be playing, it moves on to
+the next fallback mid-stream rather than showing you a frozen picture.</p>
 <h3 id="what-the-fallback-feels-like">What the fallback feels like</h3>
-<p>HLS is segmented, so it is several seconds behind real time rather than
-under one. Everything still works; it is just not live in the way WebRTC is
-live. If your remote setup always falls back, an
+<p>MSE shows each frame as it arrives but has no sound. HLS is segmented, so it is several
+seconds behind real time rather than under one. Everything still works; it
+is just not live in the way WebRTC is live. If your remote setup always
+falls back, an
 <a href="connect.html#remote-access">overlay network</a> usually fixes it where a
 reverse proxy cannot.</p>
 <h3 id="live-on-the-scrub-page">Live on the Scrub page</h3>
@@ -126,7 +134,7 @@ Connection Doctor › <strong>Copy live diagnostics</strong> into a bug report.<
 you see on the <a href="scrub.html#the-live-chip">Scrub reel's LIVE chip</a> is about
 your position in the recording, not about stream latency.</p>
 <footer class="pagefoot">
-<p>Last updated: November 7, 2026</p>
+<p>Last updated: November 17, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

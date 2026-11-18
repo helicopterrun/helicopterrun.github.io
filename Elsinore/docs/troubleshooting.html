@@ -92,14 +92,18 @@
 Settings › Server › <strong>Connection Doctor</strong>.</p>
 <h2 id="connecting">Connecting</h2>
 <h3 id="cannot-connect-or-login-fails">Cannot connect, or login fails</h3>
-<p>Check the server URL including the port, and confirm you can open that same
-address in a browser on the same device. Then run the
+<p>Check the server URL including the port, and that this device can reach it.
+(A browser opening the address is not proof: a browser lets you click past a
+certificate warning and the app does not.) Then run the
 <a href="connect.html#connection-doctor">Connection Doctor</a>, which walks the chain
 and names the rung that broke.</p>
 <p>Common causes it distinguishes for you:</p>
 <ul>
-<li>The address does not parse, or App Transport Security will refuse it. A
-  self-signed certificate falls here; it will not work.</li>
+<li>The address does not parse, or App Transport Security will refuse it.</li>
+<li>The server's certificate is not trusted. A stock Frigate's own certificate
+  is self-signed and falls here; see
+  <a href="connect.html#stock-frigate-and-https">Stock Frigate and HTTPS</a>.</li>
+<li>The port expects https:// but the address says http://. Same section.</li>
 <li>The hostname does not resolve. For a <code>.ts.net</code> name this usually means
   Tailscale is not connected on this device.</li>
 <li>The server answers but login returns 401, which is a wrong username or
@@ -217,7 +221,7 @@ corrections. See
 transcript (Copy report), the live diagnostics if live video is the problem,
 and your app, Frigate, and sidecar versions.</p>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 18, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

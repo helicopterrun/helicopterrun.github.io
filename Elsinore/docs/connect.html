@@ -63,6 +63,7 @@
 </li>
 <li><a href="#credentials-and-the-keychain">Credentials and the Keychain</a></li>
 <li><a href="#remote-access">Remote access</a></li>
+<li><a href="#stock-frigate-and-https">Stock Frigate and HTTPS</a></li>
 <li><a href="#connection-doctor">Connection Doctor</a></li>
 <li><a href="#changing-or-removing-a-server">Changing or removing a server</a></li>
 </ul>
@@ -77,16 +78,18 @@ carries Back and Continue.</p>
 <p>The castle artwork, the name, and the line "Local first, private by design,
 fast." One button: <strong>Get Started</strong>.</p>
 <h3 id="server">Server</h3>
-<p>"Connect to your Frigate server, or to a Marcellus instance in front of
-it." Fill in the server URL, username, and password, then tap <strong>Test
+<p>"Connect to a Marcellus sidecar (port 5001, plain http) or straight to
+Frigate. Frigate's own https port needs a trusted certificate." Fill in the server URL, username, and password, then tap <strong>Test
 connection</strong>. Continue stays disabled until that test succeeds, because the
 successful test is also what commits your credentials.</p>
 <p><strong>Which address?</strong> If you run a Marcellus sidecar, enter its address and
-port. Otherwise enter the address you open Frigate's web interface at in a
-browser, including the port: usually Frigate's login-protected port, 8971,
-for example <code>https://192.168.1.10:8971</code>. The username and password are your
-Frigate login. If a browser on this device can't reach that address, the
-app can't either; see <a href="#remote-access">Remote access</a>.</p>
+port, for example <code>http://192.168.1.10:5001</code>. Otherwise enter Frigate's
+login-protected port, 8971, and read
+<a href="#stock-frigate-and-https">Stock Frigate and HTTPS</a> first: a stock Frigate
+serves that port over https with a self-signed certificate, which the app
+refuses, even though a browser would let you click through the warning. The
+username and password are your Frigate login. The device does have to be
+able to reach the address; see <a href="#remote-access">Remote access</a>.</p>
 <p>If the test fails, a <strong>Connection Doctor</strong> button appears under the result
 and opens the <a href="#connection-doctor">Connection Doctor</a> as a sheet without
 losing what you typed. A <strong>Where do I find my server address?</strong> link opens
@@ -152,9 +155,35 @@ low-latency WebRTC live video work remotely.</p>
 <p><strong>Reverse proxy.</strong> A public reverse proxy with your own TLS certificate
 works too. Live video may fall back to higher-latency HLS, because WebRTC
 media travels on its own port and many proxies do not pass it through. See
-<a href="live.html#webrtc-and-hls">Live</a> for what that fallback looks like.</p>
+<a href="live.html#webrtc-mse-and-hls">Live</a> for what that fallback looks like.</p>
 <p>Self-signed certificates do not work; the Connection Doctor says so
-explicitly when it sees one.</p>
+explicitly when it sees one. See the next section for what to do about it.</p>
+<h2 id="stock-frigate-and-https">Stock Frigate and HTTPS</h2>
+<p>Frigate's login-protected port, 8971, serves https with a certificate
+Frigate made for itself. Apple's system refuses a certificate that no trusted
+authority signed, and the app has no way to override that. A browser shows a
+warning you can click past; the app cannot. Pointing the app at
+<code>https://&lt;your-frigate&gt;:8971</code> on a stock install therefore fails with "This
+server's certificate is not trusted". Pointing it at <code>http://</code> on the same
+port fails with "This port expects https://", because Frigate answers plain
+http on that port with HTTP 400.</p>
+<p>Pick one of three ways forward:</p>
+<ol>
+<li><strong>Connect through the Marcellus sidecar.</strong> The sidecar talks to Frigate
+   for you and the app reaches it over plain http on your network, for example
+   <code>http://192.168.1.10:5001</code>. Set <code>frigate.verify_tls: false</code> in the
+   sidecar's config so it accepts Frigate's certificate. See
+   <a href="sidecar.html">the sidecar</a>.</li>
+<li><strong>Turn TLS off in Frigate.</strong> Set <code>tls: enabled: false</code> in Frigate's
+   config, restart it, and use <code>http://192.168.1.10:8971</code>. Only do this on a
+   network you trust.</li>
+<li><strong>Give Frigate a trusted certificate</strong>, for example one from
+   <a href="https://tailscale.com/">Tailscale</a>, and use the <code>https://</code> name the
+   certificate is for.</li>
+</ol>
+<p>The Connection Doctor names which of these situations you are in. If you use
+the sidecar and it cannot verify Frigate's certificate, the Doctor says so
+and names the <code>frigate.verify_tls</code> setting.</p>
 <h2 id="connection-doctor">Connection Doctor</h2>
 <p>Settings › Server › Connection Doctor. It runs a ladder of checks in order
 and stops at the first hard failure, reporting each rung as it completes:</p>
@@ -192,7 +221,7 @@ report if live video does not start. <strong>Clear</strong> empties it.</p>
   zone classifications, and returns to the welcome screen.</li>
 </ul>
 <footer class="pagefoot">
-<p>Last updated: October 19, 2026</p>
+<p>Last updated: November 18, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;

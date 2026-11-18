@@ -83,9 +83,20 @@ See <a href="connect.html#remote-access">remote access</a>.</p>
 <p><strong>Your Frigate address.</strong> Frigate listens on two ports. Port <strong>8971</strong> is the
 authenticated one (login required); port <strong>5000</strong> is the unauthenticated
 internal one, meant for the local network only. Elsinore uses the
-authenticated port, so enter an address like <code>https://192.168.1.10:8971</code>,
-the same one you open Frigate's web interface at in a browser. If you run
-the <a href="sidecar.html">Marcellus sidecar</a>, enter the sidecar's address instead.</p>
+authenticated port, but a stock Frigate serves it over https with a
+self-signed certificate, and the app will not accept that. So the address
+you enter depends on your setup:</p>
+<ul>
+<li><strong>With the <a href="sidecar.html">Marcellus sidecar</a>:</strong> enter the sidecar's
+  address, such as <code>http://192.168.1.10:5001</code>. This works with a stock
+  Frigate.</li>
+<li><strong>Frigate directly, with TLS turned off</strong> (<code>tls: enabled: false</code> in
+  Frigate's config): enter <code>http://192.168.1.10:8971</code>.</li>
+<li><strong>Frigate directly, with a trusted certificate</strong> (for example Tailscale's):
+  enter the <code>https://</code> name that certificate is for.</li>
+</ul>
+<p>A browser lets you click past a certificate warning; the app does not. See
+<a href="connect.html#stock-frigate-and-https">Stock Frigate and HTTPS</a>.</p>
 <p><strong>A Frigate login.</strong> Elsinore signs in with a Frigate username and password.
 Create one in Frigate's own web interface under Settings &gt; Users, or use an
 existing one. Elsinore's documentation does not state a required role, but
@@ -145,7 +156,7 @@ tells you which rung broke and what to do about it. The
 <a href="troubleshooting.html">troubleshooting page</a> groups the common failures by
 symptom.</p>
 <footer class="pagefoot">
-<p>Last updated: November 13, 2026</p>
+<p>Last updated: November 18, 2026</p>
 <p>Elsinore is not affiliated with the Frigate project. Contact:
 <a href="mailto:helicopterrun@gmail.com">helicopterrun@gmail.com</a></p>
 <p><a href="../index.html">Home</a> &middot; <a href="../support.html">Support</a> &middot;
